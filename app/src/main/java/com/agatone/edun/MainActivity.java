@@ -22,7 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
-
     private Button btContinuar1;
     private Button btCambioRegistro;
     RequestQueue rq;
