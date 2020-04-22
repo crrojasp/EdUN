@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Bienvenido"></activity>
         <activity android:name=".Principal" />
         <activity android:name=".registro" ></activity>
         <activity android:name=".MainActivity">
