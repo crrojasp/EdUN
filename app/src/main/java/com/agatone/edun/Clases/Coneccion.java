@@ -23,10 +23,11 @@ import java.io.PrintWriter;
 
 public class Coneccion {
 
-    public static String url="sftp://3407620@f25-preview.awardspace.net:221/";
-    FTPClient cliente;
-    String username;
-    String
+    public static String host="f25-preview.awardspace.net";
+    private FTPClient cliente;
+    private String username="3407620";
+    private String pass="12345_Unal";
+    private int port=21;
 
     public Coneccion(){
 
@@ -40,7 +41,13 @@ public class Coneccion {
 
 
     public FTPClient conect(){
-        cliente.connect();
-
+        try {
+            cliente.connect(host,port);
+            cliente.login(username,pass);
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return this.cliente;
     }
 }
