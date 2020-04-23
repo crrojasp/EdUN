@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     }
     @Override
     public void onResponse ( JSONObject response ) {
-        Usuario user = new Usuario ();
+        Usuario user = new Usuario ("Carlos","123456789");
         Toast.makeText ( getApplicationContext (),"Bienvenido", Toast.LENGTH_SHORT ).show ();
         JSONArray jsona=response.optJSONArray ( "datos" );
 
