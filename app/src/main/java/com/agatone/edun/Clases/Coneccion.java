@@ -1,4 +1,8 @@
 package com.agatone.edun.Clases;
+import android.widget.Toast;
+
+import com.agatone.edun.MainActivity;
+
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.PrintCommandListener;
 
@@ -24,7 +28,7 @@ import java.io.PrintWriter;
 public class Coneccion {
 
     public static String host="f25-preview.awardspace.net";
-    private FTPClient cliente;
+    private FTPClient cliente=new FTPClient();
     private String username="3407620";
     private String pass="12345_Unal";
     private int port=21;
@@ -40,14 +44,17 @@ public class Coneccion {
 
 
 
-    public FTPClient conect(){
-        try {
-            cliente.connect(host,port);
-            cliente.login(username,pass);
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public FTPClient conect() throws  IOException{
+        boolean j=false;
+
+                cliente.connect(host,port);
+
+                j=cliente.login(username,pass);
+                if(!j){
+                    throw new IOException();
+                }
+                cliente.logout();
+
         return this.cliente;
     }
 }

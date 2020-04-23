@@ -18,13 +18,23 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.apache.commons.net.ftp.FTPClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
     private Button btContinuar1;
     private Button btCambioRegistro;
+
+
+
+    //este boton es solo para probar si se realiza bien la conexion con el servidor externo
+    private Button ftp;
+
+
     RequestQueue rq;
     JsonRequest jrq;
 
@@ -32,6 +42,34 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_main );
+
+
+
+        //aqui creo la parte del recibidor de clicks del boton de prueba
+        ftp=findViewById(R.id.ftp);
+        ftp.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view){
+                Coneccion coneccion =new Coneccion();
+
+                FTPClient ftpclient= null;
+                try {
+                    ftpclient = coneccion.conect();
+                    ftpclient.enterLocalPassiveMode();
+                } catch (IOException e) {
+                    Toast.makeText ( getApplicationContext (),e.toString (),Toast.LENGTH_LONG).show ();
+                }
+
+
+            }
+
+
+        });
+
+
+
+
 
         btContinuar1     = findViewById ( R.id.btContinuar);
         btCambioRegistro = findViewById ( R.id.btregistro);
