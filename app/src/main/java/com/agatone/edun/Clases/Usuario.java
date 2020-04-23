@@ -1,8 +1,13 @@
-package com.agatone.edun;
+package com.agatone.edun.Clases;
 
 public class Usuario {
     private String Usuario,Contraseña;
 
+
+    public Usuario(String usuario, String contraseña){
+        this.Usuario=usuario;
+        this.Contraseña=contraseña;
+    }
 
     public String getUsuario () {
         return Usuario;
