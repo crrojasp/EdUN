@@ -7,18 +7,7 @@ public class archivo {
     protected String nombre;
     protected String autor;
     protected String dueno;
-
-    public String getTipo () {
-        return tipo;
-    }
-
     protected String tipo;
-
-    public String getReceptor () {
-        return receptor;
-    }
-
-    protected String receptor;
 
     public archivo (String nombre,  String dueno){
         this(nombre,"autor desconocido",dueno,"tipo no especificado");
@@ -61,9 +50,6 @@ public class archivo {
 
     public void setDueno(String dueno) {
         this.dueno = dueno;
-    }
-    public String setReceptor(){
-        return receptor;
     }
 
 
