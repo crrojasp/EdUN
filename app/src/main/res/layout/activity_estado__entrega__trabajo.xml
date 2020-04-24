@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Estado_Entrega_Trabajo">
+    tools:context=".Subir_Archivo_De_Apoyo">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

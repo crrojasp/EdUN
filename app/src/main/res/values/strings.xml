@@ -11,6 +11,6 @@
     <string name="Contraseña">Contraseña</string>
     <string name="Welcome">Bienvenid@</string>
     <string name="a0001">Entrega_Trabajos_Estudiantes</string>
-    <string name="Estado_Entrega_Str">Estado Entrega De Trabajo</string>
-    <string name="Hacer_Entrega_Str">Hacer Entrega De Trabajo</string>
+    <string name="Subir_Archivo_Apoyo_Str">Subir un archivo de apoyo</string>
+    <string name="Archivos_De_Apoyo_Str">Buscar un archivo de apoyo</string>
 </resources>

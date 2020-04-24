@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Estado_Entrega_Trabajo"></activity>
-        <activity android:name=".Entrega_Trabajo_Activity" />
+        <activity android:name=".Subir_Archivo_De_Apoyo"></activity>
+        <activity android:name=".Archivos_de_apoyo" />
         <activity android:name=".Principal" />
         <activity android:name=".registro" />
         <activity android:name=".MainActivity">

@@ -30,23 +30,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Crear_Entrega_btm"
+        android:id="@+id/Estado_Entrega_btm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/Crear_Entrega_Str"
+        android:text="@string/Subir_Archivo_Apoyo_Str"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/Hacer_Entrega_btm"
+        android:id="@+id/Archivos_de_apoyo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/Hacer_Entrega_Str"
-        app:layout_constraintBottom_toTopOf="@+id/Crear_Entrega_btm"
+        android:text="@string/Archivos_De_Apoyo_Str"
+        app:layout_constraintBottom_toTopOf="@+id/Estado_Entrega_btm"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
