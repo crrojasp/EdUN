@@ -4,9 +4,9 @@ public class Usuario {
     private String Usuario,Contraseña;
 
 
-    public Usuario(String usuario, String contraseña){
-        this.Usuario=usuario;
-        this.Contraseña=contraseña;
+    public Usuario (){
+        this.Usuario=getUsuario ();
+        this.Contraseña=getContraseña ();
     }
 
     public String getUsuario () {
