@@ -3,7 +3,9 @@ package com.agatone.edun;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,21 +47,14 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
 
 
 
-        //aqui creo la parte del recibidor de clicks del boton de prueba
+        //aqui creo la parte del recibidor de clicks del boton de prueba ftp
         ftp=findViewById(R.id.ftp);
         ftp.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view){
-                Coneccion coneccion =new Coneccion();
-
-                FTPClient ftpclient= null;
-                try {
-                    ftpclient = coneccion.conect();
-                    ftpclient.enterLocalPassiveMode();
-                } catch (IOException e) {
-                    Toast.makeText ( getApplicationContext (),e.toString (),Toast.LENGTH_LONG).show ();
-                }
+                Con coneccion= new Con();
+                coneccion.execute();
 
 
             }
@@ -118,5 +113,60 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         String url="https://edun-proyectodb.000webhostapp.com/index.php?Usuario"+Usuario1+"&Contraseña="+Contraseña1;
         jrq = new JsonObjectRequest ( Request.Method.GET,url, null,this,this );
         rq.add(jrq);
+    }
+
+
+
+
+
+    private class Con extends AsyncTask<Void,Void,Void>{
+        public  String host="estructuras.atwebpages.com";
+        private FTPClient cliente=new FTPClient();
+        private String username="3407620";
+        private String pass="12345_Unal";
+        private int port=21;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            boolean j=false;
+            try {
+                cliente.connect(host,port);
+                j=cliente.login(username,pass);
+
+                cliente.logout();
+                if(j)
+                    Log.d("Hols"," Hola mundoooooo\n\n\n\n\n\n\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            return null;
+
+
+        }
+
+
     }
 }
