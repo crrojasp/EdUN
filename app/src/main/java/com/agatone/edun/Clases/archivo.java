@@ -8,6 +8,8 @@ public class archivo {
     protected String autor;
     protected String dueno;
     protected String tipo;
+    protected String filepath;
+    protected static String remotePath= "";
 
     public archivo (String nombre,  String dueno){
         this(nombre,"autor desconocido",dueno,"tipo no especificado");
@@ -54,5 +56,35 @@ public class archivo {
         this.dueno = dueno;
     }
 
+    public static int getIdOp() {
+        return idOp;
+    }
 
+    public static void setIdOp(int idOp) {
+        archivo.idOp = idOp;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
+
+    public static String getRemotePath() {
+        return remotePath;
+    }
+
+    public static void setRemotePath(String remotePath) {
+        archivo.remotePath = remotePath;
+    }
 }

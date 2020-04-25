@@ -99,11 +99,11 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     }
     @Override
     public void onResponse ( JSONObject response ) {
-<<<<<<< Updated upstream
+
         Usuario user = new Usuario ("Carlos","123456789");
-=======
-        Usuario user = new Usuario (null,null);
->>>>>>> Stashed changes
+
+
+
         Toast.makeText ( getApplicationContext (),"Bienvenido", Toast.LENGTH_SHORT ).show ();
         JSONArray jsona=response.optJSONArray ( "datos" );
 
