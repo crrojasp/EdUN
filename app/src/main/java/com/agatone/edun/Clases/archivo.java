@@ -14,6 +14,8 @@ public class archivo {
     }
 
     public archivo(String nombre, String autor, String dueno, String tipo) {
+        id=idOp;
+        idOp++;
         this.nombre = nombre;
         this.autor = autor;
         this.dueno = dueno;

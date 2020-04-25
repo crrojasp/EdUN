@@ -1,4 +1,4 @@
-package com.agatone.edun.clases;
+package com.agatone.edun.Clases;
 
 public class Subida {
 }
