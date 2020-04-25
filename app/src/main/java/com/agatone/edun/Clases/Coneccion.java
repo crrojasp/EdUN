@@ -64,6 +64,7 @@ public class Coneccion extends AsyncTask<Void,Void,Boolean> {
         try {
             cliente.connect(host,port);
             j=cliente.login(username,pass);
+            cliente.
             cliente.logout();
             return j;
         } catch (IOException e) {
