@@ -4,16 +4,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Principal extends AppCompatActivity {
     private Button Archivos_de_apoyo_Button, Estado_Trabajo_Button;
+    CalendarView calendarView;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_principal );
+
+
+        //calendarView = findViewById ( R.id.Calendario);
+
+        calendarView.setOnDateChangeListener ( new CalendarView.OnDateChangeListener () {
+            @Override
+            public void onSelectedDayChange ( @NonNull CalendarView view, int year, int month, int dayOfMonth ) {
+
+            }
+        } );
 
         Archivos_de_apoyo_Button = findViewById ( R.id.Archivos_de_apoyo );
         Estado_Trabajo_Button = findViewById ( R.id.Estado_Entrega_btm );

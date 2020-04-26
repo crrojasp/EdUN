@@ -54,8 +54,12 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
                 rq = Volley.newRequestQueue (getApplicationContext ());
                 IniciarSesión();
 
-                MainActivity.this.startActivity ( cambio1 );
-                MainActivity.this.finish ();
+                if (rq!=null){
+
+                    MainActivity.this.startActivity ( cambio1 );
+                    MainActivity.this.finish ();
+
+                }
 
             }
             } );
