@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Agendar_Evento"></activity>
         <activity android:name=".Subir_Archivo_De_Apoyo" />
         <activity android:name=".Archivos_de_apoyo" />
-        <activity android:name=".Principal" />
+        <activity android:name=".Principal"
+            android:launchMode="singleTask"/>
         <activity android:name=".registro" />
         <activity android:name=".MainActivity">
             <intent-filter>

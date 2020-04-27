@@ -32,12 +32,12 @@
         android:id="@+id/btregistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:text="@string/Continuar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Contraseña_Registro" />
+        app:layout_constraintTop_toBottomOf="@+id/Tipo" />
 
     <EditText
         android:id="@+id/Nombres_Registro"
@@ -71,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:background="#FFF"
         android:text="@string/Formulario_Registro_Str"
         android:textColor="#009688"
         android:textSize="30sp"
@@ -78,7 +79,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="#FFF"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -92,5 +92,28 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Apellidos_Registro" />
+
+    <RadioGroup
+        android:id="@+id/Tipo"
+        android:layout_width="220dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Contraseña_Registro">
+
+        <RadioButton
+            android:id="@+id/Profesor_radiobt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/a0006" />
+
+        <RadioButton
+            android:id="@+id/Estudiante_radiobt"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/a0007" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

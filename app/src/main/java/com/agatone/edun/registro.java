@@ -1,14 +1,13 @@
 package com.agatone.edun;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,7 +33,7 @@ public class registro extends AppCompatActivity {
         botonregistro.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-                ejecutarservicio ("https://edun-proyectodb.000webhostapp.com/registro.php");
+                ejecutarservicio ("https://estructuras.atwebpages.com/registro.php");
                 registro.this.startActivity ( cambio4 );
                 registro.this.finish ();
             }
@@ -55,6 +54,8 @@ public class registro extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams () throws AuthFailureError {
                 HashMap<String,String>parametros = new HashMap<> ();
+
+
 
                 String UsuarioDB      =((EditText)findViewById ( R.id.Usuario_registro )).getText ().toString ();
                 String NombresDB      =((EditText)findViewById ( R.id.Apellidos_Registro )).getText().toString();

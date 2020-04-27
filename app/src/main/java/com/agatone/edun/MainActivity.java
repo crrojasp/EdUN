@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
                 rq = Volley.newRequestQueue (getApplicationContext ());
                 IniciarSesión();
 
-                if (rq!=null){
+                if (jrq!=null){
 
                     MainActivity.this.startActivity ( cambio1 );
                     MainActivity.this.finish ();
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     private void IniciarSesión(){
         String Usuario1      =((EditText)findViewById ( R.id.CajaUsuario )).getText ().toString ();
         String Contraseña1      =((EditText)findViewById ( R.id.CajaContraseña )).getText ().toString ();
-        String url="https://edun-proyectodb.000webhostapp.com/index.php?Usuario"+Usuario1+"&Contraseña="+Contraseña1;
+        String url="https://estructuras.atwebpages.com/index.php?Usuario"+Usuario1+"&Contraseña="+Contraseña1;
         jrq = new JsonObjectRequest ( Request.Method.GET,url, null,this,this );
         rq.add(jrq);
     }

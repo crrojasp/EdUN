@@ -9,6 +9,6 @@ public class Subir_Archivo_De_Apoyo extends AppCompatActivity {
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_archivos_de_apoyo );
+        setContentView ( R.layout.activity_subir_archivos_de_apoyo );
     }
 }
