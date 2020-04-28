@@ -1,10 +1,14 @@
 package com.agatone.edun;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     //este boton es solo para probar si se realiza bien la conexion con el servidor externo
     private Button ftp;
 
+    private Button subir;
+
 
     RequestQueue rq;
     JsonRequest jrq;
@@ -47,22 +53,34 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
 
 
 
+
+
+
+
+
+
+        //colocare otro boton que sirva de ejemplo para la subida de archivos
         //aqui creo la parte del recibidor de clicks del boton de prueba ftp
         ftp=findViewById(R.id.ftp);
+        subir=findViewById(R.id.subir);
+
+
+
+
+
         ftp.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view){
-                Con coneccion= new Con();
-                coneccion.execute();
-
-
             }
-
-
         });
 
-
+        subir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarOpciones();
+            }
+        });
 
 
 
@@ -123,54 +141,44 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
 
 
 
-    private class Con extends AsyncTask<Void,Void,Void>{
-        public  String host="estructuras.atwebpages.com";
-        private FTPClient cliente=new FTPClient();
-        private String username="3407620";
-        private String pass="12345_Unal";
-        private int port=21;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            boolean j=false;
-            try {
-                cliente.connect(host,port);
-                j=cliente.login(username,pass);
-
-                cliente.logout();
-                if(j)
-                    Log.d("Hols"," Hola mundoooooo\n\n\n\n\n\n\n");
-            } catch (IOException e) {
-                e.printStackTrace();
+    private void mostrarOpciones(){
+        final CharSequence[] opciones={"Subir Archivo","Cancelar"};
+        final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("Escoge una");
+        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(opciones[which].equals("Cancelar")){
+                    dialog.dismiss();
+                }else{
+                    Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    //Intent intent=new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("*/*");
+                    startActivityForResult(intent.createChooser(intent,"Seleccione"),10);
+                }
             }
-
-
-            return null;
-
-
-        }
-
+        });
+        builder.show();
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+            case 10:
+                Uri path=data.getData();
+                break;
+
+        }
+    }
 }
+
+
+
+
+
