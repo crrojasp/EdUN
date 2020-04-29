@@ -1,23 +1,10 @@
 package com.agatone.edun.Clases;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
+import android.os.Environment;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import org.apache.commons.net.ftp.FTP;
 
-import java.io.File;
-import org.apache.commons.net.ftp.*;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -78,14 +65,13 @@ import java.io.IOException;
             }
             *
             *
-            adicionalmente si se quiere cambiar la ruta de guardado del documento descargado, antes de
-            ejecutarlo, cambiar la ruta con el metodo setPath de la clase Bajada
+
     *
     *
     *
 
 */
-public class Bajada  extends AsyncTask<String,Void,Boolean> implements  Coneccion{
+public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements  Coneccion{
     String path;
 
 
@@ -96,45 +82,49 @@ public class Bajada  extends AsyncTask<String,Void,Boolean> implements  Coneccio
     }
 
     public Bajada(){
-        this("esta parte hay que cambiarla");//<<<<<<<<<<<<<<<<<<<<<<<<<<<< CAMBIAR
+        this(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString());//<<<<<<<<<<<<<<<<<<<<<<<<<<<< CAMBIAR
     }
 
 
     //
     @Override
-    protected Boolean doInBackground(String... strings) {
+    protected Boolean doInBackground(archivo... archivos) {
         //se carga el nombre del archivo
-        String nombre=strings[0];
-        String tipo=strings[1];
+
+
+
+
         boolean down=false;
         String url=null;
         FileOutputStream stream=null;
 
 
+        for (archivo arc: archivos) {
+            try {
+                cliente.connect(host,port); //estos valores se encuentran en la interfaz Coneccion
+                cliente.login( username,pass);
+                cliente.enterLocalPassiveMode(); // IMPORTANTE!!!!
+                cliente.setFileType(FTP.BINARY_FILE_TYPE, FTP.BINARY_FILE_TYPE);
+                cliente.setFileTransferMode(FTP.BINARY_FILE_TYPE);
+                cliente.changeWorkingDirectory("/archivo/");
 
 
+                stream=new FileOutputStream(this.path);
 
+                cliente.retrieveFile("/archivo/"+arc.getNombre()+"."+arc.getTipo(),stream);
+                stream.close();
+                cliente.disconnect();
 
-
-
-        try {
-            cliente.connect(host,port); //estos valores se encuentran en la interfaz Coneccion
-            cliente.login( username,pass);
-            cliente.enterLocalPassiveMode(); // IMPORTANTE!!!!
-            cliente.setFileType(FTP.BINARY_FILE_TYPE, FTP.BINARY_FILE_TYPE);
-            cliente.setFileTransferMode(FTP.BINARY_FILE_TYPE);
-            cliente.changeWorkingDirectory("/archivo/");
-
-
-            stream=new FileOutputStream(this.path);
-
-            cliente.retrieveFile("/archivo/"+nombre+"."+tipo,stream);
-            stream.close();
-            cliente.disconnect();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+
+
+
+
+
 
 
 

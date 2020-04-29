@@ -1,21 +1,20 @@
 package com.agatone.edun;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.agatone.edun.Clases.*;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.agatone.edun.Clases.Bajada;
+import com.agatone.edun.Clases.Coneccion;
+import com.agatone.edun.Clases.archivo;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,12 +23,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.apache.commons.net.ftp.FTPClient;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.IOException;
+import java.io.FileOutputStream;
+
 
 public class MainActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
     private Button btContinuar1;
@@ -84,6 +83,13 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
 
 
 
+
+
+
+
+
+
+
         btContinuar1     = findViewById ( R.id.btContinuar);
         btCambioRegistro = findViewById ( R.id.btregistro);
 
@@ -111,6 +117,10 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
             }
             } );
     }
+
+
+
+    /*
     @Override
     public void onErrorResponse ( VolleyError error ) {
         Toast.makeText ( getApplicationContext (),error.toString (),Toast.LENGTH_LONG).show ();
@@ -128,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         user.setUsuario ("Usuario");
 
         user.setContraseña ("Contraseña");
-    }
+    }*/
     private void IniciarSesión(){
         String Usuario1      =((EditText)findViewById ( R.id.CajaUsuario )).getText ().toString ();
         String Contraseña1      =((EditText)findViewById ( R.id.CajaContraseña )).getText ().toString ();
@@ -136,6 +146,18 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         jrq = new JsonObjectRequest ( Request.Method.GET,url, null,this,this );
         rq.add(jrq);
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -169,12 +191,70 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        archivo arc[]=new archivo[1];
         switch(requestCode){
             case 10:
-                Uri path=data.getData();
+
+
+                RequestQueue request;
+                JsonObjectRequest jeison;
+                int id;
+                request=Volley.newRequestQueue(getApplicationContext());
+
+                boolean insert=false;
+                String url=null;
+                FileOutputStream stream=null;
+
+                url= Coneccion.host+"/bajarNombreArchivoDeBase.php?id="+0;
+                jeison=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
+                request.add(jeison);
+
+
+
+
+
+
+
+
+
+
+
+
+
+                //subida.execute(arc);
+                //Toast.makeText ( getApplicationContext (),path.toString(), Toast.LENGTH_SHORT ).show ();
                 break;
 
         }
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+        archivo archivo[]=new archivo[1];//el tamano se puede cambiar a una variable si en algun momentop se quiere programar la descarga demas d eun archivo
+        String nombre,autor, tipo;
+
+
+
+        Toast.makeText ( getApplicationContext (),"Bienvenido", Toast.LENGTH_SHORT ).show ();
+        JSONArray jsona=response.optJSONArray ( "usuario" );
+        JSONObject json=null;
+        try {
+            json=jsona.getJSONObject(0);
+            nombre=json.optString("nombreArchivo");
+            autor=json.optString("autorArchivo");
+            tipo=json.optString("tipo");
+            archivo[0]=new archivo(nombre,autor,tipo);
+            Bajada bajada=new Bajada();
+            bajada.execute(archivo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+
     }
 }
 

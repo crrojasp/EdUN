@@ -1,6 +1,7 @@
 package com.agatone.edun.Clases;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -8,16 +9,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.io.File;
-import org.apache.commons.net.ftp.*;
-import org.json.JSONObject;
+import org.apache.commons.net.ftp.FTP;
+import org.json.JSONArray;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-
 
 
 /*
@@ -30,7 +29,7 @@ import java.io.IOException;
  *
 
  */
-public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccion, Response.Listener<JSONObject>,Response.ErrorListener {
+public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccion, Response.Listener<JSONArray>,Response.ErrorListener {
 
     private Context context;
 
@@ -43,8 +42,10 @@ public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
     @Override
     protected Boolean doInBackground(archivo... archivos) {
 
+
+
         RequestQueue request;
-        JsonObjectRequest jeison;
+        JsonArrayRequest jeison;
         boolean insert=false;
         String url;
 
@@ -53,7 +54,7 @@ public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
 
 
             request=Volley.newRequestQueue(context);
-            String file=arc.getFilepath();//el hilo recibira los datos para la subida de archivos
+            Uri file=arc.getUri();//el hilo recibira los datos para la subida de archivos
             String id=String.valueOf(arc.getId());
 
 
@@ -61,25 +62,32 @@ public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
 
             try {
 
-                FileInputStream fis=new FileInputStream(file);
-                cliente.connect(host,port); //estos valores se encuentran en la interfaz Coneccion
+                FileInputStream fis=(FileInputStream) context.getContentResolver().openInputStream(file);
+
+                //Toast.makeText ( context,"jerga", Toast.LENGTH_SHORT ).show ();
+                cliente.connect(host,port);
+                //estos valores se encuentran en la interfaz Coneccion
 
                 cliente.login( username,pass);
                 cliente.enterLocalPassiveMode(); // IMPORTANTE!!!!
                 cliente.setFileType(FTP.BINARY_FILE_TYPE, FTP.BINARY_FILE_TYPE);
                 cliente.setFileTransferMode(FTP.BINARY_FILE_TYPE);
-                cliente.changeWorkingDirectory("/archivo/");
-                insert = cliente.storeFile(name,fis);
+                cliente.changeWorkingDirectory("estructuras.atwebpages.com/archivo/");
+                insert = cliente.storeFile(name+"."+arc.getTipo(),fis);
                 cliente.logout();
                 cliente.disconnect();
-                url=Coneccion.host+"/subirArchivoABase.php?id="+id+"&nombre="+name+"&autor="+
+                url="http://"+Coneccion.host+"/subirArchivoABase.php?id="+id+"&nombre="+name+"&autor="+
                         arc.getAutor()+"&dueno="+arc.getDueno()+"&tipo="+arc.getTipo();
-                jeison=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
+                url=url.replace( " ","%20");
+                jeison=new JsonArrayRequest(Request.Method.GET,url,null,this,this);
                 request.add(jeison);
 
             }catch(IOException e){
                 return insert;
             }
+
+
+
         }
 
 
@@ -89,10 +97,11 @@ public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
     @Override
     public void onErrorResponse(VolleyError error) {
 
+        Toast.makeText ( context,error.toString(), Toast.LENGTH_SHORT ).show ();
     }
 
     @Override
-    public void onResponse(JSONObject response) {
-
+    public void onResponse(JSONArray response) {
+        Toast.makeText ( context,"hola mundo", Toast.LENGTH_SHORT ).show ();
     }
 }
