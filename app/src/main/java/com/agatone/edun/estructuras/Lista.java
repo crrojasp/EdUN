@@ -7,6 +7,9 @@ import com.agatone.edun.Clases.archivo;
  *
  * @author cristian
  */
+
+
+
 public class Lista {
 
     private Nodo head;
