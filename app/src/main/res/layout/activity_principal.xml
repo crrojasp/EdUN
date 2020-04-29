@@ -19,26 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@mipmap/universidad_escudo" />
 
-    <Button
-        android:id="@+id/Estado_Entrega_btm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/Subir_Archivo_Apoyo_Str"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/Archivos_de_apoyo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/Archivos_De_Apoyo_Str"
-        app:layout_constraintBottom_toTopOf="@+id/Estado_Entrega_btm"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <EditText
         android:id="@+id/editText"
         android:layout_width="315dp"
@@ -104,5 +84,25 @@
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/bot_hora"
         app:layout_constraintTop_toBottomOf="@+id/Caja_fecha" />
+
+    <Button
+        android:id="@+id/ftp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="40dp"
+        android:text="ftp test"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/subir" />
+
+    <Button
+        android:id="@+id/subir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="40dp"
+        android:text="subir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Escudo3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
