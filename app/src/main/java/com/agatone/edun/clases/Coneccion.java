@@ -1,35 +1,12 @@
 package com.agatone.edun.Clases;
 import org.apache.commons.net.ftp.FTPClient;
 
-import java.io.IOException;
+public interface Coneccion {
 
-public class Coneccion {
+    public static String host = "estructuras.atwebpages.com";
+    FTPClient cliente = new FTPClient();
+    String username = "3407620";
+    String pass = "12345_Unal";
+    int port = 21;
 
-    public static String host="f25-preview.awardspace.net";
-    private FTPClient cliente;
-    private String username="3407620";
-    private String pass="12345_Unal";
-    private int port=21;
-
-    public Coneccion(){
-
-
-    };
-    public FTPClient getCliente() {
-
-        return cliente;
-    }
-
-
-
-    public FTPClient conect(){
-        try {
-            cliente.connect(host,port);
-            cliente.login(username,pass);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return this.cliente;
-    }
 }

@@ -23,7 +23,7 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
 
-    private Button btContinuar1;
+    private Button btContinuar;
     private Button btCambioRegistro;
     RequestQueue rq;
     JsonRequest jrq;
@@ -33,31 +33,29 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_main );
 
-        btContinuar1     = findViewById ( R.id.btContinuar);
+        btContinuar     = findViewById ( R.id.btcontinuar);
         btCambioRegistro = findViewById ( R.id.btregistro);
 
-        final Intent cambio1 = new Intent ( this, Principal.class );
         final Intent cambio2 = new Intent ( this, registro.class );
+        final Intent cambio1 = new Intent ( this, Principal.class );
         btCambioRegistro.setOnClickListener ( new View.OnClickListener () {
-                                                  @Override
-                                                  public void onClick(View view){
-                                                      MainActivity.this.startActivity ( cambio2 );
-                                                      MainActivity.this.finish ();
-                                                  }
-                                              }
-        );
-        btContinuar1.setOnClickListener ( new View.OnClickListener () {
             @Override
-            public void onClick(View view){
+            public void onClick(View v){
+                MainActivity.this.startActivity ( cambio2 );
+                MainActivity.this.finish ();
+            }
+        });
+        btContinuar.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick ( View v ) {
                 rq = Volley.newRequestQueue (getApplicationContext ());
                 IniciarSesión();
-                MainActivity.this.startActivity ( cambio1 );
+                startActivity ( cambio1 );
                 MainActivity.this.finish ();
             }
         } );
+
     }
-
-
     @Override
     public void onErrorResponse ( VolleyError error ) {
         Toast.makeText ( getApplicationContext (),error.toString (),Toast.LENGTH_LONG).show ();
@@ -67,9 +65,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         Usuario user = new Usuario ();
         Toast.makeText ( getApplicationContext (),"Bienvenido", Toast.LENGTH_SHORT ).show ();
         JSONArray jsona=response.optJSONArray ( "datos" );
-
         user.setUsuario ("Usuario");
-
         user.setContraseña ("Contraseña");
     }
     private void IniciarSesión(){

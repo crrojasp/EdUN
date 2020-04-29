@@ -41,7 +41,7 @@ public class registro extends AppCompatActivity {
         } );
     }
     public void ejecutarservicio(String url ){
-        StringRequest st = new StringRequest ( Request.Method.GET, url, new Response.Listener<String> () {
+        StringRequest st = new StringRequest ( Request.Method.POST, url, new Response.Listener<String> () {
             @Override
             public void onResponse ( String response ) {
                 Toast.makeText ( getApplicationContext (),"Operación Exitosa", Toast.LENGTH_SHORT ).show ();

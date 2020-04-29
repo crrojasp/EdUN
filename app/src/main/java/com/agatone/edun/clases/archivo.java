@@ -1,5 +1,7 @@
 package com.agatone.edun.Clases;
 
+import android.net.Uri;
+
 public class archivo {
     protected static int idOp=0;
 
@@ -8,12 +10,21 @@ public class archivo {
     protected String autor;
     protected String dueno;
     protected String tipo;
+    protected String filepath;
+    protected static String remotePath= "";
+    protected static Uri uri;
 
+    public archivo (String nombre, String autor, String tipo){
+        this(nombre,autor,"unknown",tipo);
+    }
     public archivo (String nombre,  String dueno){
-        this(nombre,"autor desconocido",dueno,"tipo no especificado");
+        this(nombre,"autor desconocido",dueno,"pdf");
+
     }
 
     public archivo(String nombre, String autor, String dueno, String tipo) {
+        id=idOp;
+        idOp++;
         this.nombre = nombre;
         this.autor = autor;
         this.dueno = dueno;
@@ -52,5 +63,43 @@ public class archivo {
         this.dueno = dueno;
     }
 
+    public static int getIdOp() {
+        return idOp;
+    }
 
+    public static void setIdOp(int idOp) {
+        archivo.idOp = idOp;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getFilepath() {
+        return filepath;
+    }
+
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
+    }
+
+    public static String getRemotePath() {
+        return remotePath;
+    }
+
+    public static void setRemotePath(String remotePath) {
+        archivo.remotePath = remotePath;
+    }
+
+    public static Uri getUri() {
+        return uri;
+    }
+
+    public static void setUri(Uri uri) {
+        archivo.uri = uri;
+    }
 }
