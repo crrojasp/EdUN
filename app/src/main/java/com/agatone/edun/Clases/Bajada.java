@@ -1,13 +1,16 @@
 package com.agatone.edun.Clases;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Looper;
+import android.widget.Toast;
 
 import org.apache.commons.net.ftp.FTP;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import java.io.OutputStream;
 
 
 /*
@@ -73,6 +76,7 @@ import java.io.IOException;
 */
 public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements  Coneccion{
     String path;
+    public Context context;//solo por una prueba, despues eliminar
 
 
 
@@ -99,24 +103,38 @@ public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements  Conecci
         FileOutputStream stream=null;
 
 
+
         for (archivo arc: archivos) {
+
             try {
                 cliente.connect(host,port); //estos valores se encuentran en la interfaz Coneccion
                 cliente.login( username,pass);
+
                 cliente.enterLocalPassiveMode(); // IMPORTANTE!!!!
+
                 cliente.setFileType(FTP.BINARY_FILE_TYPE, FTP.BINARY_FILE_TYPE);
+
                 cliente.setFileTransferMode(FTP.BINARY_FILE_TYPE);
-                cliente.changeWorkingDirectory("/archivo/");
+
+                cliente.changeWorkingDirectory("estructuras.atwebpages.com/archivo/");
+
+                //BufferedOutputStream buffOut = new BufferedOutputStream(new FileOutputStream(this.path+arc.getNombre()+"."+arc.getTipo()));
+                //Toast.makeText ( context,"como que si llego",Toast.LENGTH_LONG).show ();
 
 
-                stream=new FileOutputStream(this.path);
 
-                cliente.retrieveFile("/archivo/"+arc.getNombre()+"."+arc.getTipo(),stream);
+                OutputStream out = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/hola.pdf");
+                //stream=new FileOutputStream(this.path+arc.getNombre()+"."+arc.getTipo());
+
+
+                cliente.retrieveFile(arc.getNombre()+"."+arc.getTipo(),out);
                 stream.close();
                 cliente.disconnect();
 
             } catch (IOException e) {
-                e.printStackTrace();
+                Looper.prepare();
+                    Toast.makeText ( context,e.toString(),Toast.LENGTH_LONG).show ();
+                Looper.loop();
             }
         }
 

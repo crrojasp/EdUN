@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -205,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
                 String url=null;
                 FileOutputStream stream=null;
 
-                url= Coneccion.host+"/bajarNombreArchivoDeBase.php?id="+0;
+                url="http://"+ Coneccion.host+"/bajarNombreArchivoDeBase.php?id="+0;
                 jeison=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
                 request.add(jeison);
 
@@ -235,17 +234,24 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
 
 
 
-        Toast.makeText ( getApplicationContext (),"Bienvenido", Toast.LENGTH_SHORT ).show ();
+
         JSONArray jsona=response.optJSONArray ( "usuario" );
         JSONObject json=null;
         try {
             json=jsona.getJSONObject(0);
+
+
             nombre=json.optString("nombreArchivo");
             autor=json.optString("autorArchivo");
             tipo=json.optString("tipo");
+
             archivo[0]=new archivo(nombre,autor,tipo);
+
             Bajada bajada=new Bajada();
+
+            bajada.context=getApplicationContext();
             bajada.execute(archivo);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -1,7 +1,20 @@
 package com.agatone.edun.estructuras;
 
 
+import android.content.Context;
+
+import com.agatone.edun.Clases.Coneccion;
 import com.agatone.edun.Clases.archivo;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -10,12 +23,60 @@ import com.agatone.edun.Clases.archivo;
 
 
 
-public class Lista {
+public class Lista  implements Response.Listener<JSONObject>,Response.ErrorListener{
 
     private Nodo head;
+    private Nodo back;
+    public Context context;
+
+    public Nodo llenarLista(){
+        RequestQueue request;
+        JsonObjectRequest jeison;
+
+        request= Volley.newRequestQueue(context);
+        String url=null;
+        url="http://"+ Coneccion.host+"/listarArchivos.php";
+        jeison=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
+        request.add(jeison);
+        return head;
+    }
 
 
-    public Lista(){
+    @Override
+    public void onErrorResponse(VolleyError error) {
+
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+        archivo arc=null;
+        JSONArray json=response.optJSONArray("usuario");
+
+
+            try {
+                for(int i=0;i<json.length();i++){
+                    int id;
+                    String nombre,autor,dueno,tipo;
+                    JSONObject jsonObject=json.getJSONObject(i);
+                    id=jsonObject.optInt("id");
+                    nombre=jsonObject.optString("nombreArchivo");
+                    autor=jsonObject.optString("autorArchivo");
+                    dueno=jsonObject.optString("duenoArchivo");
+                    tipo=jsonObject.optString("tipo");
+
+                    arc=new archivo(id,nombre,autor,dueno,tipo);
+                    insert(arc);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+
+    }
+
+    public Lista(Context context){
+        this.context=context;
         head=null;
     };
 
@@ -90,6 +151,11 @@ public class Lista {
         }
         return null;
     }
+
+
+
+
+
 
 
 }

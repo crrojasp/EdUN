@@ -1,6 +1,6 @@
 package com.agatone.edun.estructuras;
 
-import com.agatone.edun.Clases.*;
+import com.agatone.edun.Clases.archivo;
 
 /**
  *
@@ -11,6 +11,7 @@ public class Nodo {
 
     private Nodo next;
     private Nodo before;
+
 
 
 

@@ -21,9 +21,19 @@ public class archivo {
         this(nombre,"autor desconocido",dueno,"pdf");
 
     }
+    public archivo(int id,String nombre, String autor, String dueno, String tipo){
+        this.id=id;
+        this.nombre=nombre;
+        this.autor=autor;
+        this.dueno=dueno;
+        this.tipo=tipo;
+        if(idOp<=id)
+            idOp=id+1;
+
+    }
 
     public archivo(String nombre, String autor, String dueno, String tipo) {
-        id=idOp;
+        this.id=idOp;
         idOp++;
         this.nombre = nombre;
         this.autor = autor;

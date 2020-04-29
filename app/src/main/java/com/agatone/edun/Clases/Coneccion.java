@@ -3,7 +3,7 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public interface Coneccion {
 
-    public static String host = "http://estructuras.atwebpages.com";
+    public static String host = "estructuras.atwebpages.com";
     FTPClient cliente = new FTPClient();
     String username = "3407620";
     String pass = "12345_Unal";
