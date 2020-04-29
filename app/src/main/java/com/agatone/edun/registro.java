@@ -10,18 +10,22 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.agatone.edun.Clases.Coneccion;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class registro extends AppCompatActivity {
+public class registro extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener{
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -34,13 +38,111 @@ public class registro extends AppCompatActivity {
         botonregistro.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-                ejecutarservicio ("https://estructuras.atwebpages.com/registro.php");
+                ejecutarservicio ();
                 registro.this.startActivity ( cambio4 );
                 registro.this.finish ();
             }
         } );
     }
-    public void ejecutarservicio(String url ){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //aqui comienza lo que Cristian edito
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+
+    }
+
+    public void ejecutarservicio( ){
+        JsonObjectRequest json;
+        RequestQueue request=Volley.newRequestQueue(getApplicationContext());
+        String url;
+
+        String Tipo = "indefinido";
+        RadioButton profesor = findViewById ( R.id.Profesor_radiobt );
+        RadioButton estudiante =findViewById ( R.id.Estudiante_radiobt );
+        if(profesor.isChecked ()){
+            Tipo="Profesor";
+        }else if(estudiante.isChecked ()){
+            Tipo="Estudiante";
+        }
+
+
+
+
+        String UsuarioDB      = ((EditText)findViewById ( R.id.Usuario_registro )).getText ().toString ();
+        String NombresDB      = ((EditText)findViewById ( R.id.Nombres_Registro )).getText().toString();
+        String ApellidosDB    = ((EditText)findViewById ( R.id.Apellidos_Registro )).getText().toString();
+        String ClaveDB        = ((EditText)findViewById ( R.id.Contraseña_Registro )).getText().toString();
+
+
+
+        url="http://"+ Coneccion.host+"/Registro?Usuario="+"&nombre="+UsuarioDB+"&Tipo="+
+                Tipo+"&Nombres="+NombresDB+"&Apellidos="+ApellidosDB+"&Contrasena="+ClaveDB;
+        url=url.replace( " ","%20");
+        json=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
+        request.add(json);
+
+
+
+
+
+                //aqui termina
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         StringRequest st = new StringRequest ( Request.Method.POST, url, new Response.Listener<String> () {
             @Override
             public void onResponse ( String response ) {
@@ -78,4 +180,6 @@ public class registro extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue ( this );
         requestQueue.add ( st );
     }
+
+    
 }
