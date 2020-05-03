@@ -86,11 +86,11 @@ public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements  Conecci
         String url=null;
         FileOutputStream stream=null;
 
+        try {
+
+            for (archivo arc: archivos) {
 
 
-        for (archivo arc: archivos) {
-
-            try {
                 cliente.connect(host,port); //estos valores se encuentran en la interfaz Coneccion
                 cliente.login( username,pass);
 
@@ -112,16 +112,16 @@ public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements  Conecci
 
 
                 cliente.retrieveFile(arc.getNombre()+"."+arc.getTipo(),out);
-                stream.close();
+                out.close();
                 cliente.disconnect();
 
-            } catch (IOException e) {
-                Looper.prepare();
-                Toast.makeText ( context,e.toString(),Toast.LENGTH_LONG).show ();
-                Looper.loop();
-            }
-        }
 
+            }
+        } catch (IOException e) {
+            Looper.prepare();
+            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+            Looper.loop();
+        }
 
 
 

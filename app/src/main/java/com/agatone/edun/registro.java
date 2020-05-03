@@ -181,5 +181,5 @@ public class registro extends AppCompatActivity implements Response.Listener<JSO
         requestQueue.add ( st );
     }
 
-    
+
 }
