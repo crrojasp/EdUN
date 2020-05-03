@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
         btCambioRegistro = findViewById ( R.id.btregistro);
 
         final Intent cambio2 = new Intent ( this, registro.class );
-        final Intent cambio1 = new Intent ( this, Principal.class );
+        final Intent cambio1 = new Intent ( this, Choose.class );
         btCambioRegistro.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v){

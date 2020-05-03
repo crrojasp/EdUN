@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Principal" />
+        <activity android:name=".Choose" />
         <activity android:name=".registro" ></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
