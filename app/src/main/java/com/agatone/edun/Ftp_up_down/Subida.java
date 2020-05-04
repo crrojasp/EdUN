@@ -1,4 +1,4 @@
-package com.agatone.edun.Clases;
+package com.agatone.edun.Ftp_up_down;
 
 import android.content.Context;
 import android.net.Uri;
@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.agatone.edun.Clases.archivo;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;

@@ -1,4 +1,4 @@
-package com.agatone.edun;
+package com.agatone.edun.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.agatone.edun.R;
 
 public class opciones extends AppCompatActivity {
 

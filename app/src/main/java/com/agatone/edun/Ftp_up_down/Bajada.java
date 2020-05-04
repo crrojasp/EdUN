@@ -1,10 +1,12 @@
-package com.agatone.edun.Clases;
+package com.agatone.edun.Ftp_up_down;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Looper;
 import android.widget.Toast;
+
+import com.agatone.edun.Clases.archivo;
 
 import org.apache.commons.net.ftp.FTP;
 
@@ -58,7 +60,7 @@ import java.io.OutputStream;
     *
     *
 */
-public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements  Coneccion{
+public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements Coneccion {
     String path;
     public Context context;//solo por una prueba, despues eliminar
 

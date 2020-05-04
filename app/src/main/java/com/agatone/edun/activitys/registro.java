@@ -1,4 +1,4 @@
-package com.agatone.edun;
+package com.agatone.edun.activitys;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.agatone.edun.Clases.Coneccion;
+import com.agatone.edun.Ftp_up_down.Coneccion;
+import com.agatone.edun.R;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;

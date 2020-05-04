@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF"
-    tools:context=".Archivos_de_apoyo">
+    tools:context=".activitys.Archivos_de_apoyo">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

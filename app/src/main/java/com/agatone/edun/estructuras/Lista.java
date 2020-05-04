@@ -3,7 +3,7 @@ package com.agatone.edun.estructuras;
 
 import android.content.Context;
 
-import com.agatone.edun.Clases.Coneccion;
+import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.Clases.archivo;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;

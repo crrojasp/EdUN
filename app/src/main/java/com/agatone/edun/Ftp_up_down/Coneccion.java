@@ -1,4 +1,4 @@
-package com.agatone.edun.Clases;
+package com.agatone.edun.Ftp_up_down;
 import org.apache.commons.net.ftp.FTPClient;
 
 public interface Coneccion {

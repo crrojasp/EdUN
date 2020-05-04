@@ -14,10 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Principal" />
-        <activity android:name=".opciones" />
-        <activity android:name=".registro" ></activity>
-        <activity android:name=".login">
+        <activity android:name=".activitys.Principal" />
+        <activity android:name=".activitys.opciones" />
+        <activity android:name=".activitys.registro" ></activity>
+        <activity android:name=".activitys.login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
