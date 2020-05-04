@@ -32,7 +32,7 @@ public class registro extends AppCompatActivity implements Response.Listener<JSO
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_registro );
         Button botonregistro        = findViewById ( R.id.btregistrar );
-        final Intent cambio4 = new Intent ( this, MainActivity.class );
+        final Intent cambio4 = new Intent ( this, login.class );
 
 
         botonregistro.setOnClickListener ( new View.OnClickListener () {

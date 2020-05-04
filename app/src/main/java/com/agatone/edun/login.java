@@ -21,7 +21,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class login extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     private Button btContinuar;
     private Button btCambioRegistro;
@@ -31,18 +31,18 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_main );
+        setContentView ( R.layout.activity_login);
 
         btContinuar     = findViewById ( R.id.btcontinuar);
         btCambioRegistro = findViewById ( R.id.btregistro);
 
         final Intent cambio2 = new Intent ( this, registro.class );
-        final Intent cambio1 = new Intent ( this, Choose.class );
+        final Intent cambio1 = new Intent ( this, opciones.class );
         btCambioRegistro.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v){
-                MainActivity.this.startActivity ( cambio2 );
-                MainActivity.this.finish ();
+                login.this.startActivity ( cambio2 );
+                login.this.finish ();
             }
         });
         btContinuar.setOnClickListener ( new View.OnClickListener () {
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
                 rq = Volley.newRequestQueue (getApplicationContext ());
                 IniciarSesión();
                 startActivity ( cambio1 );
-                MainActivity.this.finish ();
+                login.this.finish ();
             }
         } );
 

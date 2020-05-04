@@ -7,7 +7,7 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Choose extends AppCompatActivity {
+public class opciones extends AppCompatActivity {
 
     //zona de inicizlizacion
     private ImageButton returnBt;
@@ -18,10 +18,10 @@ public class Choose extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView ( R.layout.activity_choose );
+        setContentView ( R.layout.activity_opciones);
 
 
-        final Intent cambio2 = new Intent ( this, MainActivity.class );
+        final Intent cambio2 = new Intent ( this, login.class );
 
         //seccion de retorno a la pagina anterior
         returnBt=findViewById(R.id.regresar);
