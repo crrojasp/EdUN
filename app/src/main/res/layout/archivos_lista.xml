@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="94dp">
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/imageButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -22,7 +22,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/unknown" />
+            app:srcCompat="@drawable/unknown" />
 
         <TextView
             android:id="@+id/idtext"
@@ -36,7 +36,7 @@
             android:text="id"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.394"
-            app:layout_constraintStart_toEndOf="@+id/imageButton3"
+            app:layout_constraintStart_toEndOf="@+id/imageButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -50,7 +50,7 @@
             android:text="autor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.394"
-            app:layout_constraintStart_toEndOf="@+id/imageButton3"
+            app:layout_constraintStart_toEndOf="@+id/imageButton"
             app:layout_constraintTop_toBottomOf="@+id/duenoText" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:text="dueno"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.394"
-            app:layout_constraintStart_toEndOf="@+id/imageButton3"
+            app:layout_constraintStart_toEndOf="@+id/imageButton"
             app:layout_constraintTop_toBottomOf="@+id/nombreText" />
 
         <TextView
@@ -78,7 +78,7 @@
             android:text="nombre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.394"
-            app:layout_constraintStart_toEndOf="@+id/imageButton3"
+            app:layout_constraintStart_toEndOf="@+id/imageButton"
             app:layout_constraintTop_toBottomOf="@+id/idtext" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

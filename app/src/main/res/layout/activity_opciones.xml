@@ -16,7 +16,7 @@
         android:hapticFeedbackEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@mipmap/universidad_escudo" />
+        app:srcCompat="@drawable/universidad_escudo" />
 
 
 
@@ -32,7 +32,7 @@
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/boton_eventos" />
+        app:srcCompat="@drawable/boton_eventos" />
 
     <ImageButton
         android:id="@+id/documentos"
@@ -44,7 +44,7 @@
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/boton_documentos" />
+        app:srcCompat="@drawable/boton_documentos" />
 
     <ImageButton
         android:id="@+id/regresar"

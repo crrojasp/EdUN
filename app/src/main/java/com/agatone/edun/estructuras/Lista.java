@@ -27,9 +27,10 @@ public class Lista  implements Response.Listener<JSONObject>,Response.ErrorListe
 
     private Nodo head;
     private Nodo back;
+    private int count=0;
     public Context context;
 
-    public Nodo llenarLista(){
+    public void llenarLista(){
         RequestQueue request;
         JsonObjectRequest jeison;
 
@@ -38,7 +39,7 @@ public class Lista  implements Response.Listener<JSONObject>,Response.ErrorListe
         url="http://"+ Coneccion.host+"/listarArchivos.php";
         jeison=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
         request.add(jeison);
-        return head;
+
     }
 
 
@@ -93,7 +94,8 @@ public class Lista  implements Response.Listener<JSONObject>,Response.ErrorListe
         head.setNext(node);
         if(head.getNext()== node)
             insertado = true;
-
+        if(insertado)
+            count++;
         return insertado;
     }
 
@@ -136,6 +138,9 @@ public class Lista  implements Response.Listener<JSONObject>,Response.ErrorListe
             del=true;
             prv=ptr.getNext();
         }
+
+        if(del)
+            count--;
         return del;
     }
 
@@ -150,6 +155,33 @@ public class Lista  implements Response.Listener<JSONObject>,Response.ErrorListe
             nodo=nodo.getNext();
         }
         return null;
+    }
+
+    public Nodo buscarPosicion(int pos){
+        if(count<=0)
+            return null;
+        if(count==1)
+            return head.getNext();
+
+        Nodo nodo=head;
+        int i=0;
+
+        while(i<pos){
+            if(nodo==null)
+                return null;
+            nodo=nodo.getNext();
+
+        }
+        return nodo;
+
+
+    };
+
+
+
+
+    public int getCount(){
+        return this.count;
     }
 
 
