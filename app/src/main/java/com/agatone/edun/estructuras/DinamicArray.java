@@ -26,60 +26,6 @@ public class DinamicArray {
         capacity=2;
     }
 
-    private class fillArray implements Response.Listener<JSONObject>, Response.ErrorListener {
-        Context context;
-
-        public fillArray(Context context) {
-            this.context = context;
-        }
-
-
-        public void fill(){
-            RequestQueue request;
-            JsonObjectRequest jeison;
-
-            request= Volley.newRequestQueue(context);
-            String url=null;
-            url="http://"+ Coneccion.host+"/listarArchivos.php";
-            jeison=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
-            request.add(jeison);
-        }
-
-        @Override
-        public void onErrorResponse(VolleyError error) {
-
-        }
-
-        @Override
-        public void onResponse(JSONObject response) {
-            archivo arc=null;
-            JSONArray json=response.optJSONArray("usuario");
-
-
-            try {
-                for(int i=0;i<json.length();i++){
-                    int id;
-                    String nombre,autor,dueno,tipo;
-                    JSONObject jsonObject=json.getJSONObject(i);
-                    id=jsonObject.optInt("id");
-                    nombre=jsonObject.optString("nombreArchivo");
-                    autor=jsonObject.optString("autorArchivo");
-                    dueno=jsonObject.optString("duenoArchivo");
-                    tipo=jsonObject.optString("tipo");
-
-                    arc=new archivo(id,nombre,autor,dueno,tipo);
-                    insert(arc);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    };//esta es una inner class con la que se pretende hace la insercion de todos los archivos de la base de datos
-
-    public void fill(Context context){
-        fillArray fill=new fillArray(context);
-        fill.fill();
-    }//ya que fillArray es una clase que posee los metodos para la insercion de todos los datos, en este metodo le hago su respectivo llamado
 
 
     public void insert(archivo arc){
@@ -134,6 +80,66 @@ public class DinamicArray {
     public int size(){
         return size;
     }
+
+
+    /*de aqui en adelante sigue la zona para llenado del array con datos de la base de datos
+    *se hara la consulta por medi de php y se cargara archivo por archivo
+     */
+
+    private class fillArray implements Response.Listener<JSONObject>, Response.ErrorListener {
+        Context context;
+
+        public fillArray(Context context) {
+            this.context = context;
+        }
+
+
+        public void fill(){
+            RequestQueue request;
+            JsonObjectRequest jeison;
+
+            request= Volley.newRequestQueue(context);
+            String url=null;
+            url="http://"+ Coneccion.host+"/listarArchivos.php";
+            jeison=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
+            request.add(jeison);
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError error) {
+
+        }
+
+        @Override
+        public void onResponse(JSONObject response) {
+            archivo arc=null;
+            JSONArray json=response.optJSONArray("usuario");
+
+
+            try {
+                for(int i=0;i<json.length();i++){
+                    int id;
+                    String nombre,autor,dueno,tipo;
+                    JSONObject jsonObject=json.getJSONObject(i);
+                    id=jsonObject.optInt("id");
+                    nombre=jsonObject.optString("nombreArchivo");
+                    autor=jsonObject.optString("autorArchivo");
+                    dueno=jsonObject.optString("duenoArchivo");
+                    tipo=jsonObject.optString("tipo");
+
+                    arc=new archivo(id,nombre,autor,dueno,tipo);
+                    insert(arc);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    };//esta es una inner class con la que se pretende hace la insercion de todos los archivos de la base de datos
+
+    public void fill(Context context){
+        fillArray fill=new fillArray(context);
+        fill.fill();
+    }//ya que fillArray es una clase que posee los metodos para la insercion de todos los datos, en este metodo le hago su respectivo llamado
 
 
 
