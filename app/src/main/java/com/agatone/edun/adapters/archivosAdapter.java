@@ -1,23 +1,26 @@
 package com.agatone.edun.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agatone.edun.R;
-import com.agatone.edun.estructuras.Lista;
+import com.agatone.edun.estructuras.DinamicArray;
 
 public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archivosHolder> {
-    Lista listArchivos;
+    DinamicArray listArchivos;
+    Context context;
 
-    public archivosAdapter (Lista archivos){
+    public archivosAdapter (DinamicArray archivos, Context context){
         listArchivos=archivos;
-
+        this.context=context;
     }
     public class archivosHolder extends RecyclerView.ViewHolder{
         TextView id,nombre,dueno,autor;
@@ -47,14 +50,21 @@ public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archiv
 
     @Override
     public void onBindViewHolder(@NonNull archivosHolder holder, int position) {
-        holder.id.setText(listArchivos.buscarPosicion(position).getArc().getId());
-        holder.dueno.setText(listArchivos.buscarPosicion(position).getArc().getDueno());
-        holder.nombre.setText(listArchivos.buscarPosicion(position).getArc().getNombre());
-        holder.autor.setText(listArchivos.buscarPosicion(position).getArc().getAutor());
+        try{
+            holder.id.setText(listArchivos.getArchivo(position).getId());
+            holder.dueno.setText(listArchivos.getArchivo(position).getDueno());
+            holder.nombre.setText(listArchivos.getArchivo(position).getNombre());
+            holder.autor.setText(listArchivos.getArchivo(position).getAutor());
+
+        }catch(IndexOutOfBoundsException e){
+            Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
+
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return listArchivos.getCount();
+        return listArchivos.getSize();
     }
 }

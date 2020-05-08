@@ -26,13 +26,13 @@
 
         <TextView
             android:id="@+id/idtext"
-            android:gravity="center"
             android:layout_width="150dp"
             android:layout_height="20dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="7dp"
             android:layout_marginEnd="15dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="id"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.394"
@@ -41,12 +41,12 @@
 
         <TextView
             android:id="@+id/autorText"
-            android:gravity="center"
             android:layout_width="150dp"
             android:layout_height="20dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="autor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.394"
@@ -55,12 +55,12 @@
 
         <TextView
             android:id="@+id/duenoText"
-            android:gravity="center"
             android:layout_width="150dp"
             android:layout_height="20dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="dueno"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.394"
@@ -69,12 +69,12 @@
 
         <TextView
             android:id="@+id/nombreText"
-            android:gravity="center"
             android:layout_width="150dp"
             android:layout_height="20dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="nombre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.394"

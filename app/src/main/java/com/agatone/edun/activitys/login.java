@@ -59,7 +59,7 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
     }
     @Override
     public void onErrorResponse ( VolleyError error ) {
-        Toast.makeText ( getApplicationContext (),error.toString (),Toast.LENGTH_LONG).show ();
+        Toast.makeText ( getApplicationContext (),error.toString (),Toast.LENGTH_SHORT).show ();
     }
     @Override
     public void onResponse ( JSONObject response ) {

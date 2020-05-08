@@ -12,7 +12,7 @@ import com.agatone.edun.R;
 public class opciones extends AppCompatActivity {
 
     //zona de inicizlizacion
-    private ImageButton returnBt;
+    private ImageButton returnBt,documentoBt;
 
 
 
@@ -23,17 +23,28 @@ public class opciones extends AppCompatActivity {
         setContentView ( R.layout.activity_opciones);
 
 
-        final Intent cambio2 = new Intent ( this, login.class );
+        final Intent cambio = new Intent ( this, login.class );
+        final Intent documentos = new Intent ( this, documentos.class );
 
         //seccion de retorno a la pagina anterior
         returnBt=findViewById(R.id.regresar);
+        documentoBt=(ImageButton) findViewById(R.id.documentos);
+
         returnBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(cambio2);
+                startActivity(cambio);
             }
         });
 
+
+        documentoBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opciones.this.startActivity(documentos);
+                opciones.this.finish();
+            }
+        });
 
 
     }

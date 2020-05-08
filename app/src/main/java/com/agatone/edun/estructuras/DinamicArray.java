@@ -1,6 +1,7 @@
 package com.agatone.edun.estructuras;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Ftp_up_down.Coneccion;
@@ -28,12 +29,14 @@ public class DinamicArray {
 
 
 
-    public void insert(archivo arc){
+    public void insertarArchivo(archivo arc){
         if(size>=capacity)
             aumentarArreglo();
         arreglo[size]=arc;
         size++;
     }
+
+
 
     public void aumentarArreglo(){
         archivo[] recurso=new archivo [capacity*2];
@@ -42,21 +45,20 @@ public class DinamicArray {
         }
         arreglo=recurso;
         capacity*=2;
-
     };
 
-    public archivo getArchivo(int i){
+
+    public archivo getArchivo(int i) throws IndexOutOfBoundsException{
         if(i>=size|i<0)
             throw new IndexOutOfBoundsException();
 
         return arreglo[i];
     }
 
+
     public void setInt(int i, archivo value){
         if(i>=size||i<0)
             throw new IndexOutOfBoundsException();
-
-
         if(i==size){//se evalua si la variable se quiere insertar al final del arreglo para ppoder hacer el respectivo aumento del contador "size"
             if(size>=capacity)//al igual que en la funcion "insert", se evalua si nos encontramos apuntando al final del arreglo, si es asi, debemos incrementar el tamano del arreglo
                 aumentarArreglo();
@@ -64,6 +66,7 @@ public class DinamicArray {
         }
         arreglo[i]=value;
     }
+
 
     public void remove(int i){
         if(i<0||i>=size){
@@ -77,8 +80,9 @@ public class DinamicArray {
         size--;
     }
 
-    public int size(){
-        return size;
+
+    public int getSize(){
+        return this.size;
     }
 
 
@@ -88,9 +92,10 @@ public class DinamicArray {
 
     private class fillArray implements Response.Listener<JSONObject>, Response.ErrorListener {
         Context context;
-
-        public fillArray(Context context) {
+        DinamicArray arreglo;
+        public fillArray(Context context,DinamicArray arreglo) {
             this.context = context;
+            this.arreglo=arreglo;
         }
 
 
@@ -107,7 +112,7 @@ public class DinamicArray {
 
         @Override
         public void onErrorResponse(VolleyError error) {
-
+            Toast.makeText(context, error.toString(),Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -122,22 +127,23 @@ public class DinamicArray {
                     String nombre,autor,dueno,tipo;
                     JSONObject jsonObject=json.getJSONObject(i);
                     id=jsonObject.optInt("id");
-                    nombre=jsonObject.optString("nombreArchivo");
-                    autor=jsonObject.optString("autorArchivo");
-                    dueno=jsonObject.optString("duenoArchivo");
+                    nombre=jsonObject.optString("nombre");
+                    autor=jsonObject.optString("autor");
+                    dueno=jsonObject.optString("dueno");
                     tipo=jsonObject.optString("tipo");
 
                     arc=new archivo(id,nombre,autor,dueno,tipo);
-                    insert(arc);
+                    arreglo.insertarArchivo(arc);
                 }
+
             } catch (JSONException e) {
-                e.printStackTrace();
+                Toast.makeText(context,e.toString() ,Toast.LENGTH_SHORT).show();
             }
         }
     };//esta es una inner class con la que se pretende hace la insercion de todos los archivos de la base de datos
 
-    public void fill(Context context){
-        fillArray fill=new fillArray(context);
+    public void fill(Context context,DinamicArray array){
+        fillArray fill=new fillArray(context,array);
         fill.fill();
     }//ya que fillArray es una clase que posee los metodos para la insercion de todos los datos, en este metodo le hago su respectivo llamado
 

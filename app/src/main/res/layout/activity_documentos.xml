@@ -33,43 +33,49 @@
 
     <ImageButton
         android:id="@+id/listaDocumentos"
-        android:layout_width="180dp"
-        android:layout_height="54dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="82dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycler"
+        app:srcCompat="@drawable/boton_listadocumentos" />
+
+    <ImageButton
+        android:id="@+id/misDocumentos"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycler"
+        app:srcCompat="@drawable/boton_misdocumentos" />
+
+    <ImageButton
+        android:id="@+id/permisoDocumentos"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="64dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/boton_permisodocumentos" />
+
+    <ImageButton
+        android:id="@+id/upload"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="19dp"
         android:background="@null"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler"
-        app:srcCompat="@drawable/boton_listaDocumentos" />
-
-    <ImageButton
-        android:id="@+id/misDocumentos"
-        android:layout_width="180dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="141dp"
-        android:background="@null"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler"
-        app:srcCompat="@drawable/boton_misDocumentos" />
-
-    <ImageButton
-        android:id="@+id/permisoDocumentos"
-        android:layout_width="180dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="23dp"
-        android:background="@null"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/misDocumentos"
-        app:srcCompat="@drawable/boton_permisoDocumentos" />
+        app:srcCompat="@drawable/boton_subir" />
 </androidx.constraintlayout.widget.ConstraintLayout>
