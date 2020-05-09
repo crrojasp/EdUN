@@ -51,10 +51,15 @@ public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archiv
     @Override
     public void onBindViewHolder(@NonNull archivosHolder holder, int position) {
         try{
-            holder.id.setText(listArchivos.getArchivo(position).getId());
+            holder.id.setText(String.valueOf(listArchivos.getArchivo(position).getId()));
             holder.dueno.setText(listArchivos.getArchivo(position).getDueno());
             holder.nombre.setText(listArchivos.getArchivo(position).getNombre());
             holder.autor.setText(listArchivos.getArchivo(position).getAutor());
+            if(listArchivos.getArchivo(position).getTipo().equals("pdf")){
+                holder.image.setBackgroundResource(R.drawable.pdf);
+            }else{
+                holder.image.setBackgroundResource(R.drawable.unknown);
+            }
 
         }catch(IndexOutOfBoundsException e){
             Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
