@@ -1,7 +1,4 @@
-package com.agatone.edun;
-
-import com.agatone.edun.Clases.Usuario;
-
+package com.agatone.edun.Clases;
 
 /*
 *Con esta clase se planea poder compartir informacion del usuario que inicio sesio en la app

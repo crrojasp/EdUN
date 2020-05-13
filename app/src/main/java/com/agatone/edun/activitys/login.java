@@ -39,6 +39,9 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
 
         final Intent cambio2 = new Intent ( this, registro.class );
         final Intent cambio1 = new Intent ( this, opciones.class );
+
+
+
         btCambioRegistro.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v){
@@ -46,6 +49,8 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
                 login.this.finish ();
             }
         });
+
+
         btContinuar.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
@@ -56,6 +61,14 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
             }
         } );
 
+    }
+
+    private void IniciarSesión(){
+        String Usuario1      =((EditText)findViewById ( R.id.CajaUsuario )).getText ().toString ();
+        String Contraseña1      =((EditText)findViewById ( R.id.CajaContraseña )).getText ().toString ();
+        String url="https://edun-proyectodb.000webhostapp.com/inicioSesion?Usuario"+Usuario1+"&Contraseña="+Contraseña1;
+        jrq = new JsonObjectRequest ( Request.Method.GET,url, null,this,this );
+        rq.add(jrq);
     }
     @Override
     public void onErrorResponse ( VolleyError error ) {
@@ -68,12 +81,5 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
         JSONArray jsona=response.optJSONArray ( "datos" );
         user.setUsuario ("Usuario");
         user.setContraseña ("Contraseña");
-    }
-    private void IniciarSesión(){
-        String Usuario1      =((EditText)findViewById ( R.id.CajaUsuario )).getText ().toString ();
-        String Contraseña1      =((EditText)findViewById ( R.id.CajaContraseña )).getText ().toString ();
-        String url="https://edun-proyectodb.000webhostapp.com/index.php?Usuario"+Usuario1+"&Contraseña="+Contraseña1;
-        jrq = new JsonObjectRequest ( Request.Method.GET,url, null,this,this );
-        rq.add(jrq);
     }
 }
