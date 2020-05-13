@@ -14,7 +14,14 @@ public class Usuario {
         this.Contraseña=getContraseña ();
     }
 
-    
+    public Usuario(String Nombres, String Apellidos, int id, char tipo, String Usuario,String Contraseña){
+        this.nombres=Nombres;
+        this.apellidos=Apellidos;
+        this.id=id;
+        this.tipo=tipo;
+        this.Usuario=Usuario;
+        this.Contraseña=Contraseña;
+    }
 
 
     public String getUsuario () {
@@ -31,5 +38,37 @@ public class Usuario {
 
     public void setContraseña ( String contraseña ) {
         Contraseña = contraseña;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public char getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(char tipo) {
+        this.tipo = tipo;
     }
 }
