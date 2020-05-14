@@ -75,7 +75,7 @@ public class documentos extends AppCompatActivity  {
                     @Override
                     public void onResponse(JSONObject response) {
                         archivo arc=null;
-                        JSONArray json=response.optJSONArray("usuario");
+                        JSONArray json=response.optJSONArray("documento");
                         DinamicArray filling=new DinamicArray();
 
                         try {

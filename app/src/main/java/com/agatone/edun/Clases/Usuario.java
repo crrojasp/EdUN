@@ -14,13 +14,13 @@ public class Usuario {
         this.Contraseña=getContraseña ();
     }
 
-    public Usuario(String Nombres, String Apellidos, int id, char tipo, String Usuario,String Contraseña){
+    public Usuario(String Nombres, String Apellidos, int id, char tipo, String Usuario){
         this.nombres=Nombres;
         this.apellidos=Apellidos;
         this.id=id;
         this.tipo=tipo;
         this.Usuario=Usuario;
-        this.Contraseña=Contraseña;
+        //this.Contraseña=Contraseña;
     }
 
 

@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.agatone.edun.Clases.Usuario;
+import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +21,7 @@ import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class login extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
@@ -29,6 +31,9 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
     RequestQueue rq;
     JsonRequest jrq;
 
+    EditText user;
+    EditText password;
+
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
@@ -36,9 +41,12 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
 
         btContinuar     = findViewById ( R.id.btcontinuar);
         btCambioRegistro = findViewById ( R.id.btregistro);
+        user=(EditText)findViewById ( R.id.CajaUsuario );
+        password=(EditText)findViewById ( R.id.CajaContraseña );
+
 
         final Intent cambio2 = new Intent ( this, registro.class );
-        final Intent cambio1 = new Intent ( this, opciones.class );
+
 
 
 
@@ -56,19 +64,30 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
             public void onClick ( View v ) {
                 rq = Volley.newRequestQueue (getApplicationContext ());
                 IniciarSesión();
-                startActivity ( cambio1 );
-                login.this.finish ();
+
             }
         } );
 
     }
 
     private void IniciarSesión(){
-        String Usuario1      =((EditText)findViewById ( R.id.CajaUsuario )).getText ().toString ();
-        String Contraseña1      =((EditText)findViewById ( R.id.CajaContraseña )).getText ().toString ();
-        String url="https://edun-proyectodb.000webhostapp.com/inicioSesion?Usuario"+Usuario1+"&Contraseña="+Contraseña1;
-        jrq = new JsonObjectRequest ( Request.Method.GET,url, null,this,this );
-        rq.add(jrq);
+
+        String Usuario1=user.getText().toString() ;
+        String Contraseña1=password.getText().toString();
+
+
+
+        if(Usuario1.length()==0&&Contraseña1.length()==0){
+            Toast.makeText(getApplicationContext(),"Falta el Nombre de usuario y la contrasena",Toast.LENGTH_SHORT).show();
+        }else if(Usuario1.length()==0){
+            Toast.makeText(getApplicationContext(),"Falta el Nombre de usuario",Toast.LENGTH_SHORT).show();
+        }else if(Contraseña1.length()==0){
+            Toast.makeText(getApplicationContext(),"Falta la contrasena",Toast.LENGTH_SHORT).show();
+        }else {
+            String url = "http://"+ Coneccion.host +"/inicioSesion.php?Usuario=" + Usuario1 + "&Contraseña=" + Contraseña1;
+            jrq = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+            rq.add(jrq);
+        }
     }
     @Override
     public void onErrorResponse ( VolleyError error ) {
@@ -76,10 +95,42 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
     }
     @Override
     public void onResponse ( JSONObject response ) {
-        Usuario user = new Usuario ();
-        Toast.makeText ( getApplicationContext (),"Bienvenido", Toast.LENGTH_SHORT ).show ();
-        JSONArray jsona=response.optJSONArray ( "datos" );
-        user.setUsuario ("Usuario");
-        user.setContraseña ("Contraseña");
+        int id;
+        String nombre;
+        String apellido;
+        char tipo;
+        String usuario;
+        try {
+            JSONArray json=response.optJSONArray("usuario");
+
+            JSONObject jsonObject=json.getJSONObject(0);
+            id=jsonObject.optInt("id");
+            nombre=jsonObject.optString("nombre");
+            apellido=jsonObject.optString("apellido");
+            tipo=jsonObject.optString("tipo").charAt(0);
+            usuario=user.getText().toString();
+
+            Usuario User = new Usuario (nombre, apellido, id,tipo, usuario);
+
+            if(User.getId()==-1){
+                Toast.makeText ( getApplicationContext (),"No se encontro el usuario", Toast.LENGTH_SHORT ).show ();
+            }else if(User.getId()==-2){
+                Toast.makeText ( getApplicationContext (),"error al conectar con la base", Toast.LENGTH_SHORT ).show ();
+            }else{
+                Toast.makeText ( getApplicationContext (),"Bienvenido", Toast.LENGTH_SHORT ).show ();
+                Intent cambio1 = new Intent ( getApplicationContext(), opciones.class );
+                startActivity ( cambio1 );
+                login.this.finish ();
+
+            }
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 }
