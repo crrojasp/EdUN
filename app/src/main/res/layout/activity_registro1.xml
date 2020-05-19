@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activitys.registro">
+    tools:context=".activitys.registro1">
+
+    <TextView
+        android:id="@+id/apellidoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Apellidos_Registro" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -20,36 +28,34 @@
         android:id="@+id/Usuario_registro"
         android:layout_width="220dp"
         android:layout_height="42dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="56dp"
         android:hint="@string/Usuario_string"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Formulario.String" />
 
     <Button
-        android:id="@+id/btregistrar"
+        android:id="@+id/continuar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="184dp"
         android:text="@string/Continuar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Tipo" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/Nombres_Registro"
         android:layout_width="220dp"
         android:layout_height="42dp"
+        android:layout_marginStart="96dp"
         android:layout_marginTop="30dp"
         android:gravity="center_vertical"
-        android:hint="@string/Nombres"
+        android:hint="Nombre"
         android:inputType="textPersonName"
         android:password="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Usuario_registro" />
 
@@ -57,12 +63,11 @@
         android:id="@+id/Apellidos_Registro"
         android:layout_width="220dp"
         android:layout_height="42dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="96dp"
 
-        android:hint="@string/ApellidoStr"
+        android:layout_marginTop="30dp"
+        android:hint="Apellidos"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Nombres_Registro" />
 
@@ -81,39 +86,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/Contraseña_Registro"
-        android:layout_width="220dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="30dp"
-        android:hint="@string/Contraseña"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+    <ImageButton
+        android:id="@+id/regresar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@null"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Apellidos_Registro" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
 
-    <RadioGroup
-        android:id="@+id/Tipo"
-        android:layout_width="220dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+    <TextView
+        android:id="@+id/usuarioText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Contraseña_Registro">
+        app:layout_constraintTop_toBottomOf="@+id/Usuario_registro" />
 
-        <RadioButton
-            android:id="@+id/Profesor_radiobt"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="@string/a0006" />
-
-        <RadioButton
-            android:id="@+id/Estudiante_radiobt"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="@string/a0007" />
-    </RadioGroup>
+    <TextView
+        android:id="@+id/nombreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Nombres_Registro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

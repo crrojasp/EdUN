@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">EdUN</string>
     <string name="Usuario_string">Usuario</string>
-    <string name="Contraseña_string">Contraseña</string>
+    <string name="Contraseña_string">Contrasena</string>
     <string name="StringRegistrer"> Si no tiene una cuenta y desea registrarse de click aquí  </string>
     <string name="Continuar">Continuar</string>
     <string name="Formulario_Registro_Str">Formulario de Registro</string>
     <string name="ApellidoStr">Apellidos</string>
     <string name="Nombres"> Nombres </string>
     <string name="CuentaStr">Cuenta Unal</string>
-    <string name="Contraseña">Contraseña</string>
+    <string name="Contraseña">Contrasena</string>
     <string name="Welcome">Bienvenid@</string>
     <string name="a0001">Entrega_Trabajos_Estudiantes</string>
     <string name="Subir_Archivo_Apoyo_Str">Subir un archivo de apoyo</string>
@@ -22,4 +22,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="confirmar_Contrasena">Confirmar contrasena</string>
+    <string name="finish">Terminar</string>
 </resources>

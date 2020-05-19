@@ -5,45 +5,120 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class registro extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener{
-
+public class registro1 extends AppCompatActivity {
+    private EditText usuario_registro;
+    private EditText nombre;
+    private EditText apellido;
+    private ImageButton regresar;
+    private Button continuar;
+    private TextView usuarioText;
+    private TextView nombreText;
+    private TextView apellidoText;
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
+
+
+
+
         super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_registro );
-        Button botonregistro        = findViewById ( R.id.btregistrar );
+        setContentView ( R.layout.activity_registro1);
+
+        //inicializacion de variables
+        usuario_registro=(EditText)findViewById(R.id.Usuario_registro);
+        nombre=(EditText)findViewById(R.id.Nombres_Registro);
+        apellido=(EditText)findViewById(R.id.Apellidos_Registro);
+        regresar=(ImageButton)findViewById(R.id.regresar);
+        continuar=(Button)findViewById(R.id.continuar);
+        usuarioText=(TextView)findViewById(R.id.usuarioText);
+        nombreText=(TextView)findViewById(R.id.nombreText);
+        apellidoText=(TextView)findViewById(R.id.apellidoText);
         final Intent cambio4 = new Intent ( this, login.class );
 
-
-        botonregistro.setOnClickListener ( new View.OnClickListener () {
+        continuar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick ( View v ) {
-                ejecutarservicio ();
-                registro.this.startActivity ( cambio4 );
-                registro.this.finish ();
+            public void onClick(View v) {
+                primerPaso();
             }
-        } );
+        });
+    }
+
+    private void primerPaso(){
+
+
+        //el booleano v servira para calcular si faltan espacios por llenar, ya que si llega a faltar uno, automaticamente se volvera falso por lo que no entrara al resto de la funcion
+        boolean v=true;
+        String user=usuario_registro.getText().toString();
+        String nom=nombre.getText().toString();
+        String ape=apellido.getText().toString();
+        usuarioText.setText("");
+        nombreText.setText("");
+        apellidoText.setText("");
+        if(user.length()==0){
+            usuarioText.setText("Falta nombre de usuario");
+            v=false;
+        }
+        if(nom.length()==0){
+            nombreText.setText("Falta el nombre");
+            v=false;
+        }
+        if(ape.length()==0){
+            apellidoText.setText("Falta el apellido");
+            v=false;
+        }
+        if(v){
+            RequestQueue request;
+            JsonObjectRequest jeison;
+
+            request= Volley.newRequestQueue(getApplicationContext());
+            String url;
+            url="http://"+ Coneccion.host+"/inicioRegistro/usuarioExiste.php?Usuario="+user;
+            jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    String result;
+
+                    try {
+                        JSONArray json=response.optJSONArray("exist");
+
+                        JSONObject jsonObject=json.getJSONObject(0);
+                        result=jsonObject.optString("exist");
+                        
+
+
+                        Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+                    }catch(JSONException e ){
+                        Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(),"Vuelva a intentarlo",Toast.LENGTH_SHORT).show();
+                }
+            });
+            request.add(jeison);
+
+        }
+
     }
 
 
@@ -69,8 +144,7 @@ public class registro extends AppCompatActivity implements Response.Listener<JSO
 
 
 
-
-
+    /*
 
 
 
@@ -181,6 +255,6 @@ public class registro extends AppCompatActivity implements Response.Listener<JSO
         RequestQueue requestQueue = Volley.newRequestQueue ( this );
         requestQueue.add ( st );
     }
-
+    */
 
 }

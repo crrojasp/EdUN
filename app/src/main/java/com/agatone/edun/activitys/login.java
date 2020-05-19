@@ -45,7 +45,7 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
         password=(EditText)findViewById ( R.id.CajaContraseña );
 
 
-        final Intent cambio2 = new Intent ( this, registro.class );
+        final Intent cambio2 = new Intent ( this, registro1.class );
 
 
 
