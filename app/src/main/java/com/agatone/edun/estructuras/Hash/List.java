@@ -1,20 +1,9 @@
-package com.agatone.edun.estructuras;
+package com.agatone.edun.estructuras.Hash;
 
 
 import android.content.Context;
 
-import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.Clases.archivo;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  *
@@ -23,23 +12,21 @@ import org.json.JSONObject;
 
 
 
-public class Lista{
+public class List {
 
-    private Nodo head;
-    private Nodo back;
+    private Node head;
+    private Node back;
     private int count=0;
-    public Context context;
 
-    public Lista(Context context){
-        this.context=context;
+    public List(){
         head=null;
     };
 
 
     public boolean insert(archivo arc){
         boolean insertado=false;
-        Nodo node=new Nodo(arc);
-        Nodo previo,actual;
+        Node node=new Node(arc);
+        Node previo,actual;
 
 
         actual=head;
@@ -55,7 +42,7 @@ public class Lista{
 
     public boolean delete(int id) {
         boolean del = false;
-        Nodo prv, ptr = head;
+        Node prv, ptr = head;
         while (ptr != null & ptr.getArc().getId() < id) {
             prv = ptr;
             ptr = ptr.getNext();
@@ -69,8 +56,8 @@ public class Lista{
         return del;
     }
 
-    public Nodo buscarId(int id){
-        Nodo nodo=head;
+    public Node buscarId(int id){
+        Node nodo=head;
         while(nodo!=null){
             if(nodo.getArc().getId()==id){
                 return nodo;
@@ -80,13 +67,13 @@ public class Lista{
         return null;
     }
 
-    public Nodo buscarPosicion(int pos){
+    public Node buscarPosicion(int pos){
         if(count<=0)
             return null;
         if(count==1)
             return head.getNext();
 
-        Nodo nodo=head;
+        Node nodo=head;
         int i=0;
 
         while(i<pos){
@@ -104,10 +91,20 @@ public class Lista{
         return this.count;
     }
 
+    public Node getHead() {
+        return head;
+    }
 
+    public void setHead(Node head) {
+        this.head = head;
+    }
 
+    public Node getBack() {
+        return back;
+    }
 
-
-
+    public void setBack(Node back) {
+        this.back = back;
+    }
 
 }
