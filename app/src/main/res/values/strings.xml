@@ -11,4 +11,12 @@
     <string name="Contraseña">Contraseña</string>
     <string name="Welcome">Bienvenid@</string>
     <string name="a0001">Entrega_Trabajos_Estudiantes</string>
+    <string name="Subir_Archivo_Apoyo_Str">Subir un archivo de apoyo</string>
+    <string name="Archivos_De_Apoyo_Str">Buscar un archivo de apoyo</string>
+    <string name="a0002">Crear Evento</string>
+    <string name="a0003">Fecha</string>
+    <string name="a0004">Hora</string>
+    <string name="a0005">Nombre del evento</string>
+    <string name="a0006">Profesor</string>
+    <string name="a0007">Estudiante</string>
 </resources>
