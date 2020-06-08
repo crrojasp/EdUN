@@ -62,8 +62,6 @@ public class registro1 extends AppCompatActivity {
     }
 
     private void primerPaso(){
-
-
         //el booleano v servira para calcular si faltan espacios por llenar, ya que si llega a faltar uno, automaticamente se volvera falso por lo que no entrara al resto de la funcion
         boolean v=true;
         String user=usuario_registro.getText().toString();
@@ -95,14 +93,20 @@ public class registro1 extends AppCompatActivity {
                 @Override
                 public void onResponse(JSONObject response) {
                     String result;
-
+                    int res;
                     try {
                         JSONArray json=response.optJSONArray("exist");
 
                         JSONObject jsonObject=json.getJSONObject(0);
                         result=jsonObject.optString("exist");
-                        
+                        res=Integer.parseInt(result);
 
+                        if(res>=0){
+                            Toast.makeText(getApplicationContext(),"el usuario ya existe",Toast.LENGTH_SHORT).show();
+                        }else if(res==-3){
+                            Intent intent=new Intent(getApplicationContext(),registro2.class);
+
+                        }
 
                         Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
                     }catch(JSONException e ){
@@ -118,6 +122,7 @@ public class registro1 extends AppCompatActivity {
             request.add(jeison);
 
         }
+
 
     }
 
