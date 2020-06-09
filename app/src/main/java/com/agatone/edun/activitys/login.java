@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.agatone.edun.Clases.Usuario;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
+import com.agatone.edun.activitys.registro.registro1;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -110,7 +111,8 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
             tipo=jsonObject.optString("tipo").charAt(0);
             usuario=user.getText().toString();
 
-            Usuario User = new Usuario (nombre, apellido, id,tipo, usuario);
+            Usuario User = new Usuario (nombre, apellido, tipo, usuario);
+            User.setId(id);
 
             if(User.getId()==-1){
                 Toast.makeText ( getApplicationContext (),"No se encontro el usuario", Toast.LENGTH_SHORT ).show ();

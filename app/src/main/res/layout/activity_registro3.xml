@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activitys.registro1">
+    tools:context=".activitys.registro.registro1">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -43,6 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="144dp"
@@ -67,33 +68,33 @@
         app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <RadioButton
-        android:id="@+id/radioButton"
+        android:id="@+id/tutorB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="142dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="56dp"
         android:text="Tutor"
-        app:layout_constraintBottom_toTopOf="@+id/radioButton2"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <RadioButton
-        android:id="@+id/radioButton2"
+        android:id="@+id/estudianteB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="142dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="27dp"
         android:text="Estudiante"
-        app:layout_constraintBottom_toTopOf="@+id/radioButton3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tutorB" />
 
     <RadioButton
-        android:id="@+id/radioButton3"
+        android:id="@+id/ambosB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="142dp"
-        android:layout_marginBottom="85dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="29dp"
         android:text="Ambos"
-        app:layout_constraintBottom_toTopOf="@+id/terminarRegistro"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estudianteB" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,7 @@
         <activity android:name=".activitys.documentos"></activity>
         <activity android:name=".activitys.Principal" />
         <activity android:name=".activitys.opciones" />
-        <activity android:name=".activitys.registro1" />
+        <activity android:name=".activitys.registro.registro1" />
         <activity android:name=".activitys.login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

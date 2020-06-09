@@ -1,4 +1,4 @@
-package com.agatone.edun.activitys;
+package com.agatone.edun.activitys.registro;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.agatone.edun.Clases.Usuario;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
+import com.agatone.edun.activitys.login;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,20 +27,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class registro1 extends AppCompatActivity {
+
     private EditText usuario_registro;
     private EditText nombre;
     private EditText apellido;
+
     private ImageButton regresar;
     private Button continuar;
+
     private TextView usuarioText;
     private TextView nombreText;
     private TextView apellidoText;
+
+    final Intent login = new Intent ( this, login.class );
+
+
+
+
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
-
-
-
-
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_registro1);
 
@@ -46,12 +53,22 @@ public class registro1 extends AppCompatActivity {
         usuario_registro=(EditText)findViewById(R.id.Usuario_registro);
         nombre=(EditText)findViewById(R.id.Nombres_Registro);
         apellido=(EditText)findViewById(R.id.Apellidos_Registro);
+
         regresar=(ImageButton)findViewById(R.id.regresar);
         continuar=(Button)findViewById(R.id.continuar);
+
         usuarioText=(TextView)findViewById(R.id.usuarioText);
         nombreText=(TextView)findViewById(R.id.nombreText);
         apellidoText=(TextView)findViewById(R.id.apellidoText);
-        final Intent cambio4 = new Intent ( this, login.class );
+
+
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registro1.this.startActivity(login);
+                registro1.this.finish();
+            }
+        });
 
         continuar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,15 +78,28 @@ public class registro1 extends AppCompatActivity {
         });
     }
 
+
+
+    //zona de validacion de datos
     private void primerPaso(){
-        //el booleano v servira para calcular si faltan espacios por llenar, ya que si llega a faltar uno, automaticamente se volvera falso por lo que no entrara al resto de la funcion
-        boolean v=true;
         String user=usuario_registro.getText().toString();
         String nom=nombre.getText().toString();
         String ape=apellido.getText().toString();
+
+        if(validate(user,nom,ape)){
+            existe_usuario(user,nom,ape);
+        }
+    }
+
+
+    private boolean validate(String nom, String user, String ape){
+        //el booleano v servira para calcular si faltan espacios por llenar, ya que si llega a faltar uno, automaticamente se volvera falso por lo que no entrara al resto de la funcion
+        boolean v=true;
+
         usuarioText.setText("");
         nombreText.setText("");
-        apellidoText.setText("");
+        apellido.setText("");
+
         if(user.length()==0){
             usuarioText.setText("Falta nombre de usuario");
             v=false;
@@ -82,10 +112,15 @@ public class registro1 extends AppCompatActivity {
             apellidoText.setText("Falta el apellido");
             v=false;
         }
-        if(v){
+        return v;
+    }
+
+
+
+    private void existe_usuario(String nom, String user, String ape){
             RequestQueue request;
             JsonObjectRequest jeison;
-
+            UserRegistro.user=new Usuario(nom,ape,user);
             request= Volley.newRequestQueue(getApplicationContext());
             String url;
             url="http://"+ Coneccion.host+"/inicioRegistro/usuarioExiste.php?Usuario="+user;
@@ -103,9 +138,12 @@ public class registro1 extends AppCompatActivity {
 
                         if(res>=0){
                             Toast.makeText(getApplicationContext(),"el usuario ya existe",Toast.LENGTH_SHORT).show();
-                        }else if(res==-3){
-                            Intent intent=new Intent(getApplicationContext(),registro2.class);
 
+                        }else if(res==-3){
+                            Intent intent=new Intent(getApplicationContext(), registro2.class);
+
+                            startActivity ( intent );
+                            registro1.this.finish();
                         }
 
                         Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
@@ -121,7 +159,6 @@ public class registro1 extends AppCompatActivity {
             });
             request.add(jeison);
 
-        }
 
 
     }
