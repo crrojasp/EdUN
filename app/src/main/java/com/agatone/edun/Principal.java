@@ -1,10 +1,14 @@
 package com.agatone.edun;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.agatone.edun.Clases.AlarmReceiver;
 import com.agatone.edun.Clases.Coneccion;
 import com.agatone.edun.Clases.archivo;
 import com.android.volley.AuthFailureError;
@@ -32,6 +37,7 @@ import org.json.JSONObject;
 
 import java.io.FileOutputStream;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +47,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
     JsonRequest jrq;
     EditText et_fecha, et_hora;
     int ano, mes, dia, hora, minutos;
+    Date date;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -146,6 +153,15 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 mostrarOpciones ();
             }
         } );
+    }
+
+    private static void setAlarm( int i, long tinestamp, Context ctx ){
+        AlarmManager alarmManager = (AlarmManager) ctx.getSystemService ( ALARM_SERVICE );
+        Intent alarmIntent= new Intent ( ctx, AlarmReceiver.class );
+        PendingIntent pendingIntent = null;
+        pendingIntent = pendingIntent.getBroadcast ( ctx, i, alarmIntent, PendingIntent.FLAG_ONE_SHOT );
+        alarmIntent.setData ( (Uri.parse ("custom://" + System.currentTimeMillis ())) );
+        alarmManager.set ( AlarmManager.RTC_WAKEUP,tinestamp, pendingIntent );
     }
 
     private void mostrarOpciones () {
