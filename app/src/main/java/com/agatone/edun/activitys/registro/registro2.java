@@ -27,11 +27,8 @@ public class registro2 extends AppCompatActivity {
     String cPs;
 
 
-    /**
-     * zona de intents
-     */
-    final Intent reg1 =new Intent(this,registro1.class);
-    final Intent reg3=new Intent(this,registro3.class);
+
+
 
 
     protected void onCreate ( Bundle savedInstanceState ) {
@@ -39,7 +36,10 @@ public class registro2 extends AppCompatActivity {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_registro2);
 
-
+        /**
+         * zona de intents
+         */
+        final Intent reg1 =new Intent(this,registro1.class);
 
 
 
@@ -49,7 +49,7 @@ public class registro2 extends AppCompatActivity {
 
         password=(EditText) findViewById(R.id.password);
         confirmPassword=(EditText) findViewById(R.id.confirmPassword);
-        continuar=(Button)findViewById(R.id.continuar);
+        continuar=(Button)findViewById(R.id.terminar);
         regresar=(ImageButton)findViewById(R.id.regresar);
         passText=(TextView) findViewById(R.id.passText);
         cPassText=(TextView)findViewById(R.id.cPassText);
@@ -112,6 +112,7 @@ public class registro2 extends AppCompatActivity {
 
 
     private void cont(String ps){
+        final Intent reg3=new Intent(this,registro3.class);
         UserRegistro.user.setContraseña(ps);
         registro2.this.startActivity(reg3);
         registro2.this.finish();

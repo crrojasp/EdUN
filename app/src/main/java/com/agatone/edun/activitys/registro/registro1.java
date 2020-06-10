@@ -39,7 +39,7 @@ public class registro1 extends AppCompatActivity {
     private TextView nombreText;
     private TextView apellidoText;
 
-    final Intent login = new Intent ( this, login.class );
+
 
 
 
@@ -55,12 +55,14 @@ public class registro1 extends AppCompatActivity {
         apellido=(EditText)findViewById(R.id.Apellidos_Registro);
 
         regresar=(ImageButton)findViewById(R.id.regresar);
-        continuar=(Button)findViewById(R.id.continuar);
+        continuar=(Button)findViewById(R.id.terminar);
 
         usuarioText=(TextView)findViewById(R.id.usuarioText);
         nombreText=(TextView)findViewById(R.id.nombreText);
         apellidoText=(TextView)findViewById(R.id.apellidoText);
 
+
+        final Intent login = new Intent ( registro1.this, login.class );
 
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +100,7 @@ public class registro1 extends AppCompatActivity {
 
         usuarioText.setText("");
         nombreText.setText("");
-        apellido.setText("");
+        apellidoText.setText("");
 
         if(user.length()==0){
             usuarioText.setText("Falta nombre de usuario");
@@ -127,26 +129,33 @@ public class registro1 extends AppCompatActivity {
             jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
+                    final Intent intent=new Intent(registro1.this,registro2.class);
                     String result;
                     int res;
+
+
+                    Toast.makeText(getApplicationContext(),response.toString(),Toast.LENGTH_SHORT).show();
+
                     try {
                         JSONArray json=response.optJSONArray("exist");
 
-                        JSONObject jsonObject=json.getJSONObject(0);
-                        result=jsonObject.optString("exist");
+
+                        result=json.getString(0);
+                        //result=json.getJSONObject(0).optString("exist");
+                        //result=jsonObject.optString("exist");
                         res=Integer.parseInt(result);
 
                         if(res>=0){
                             Toast.makeText(getApplicationContext(),"el usuario ya existe",Toast.LENGTH_SHORT).show();
 
                         }else if(res==-3){
-                            Intent intent=new Intent(getApplicationContext(), registro2.class);
+
 
                             startActivity ( intent );
                             registro1.this.finish();
                         }
 
-                        Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"funciono",Toast.LENGTH_SHORT).show();
                     }catch(JSONException e ){
                         Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_SHORT).show();
                     }

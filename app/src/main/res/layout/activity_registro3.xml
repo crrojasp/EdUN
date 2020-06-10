@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/universidad_escudo" />
 
     <Button
-        android:id="@+id/continuar"
+        android:id="@+id/terminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="184dp"
@@ -67,34 +67,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="?attr/actionModeCloseDrawable" />
 
-    <RadioButton
-        android:id="@+id/tutorB"
+    <RadioGroup
+        android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="56dp"
-        android:text="Tutor"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="130dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
-    <RadioButton
-        android:id="@+id/estudianteB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="27dp"
-        android:text="Estudiante"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tutorB" />
+        <RadioButton
+            android:id="@+id/tutorB"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
 
-    <RadioButton
-        android:id="@+id/ambosB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="29dp"
-        android:text="Ambos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/estudianteB" />
+            android:text="Tutor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <RadioButton
+            android:id="@+id/estudianteB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Estudiante"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tutorB" />
+
+        <RadioButton
+            android:id="@+id/ambosB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Ambos"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/estudianteB" />
+
+
+    </RadioGroup>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
