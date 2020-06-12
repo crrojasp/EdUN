@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.agatone.edun.R;
+import com.agatone.edun.auxiliares.UserRegistro;
 
 public class registro2 extends AppCompatActivity {
 

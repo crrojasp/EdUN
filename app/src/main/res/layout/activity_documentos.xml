@@ -20,11 +20,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="375dp"
-        android:layout_height="482dp"
+        android:layout_height="445dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="245dp"
         android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         android:id="@+id/listaDocumentos"
         android:layout_width="150dp"
         android:layout_height="45dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="15dp"
         android:background="@null"
         android:scaleType="fitXY"
@@ -60,22 +60,36 @@
         android:layout_width="150dp"
         android:layout_height="45dp"
         android:layout_marginStart="15dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginTop="35dp"
         android:background="@null"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/misDocumentos"
+        app:srcCompat="@drawable/boton_permisodocumentos" />
+
+    <ImageButton
+        android:id="@+id/Tengo que modificar este"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="35dp"
+        android:background="@null"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/permisoDocumentos"
         app:srcCompat="@drawable/boton_permisodocumentos" />
 
     <ImageButton
         android:id="@+id/upload"
         android:layout_width="150dp"
         android:layout_height="45dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="19dp"
         android:background="@null"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listaDocumentos"
         app:srcCompat="@drawable/boton_subir" />
 </androidx.constraintlayout.widget.ConstraintLayout>

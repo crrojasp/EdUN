@@ -1,17 +1,18 @@
 package com.agatone.edun.estructuras.Hash;
 
+import android.widget.Toast;
+
 import com.agatone.edun.Clases.archivo;
-
-
+import com.agatone.edun.estructuras.DinamicArray;
 
 
 public class HashTable {
     private int tamHash;
-    private List[] tablaHash;
+    private DinamicArray[] tablaHash;
 
     public HashTable(int tamHash) {
         this.tamHash = tamHash;
-        tablaHash = new List[tamHash];
+        tablaHash = new DinamicArray[tamHash];
     }
 
     public int Key(String cadena) {
@@ -24,20 +25,19 @@ public class HashTable {
 
     public void insert(archivo arc){
         int key=Key(arc.getNombre());
-        tablaHash[key].insert(arc);
+        tablaHash[key].insertarArchivo(arc);
     }
 
-    public List find_name(String name){
-        List lista=new List();
-        int key=Key(name);
-        Node nodo=tablaHash[key].getHead();
-        for(int i=0;i<tablaHash[key].getCount();i++){
-            if(name.equals(nodo.getArc().getNombre())){
-                lista.insert(nodo.getArc());
-            }
-            nodo=nodo.getNext();
+    public DinamicArray find_name(String name){
+        DinamicArray r=tablaHash[Key(name)];
+        try{
+            r=r.findByName(name);
+        }catch(Exception e){
+            //no necesito validar ningun error aqui, solo devolver el arreglo vacio
         }
-
-        return lista;
+        return r;
     };
+
+
+
 }

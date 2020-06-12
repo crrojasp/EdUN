@@ -66,6 +66,17 @@ public class DinamicArray {
         size--;
     }
 
+    public DinamicArray findByName(String name)throws Exception{
+        DinamicArray r=new DinamicArray();
+        for(int i=0;i<size;i++){
+            if (arreglo[i].getNombre().equals(name)) {
+                r.insertarArchivo(arreglo[i]);
+            }
+        }
+        return r;
+    }
+
+
 
     public int getSize(){
         return this.size;

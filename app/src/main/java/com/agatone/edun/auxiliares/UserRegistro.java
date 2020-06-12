@@ -1,4 +1,4 @@
-package com.agatone.edun.activitys.registro;
+package com.agatone.edun.auxiliares;
 
 import com.agatone.edun.Clases.Usuario;
 

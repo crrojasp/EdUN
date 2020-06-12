@@ -15,6 +15,7 @@ import com.agatone.edun.Clases.Usuario;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.agatone.edun.activitys.login;
+import com.agatone.edun.auxiliares.UserRegistro;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;

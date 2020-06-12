@@ -15,7 +15,9 @@ import com.agatone.edun.Clases.fillArray;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.agatone.edun.adapters.archivosAdapter;
+import com.agatone.edun.auxiliares.HashDocument;
 import com.agatone.edun.estructuras.DinamicArray;
+import com.agatone.edun.estructuras.Hash.HashTable;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -68,6 +70,13 @@ public class documentos extends AppCompatActivity  {
                 RequestQueue request;
                 JsonObjectRequest jeison;
 
+                final HashTable[] val=new HashTable[1];
+
+                final boolean complete[]=new boolean[2];
+                complete[0]=false;
+                complete[1]=false;
+
+
                 request= Volley.newRequestQueue(getApplicationContext());
                 String url=null;
                 url="http://"+ Coneccion.host+"/listarArchivos.php";
@@ -98,8 +107,12 @@ public class documentos extends AppCompatActivity  {
                             recycler.setAdapter(archivosAdapter);
 
 
+                            val[0]= HashDocument.values;
+                            complete[1]=true;
+
                         } catch (JSONException e) {
                             Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
+                            complete[0]=true;
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -108,18 +121,13 @@ public class documentos extends AppCompatActivity  {
 
                     }
                 });
+
+
+                while(!complete[0]||!complete[1]){
+                    //nada solo que espere
+                }
+
                 request.add(jeison);
-
-
-
-
-
-
-
-
-
-
-
                 fillArray fill=new fillArray(getApplicationContext(),array);
                 fill.fill();
                 array=fill.getArreglo();
