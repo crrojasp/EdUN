@@ -143,6 +143,7 @@ public class registro3 extends AppCompatActivity {
         String url;
         url="http://"+ Coneccion.host+"/inicioRegistro/registro.php?usuario="+UserRegistro.user.getUsuario()+"&&nombres="+UserRegistro.user.getNombres()+
                 "&&apellidos="+UserRegistro.user.getApellidos()+"&&tipo="+opt+"&&password="+UserRegistro.user.getContraseña();
+        url=url.replace(" ","%20");
         jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

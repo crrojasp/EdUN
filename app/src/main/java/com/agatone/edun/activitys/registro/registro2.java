@@ -96,6 +96,10 @@ public class registro2 extends AppCompatActivity {
         allText.setText("");
 
         boolean v=true;
+        if(ps.length()<6){
+            allText.setText("la contrasena debe ser minimo de 7 caracteres");
+            v=false;
+        }
         if(ps.length()==0){
             passText.setText("Falta contrasena");
             v=false;
