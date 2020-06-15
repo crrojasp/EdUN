@@ -90,7 +90,7 @@ public class registro1 extends AppCompatActivity {
         String ape=apellido.getText().toString();
 
         if(validate(user,nom,ape)){
-            existe_usuario(nom,ape,user);
+            existe_usuario(nom,user,ape);
         }
     }
 

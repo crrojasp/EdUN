@@ -14,8 +14,10 @@ import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Clases.fillArray;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
+import com.agatone.edun.adapters.algo;
 import com.agatone.edun.adapters.archivosAdapter;
 import com.agatone.edun.auxiliares.HashDocument;
+import com.agatone.edun.auxiliares.prueba;
 import com.agatone.edun.estructuras.DinamicArray;
 import com.agatone.edun.estructuras.Hash.HashTable;
 import com.android.volley.Request;
@@ -29,11 +31,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Hashtable;
+
 public class documentos extends AppCompatActivity  {
 
     private ImageButton listaDocumentos,misDocumentos,permisoDocumentos,regresar;
     private RecyclerView recycler;
     private DinamicArray archivosArray;
+
+    private static boolean complete[]=new boolean[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,20 +78,28 @@ public class documentos extends AppCompatActivity  {
 
                 final HashTable[] val=new HashTable[1];
 
-                final boolean complete[]=new boolean[2];
+                //final boolean complete[]=new boolean[2];
                 complete[0]=false;
                 complete[1]=false;
 
 
+
                 request= Volley.newRequestQueue(getApplicationContext());
                 String url=null;
-                url="http://"+ Coneccion.host+"/listarArchivos.php";
+                url="http://"+ Coneccion.host+"/Documentos/listarArchivos.php";
                 jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         archivo arc=null;
                         JSONArray json=response.optJSONArray("documento");
                         DinamicArray filling=new DinamicArray();
+
+                        /**
+                         * Implementacion con tabla hash
+                         * *aun es una implementacion temprana y por el momento es imposible acceder a los datos desde fuera del Response
+                         */
+                        HashTable hash=new HashTable(100);
+
 
                         try {
                             for(int i=0;i<json.length();i++){
@@ -102,13 +116,20 @@ public class documentos extends AppCompatActivity  {
                                 arc=new archivo(id,nombre,autor,dueno,tipo);
                                 filling.insertarArchivo(arc);
 
+
+                                hash.insert(arc);
+
+
                             }
+
+
+
                             archivosAdapter archivosAdapter=new archivosAdapter(filling,getApplicationContext());
                             recycler.setAdapter(archivosAdapter);
 
+                            valid(true);
 
-                            val[0]= HashDocument.values;
-                            complete[1]=true;
+
 
                         } catch (JSONException e) {
                             Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
@@ -118,14 +139,14 @@ public class documentos extends AppCompatActivity  {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Toast.makeText(getApplicationContext(),"error al hacer la busqueda en la base de datos",Toast.LENGTH_SHORT).show();
                     }
                 });
 
 
-                while(!complete[0]||!complete[1]){
-                    //nada solo que espere
-                }
+                while(!algo.v)
+
+                Toast.makeText(getApplicationContext(),"Hola mundo",Toast.LENGTH_SHORT).show();
 
                 request.add(jeison);
                 fillArray fill=new fillArray(getApplicationContext(),array);
@@ -141,5 +162,11 @@ public class documentos extends AppCompatActivity  {
 
             }
         });
+    }
+    private void valid(boolean v){
+
+
+        algo.v=v;
+
     }
 }

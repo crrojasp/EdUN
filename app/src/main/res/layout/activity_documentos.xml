@@ -68,7 +68,7 @@
         app:srcCompat="@drawable/boton_permisodocumentos" />
 
     <ImageButton
-        android:id="@+id/Tengo que modificar este"
+        android:id="@+id/Tengoquemodificareste"
         android:layout_width="150dp"
         android:layout_height="45dp"
         android:layout_marginStart="15dp"
