@@ -35,7 +35,7 @@ import java.util.Hashtable;
 
 public class documentos extends AppCompatActivity  {
 
-    private ImageButton listaDocumentos,misDocumentos,permisoDocumentos,regresar;
+    private ImageButton listaDocumentos,misDocumentos,permisoDocumentos,regresar,subir;
     private RecyclerView recycler;
     private DinamicArray archivosArray;
 
@@ -47,7 +47,7 @@ public class documentos extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_documentos);
 
-
+        subir=(ImageButton)findViewById(R.id.upload);
         listaDocumentos=(ImageButton) findViewById(R.id.listaDocumentos);
         regresar=(ImageButton) findViewById(R.id.regresar);
         misDocumentos=(ImageButton) findViewById(R.id.misDocumentos);
@@ -72,101 +72,115 @@ public class documentos extends AppCompatActivity  {
         listaDocumentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DinamicArray  array=new DinamicArray();
-                RequestQueue request;
-                JsonObjectRequest jeison;
-
-                final HashTable[] val=new HashTable[1];
-
-                //final boolean complete[]=new boolean[2];
-                complete[0]=false;
-                complete[1]=false;
 
 
-
-                request= Volley.newRequestQueue(getApplicationContext());
-                String url=null;
-                url="http://"+ Coneccion.host+"/Documentos/listarArchivos.php";
-                jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        archivo arc=null;
-                        JSONArray json=response.optJSONArray("documento");
-                        DinamicArray filling=new DinamicArray();
-
-                        /**
-                         * Implementacion con tabla hash
-                         * *aun es una implementacion temprana y por el momento es imposible acceder a los datos desde fuera del Response
-                         */
-                        HashTable hash=new HashTable(100);
+                listarD();
+            }
+        });
 
 
-                        try {
-                            for(int i=0;i<json.length();i++){
-
-                                int id;
-                                String nombre,autor,dueno,tipo;
-                                JSONObject jsonObject=json.getJSONObject(i);
-                                id=jsonObject.optInt("id");
-                                nombre=jsonObject.optString("nombre");
-                                autor=jsonObject.optString("autor");
-                                dueno=jsonObject.optString("dueno");
-                                tipo=jsonObject.optString("tipo");
-
-                                arc=new archivo(id,nombre,autor,dueno,tipo);
-                                filling.insertarArchivo(arc);
-
-
-                                hash.insert(arc);
-
-
-                            }
-
-
-
-                            archivosAdapter archivosAdapter=new archivosAdapter(filling,getApplicationContext());
-                            recycler.setAdapter(archivosAdapter);
-
-                            valid(true);
-
-
-
-                        } catch (JSONException e) {
-                            Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
-                            complete[0]=true;
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),"error al hacer la busqueda en la base de datos",Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-                while(!algo.v)
-
-                Toast.makeText(getApplicationContext(),"Hola mundo",Toast.LENGTH_SHORT).show();
-
-                request.add(jeison);
-                fillArray fill=new fillArray(getApplicationContext(),array);
-                fill.fill();
-                array=fill.getArreglo();
-
-
-                String s=String.valueOf(array.getSize());
-                //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
-
-
-
-
+        subir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subirArchivo();
             }
         });
     }
-    private void valid(boolean v){
 
 
-        algo.v=v;
+
+
+
+
+
+
+
+
+
+
+
+    private void listarD(){
+        DinamicArray  array=new DinamicArray();
+        RequestQueue request;
+        JsonObjectRequest jeison;
+        final HashTable[] val=new HashTable[1];
+        //final boolean complete[]=new boolean[2];
+        complete[0]=false;
+        complete[1]=false;
+
+
+
+        request= Volley.newRequestQueue(getApplicationContext());
+        String url=null;
+        url="http://"+ Coneccion.host+"/Documentos/listarArchivos.php";
+        jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                archivo arc=null;
+                JSONArray json=response.optJSONArray("documento");
+                DinamicArray filling=new DinamicArray();
+
+                /**
+                 * Implementacion con tabla hash
+                 * *aun es una implementacion temprana y por el momento es imposible acceder a los datos desde fuera del Response
+                 */
+                HashTable hash=new HashTable(100);
+
+
+                try {
+                    for(int i=0;i<json.length();i++){
+
+                        int id;
+                        String nombre,autor,dueno,tipo;
+                        JSONObject jsonObject=json.getJSONObject(i);
+                        id=jsonObject.optInt("id");
+                        nombre=jsonObject.optString("nombre");
+                        autor=jsonObject.optString("autor");
+                        dueno=jsonObject.optString("dueno");
+                        tipo=jsonObject.optString("tipo");
+
+                        arc=new archivo(id,nombre,autor,dueno,tipo);
+                        filling.insertarArchivo(arc);
+                        hash.insert(arc);
+                    }
+                    archivosAdapter archivosAdapter=new archivosAdapter(filling,getApplicationContext());
+                    recycler.setAdapter(archivosAdapter);
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
+                    complete[0]=true;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"error al hacer la busqueda en la base de datos",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
+        request.add(jeison);
+        fillArray fill=new fillArray(getApplicationContext(),array);
+        fill.fill();
+        array=fill.getArreglo();
+
+
+        String s=String.valueOf(array.getSize());
+        //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+
+
+
+
 
     }
+
+    private void subirArchivo(){
+
+
+    }
+
+
 }
