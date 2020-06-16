@@ -1,5 +1,7 @@
 package com.agatone.edun.activitys;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -178,9 +180,28 @@ public class documentos extends AppCompatActivity  {
     }
 
     private void subirArchivo(){
-
-
+        mostrarOpciones();
     }
 
+    private void mostrarOpciones(){
+        final CharSequence[] opciones={"Subir Archivo","Cancelar"};
+        final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("Escoge una");
+        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(opciones[which].equals("Cancelar")){
+                    dialog.dismiss();
+                }else{
+                    Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    //Intent intent=new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    intent.setType("*/*");
+                    startActivityForResult(intent.createChooser(intent,"Seleccione"),10);
+                }
+            }
+        });
+        builder.show();
+    }
 
 }
