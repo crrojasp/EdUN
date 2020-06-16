@@ -1,4 +1,6 @@
-package com.agatone.edun.Clases;
+package com.agatone.edun.auxiliares;
+
+import com.agatone.edun.Clases.Usuario;
 
 /*
 *Con esta clase se planea poder compartir informacion del usuario que inicio sesio en la app
@@ -6,6 +8,6 @@ package com.agatone.edun.Clases;
 *
  */
 public class UsuarioActual {
-    static Usuario usuario;
+    public static Usuario usuario;
 
 }

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.agatone.edun.Clases.Usuario;
 import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Clases.fillArray;
 import com.agatone.edun.Ftp_up_down.Coneccion;
@@ -19,6 +20,7 @@ import com.agatone.edun.R;
 import com.agatone.edun.adapters.algo;
 import com.agatone.edun.adapters.archivosAdapter;
 import com.agatone.edun.auxiliares.HashDocument;
+import com.agatone.edun.auxiliares.UsuarioActual;
 import com.agatone.edun.auxiliares.prueba;
 import com.agatone.edun.estructuras.DinamicArray;
 import com.agatone.edun.estructuras.Hash.HashTable;
@@ -74,12 +76,17 @@ public class documentos extends AppCompatActivity  {
         listaDocumentos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 listarD();
             }
         });
 
+        misDocumentos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                listarM();
+            }
+        });
 
         subir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +103,94 @@ public class documentos extends AppCompatActivity  {
 
 
 
+    private void listarM(){
+        DinamicArray  array=new DinamicArray();
+        RequestQueue request;
+        JsonObjectRequest jeison;
+        final HashTable[] val=new HashTable[1];
+        //final boolean complete[]=new boolean[2];
+        complete[0]=false;
+        complete[1]=false;
 
 
+
+        request= Volley.newRequestQueue(getApplicationContext());
+        String url=null;
+
+        
+        url="http://"+ Coneccion.host+"/Documentos/ListarMisArchivos.php?id="+UsuarioActual.usuario.getId();
+        Toast.makeText(getApplicationContext(), url,Toast.LENGTH_SHORT).show();
+        jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                archivo arc=null;
+
+
+
+
+                JSONArray json=response.optJSONArray("documento");
+                DinamicArray filling=new DinamicArray();
+
+                /**
+                 * Implementacion con tabla hash
+                 * *aun es una implementacion temprana y por el momento es imposible acceder a los datos desde fuera del Response
+                 */
+                HashTable hash=new HashTable(100);
+
+
+                try {
+                    for(int i=0;i<json.length();i++){
+
+                        int id;
+                        String nombre,autor,dueno,tipo;
+                        JSONObject jsonObject=json.getJSONObject(i);
+
+
+                        id=jsonObject.optInt("id");
+                        nombre=jsonObject.optString("nombre");
+                        autor=jsonObject.optString("autor");
+                        dueno=jsonObject.optString("dueno");
+                        tipo=jsonObject.optString("tipo");
+
+                        arc=new archivo(id,nombre,autor,dueno,tipo);
+                        filling.insertarArchivo(arc);
+                        hash.insert(arc);
+                    }
+                    archivosAdapter archivosAdapter=new archivosAdapter(filling,getApplicationContext());
+                    recycler.setAdapter(archivosAdapter);
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
+                    complete[0]=true;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),/*"error al hacer la busqueda en la base de datos  "+*/ error.toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
+        request.add(jeison);
+        fillArray fill=new fillArray(getApplicationContext(),array);
+        fill.fill();
+        array=fill.getArreglo();
+
+
+        String s=String.valueOf(array.getSize());
+        //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+
+
+
+
+
+
+
+    };
 
 
 

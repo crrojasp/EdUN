@@ -55,8 +55,14 @@ public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archiv
             holder.dueno.setText(listArchivos.getArchivo(position).getDueno());
             holder.nombre.setText(listArchivos.getArchivo(position).getNombre());
             holder.autor.setText(listArchivos.getArchivo(position).getAutor());
-            if(listArchivos.getArchivo(position).getTipo().equals("pdf")){
+            String tipo=listArchivos.getArchivo(position).getTipo();
+
+            if(tipo.equals("pdf")){
                 holder.image.setBackgroundResource(R.drawable.pdf);
+            }else if(tipo.equals("csv")) {
+                holder.image.setBackgroundResource(R.drawable.csv);
+            }else if(tipo.equals(("doc"))){
+                holder.image.setBackgroundResource(R.drawable.docs);
             }else{
                 holder.image.setBackgroundResource(R.drawable.unknown);
             }

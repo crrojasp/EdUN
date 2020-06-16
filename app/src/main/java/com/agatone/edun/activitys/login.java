@@ -13,6 +13,7 @@ import com.agatone.edun.Clases.Usuario;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.agatone.edun.activitys.registro.registro1;
+import com.agatone.edun.auxiliares.UsuarioActual;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -120,6 +121,8 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
                 Toast.makeText ( getApplicationContext (),"error al conectar con la base", Toast.LENGTH_SHORT ).show ();
             }else{
                 Toast.makeText ( getApplicationContext (),"Bienvenido", Toast.LENGTH_SHORT ).show ();
+
+                UsuarioActual.usuario=User;
                 Intent cambio1 = new Intent ( getApplicationContext(), opciones.class );
                 startActivity ( cambio1 );
                 login.this.finish ();
