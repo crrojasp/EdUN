@@ -45,7 +45,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
     Button Archivos_de_apoyo_Button, Estado_Trabajo_Button, bt_Crear_Evento, bt_Fecha, bt_Hora, ftp, subir;
     RequestQueue rq;
     JsonRequest jrq;
-    EditText et_fecha, et_hora;
+    EditText et_fecha, et_hora,princip;
     int ano, mes, dia, hora, minutos;
     Date date;
 
@@ -54,6 +54,8 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_principal );
 
+
+        princip=findViewById(R.id.editText);
         ftp = findViewById ( R.id.ftp );
         subir = findViewById ( R.id.subir );
         final Intent cambio5 = new Intent ( this, Archivos_de_apoyo.class );
@@ -132,7 +134,10 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         bt_Crear_Evento.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-
+                Toast.makeText(getApplicationContext(),"se escribio el evento con exito",Toast.LENGTH_SHORT).show();
+                et_fecha.setText("");
+                et_hora.setText("");
+                princip.setText("");
             }
         } );
 
