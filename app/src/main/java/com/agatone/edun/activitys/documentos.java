@@ -63,6 +63,8 @@ public class documentos extends AppCompatActivity  {
 
         final Intent cambio= new Intent ( this, opciones.class );
 
+
+
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +96,20 @@ public class documentos extends AppCompatActivity  {
                 subirArchivo();
             }
         });
+
+
+
+        Toast.makeText(getApplicationContext(),HashDocument.v+"",Toast.LENGTH_SHORT).show();
+        if(HashDocument.v){
+
+            Toast.makeText(getApplicationContext(),"hola mundo",Toast.LENGTH_SHORT).show();
+            archivosAdapter archivos=new archivosAdapter(HashDocument.dinamico,getApplicationContext());
+            recycler.setAdapter(archivos);
+
+        }else{
+            listarD();
+
+        }
     }
 
 
@@ -155,12 +171,22 @@ public class documentos extends AppCompatActivity  {
                         arc=new archivo(id,nombre,autor,dueno,tipo);
                         filling.insertarArchivo(arc);
                         hash.insert(arc);
+
                     }
-                    archivosAdapter archivosAdapter=new archivosAdapter(filling,getApplicationContext());
-                    recycler.setAdapter(archivosAdapter);
+
+
+                    Intent intent=new Intent(documentos.this,documentos.class);
+
+
+
+                    HashDocument.v=true;
+                    HashDocument.dinamico=filling;
+                    documentos.this.startActivity(intent);
+                    documentos.this.finish();
+
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
-                    complete[0]=true;
+
                 }
             }
         }, new Response.ErrorListener() {
@@ -169,26 +195,7 @@ public class documentos extends AppCompatActivity  {
                 Toast.makeText(getApplicationContext(),/*"error al hacer la busqueda en la base de datos  "+*/ error.toString(),Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
-
-
         request.add(jeison);
-        fillArray fill=new fillArray(getApplicationContext(),array);
-        fill.fill();
-        array=fill.getArreglo();
-
-
-        String s=String.valueOf(array.getSize());
-        //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
 
     };
 

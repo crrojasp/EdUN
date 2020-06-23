@@ -8,7 +8,7 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.agatone.edun.R;
-
+import com.agatone.edun.activitys.documentos;
 public class opciones extends AppCompatActivity {
 
     //zona de inicizlizacion
@@ -33,6 +33,7 @@ public class opciones extends AppCompatActivity {
         returnBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(cambio);
             }
         });
