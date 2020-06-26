@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.widget.Toast;
 
 import com.agatone.edun.Clases.archivo;
@@ -61,18 +62,26 @@ import java.io.OutputStream;
     *
 */
 public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements Coneccion {
-    String path;
+    private String path;
     public Context context;//solo por una prueba, despues eliminar
 
+    public String getPath() {
+        return path;
+    }
 
+    public void setPath(String path) {
+        this.path = path;
+    }
 
-    public Bajada(String path){
+    public Bajada(String path,Context context){
+        this.context=context;
         this.path=path;
 
     }
 
-    public Bajada(){
-        this(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString());//<<<<<<<<<<<<<<<<<<<<<<<<<<<< CAMBIAR
+    public Bajada(Context context){
+
+        this(MediaStore.Downloads.RELATIVE_PATH,context);//<<<<<<<<<<<<<<<<<<<<<<<<<<<< CAMBIAR
     }
 
 
@@ -90,7 +99,7 @@ public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
 
         try {
 
-            for (archivo arc: archivos) {
+
 
 
                 cliente.connect(host,port); //estos valores se encuentran en la interfaz Coneccion
@@ -109,16 +118,17 @@ public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
 
 
 
-                OutputStream out = new FileOutputStream(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+"/hola.pdf");
+                stream = new FileOutputStream(getPath());
                 //stream=new FileOutputStream(this.path+arc.getNombre()+"."+arc.getTipo());
 
 
-                cliente.retrieveFile(arc.getNombre()+"."+arc.getTipo(),out);
-                out.close();
+                //cliente.retrieveFile(arc.getNombre()+"."+arc.getTipo(),out);
+                cliente.retrieveFile(Coneccion.host+"/archivos/hola.pdf",stream);
+                stream.close();
                 cliente.disconnect();
 
 
-            }
+
         } catch (IOException e) {
             Looper.prepare();
             Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();

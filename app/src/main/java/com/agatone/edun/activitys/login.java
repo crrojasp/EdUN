@@ -120,7 +120,7 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
             }else if(User.getId()==-2){
                 Toast.makeText ( getApplicationContext (),"error al conectar con la base", Toast.LENGTH_SHORT ).show ();
             }else{
-                Toast.makeText ( getApplicationContext (),"Bienvenido", Toast.LENGTH_SHORT ).show ();
+                //Toast.makeText ( getApplicationContext (),"Bienvenido", Toast.LENGTH_SHORT ).show ();
 
                 UsuarioActual.usuario=User;
                 Intent cambio1 = new Intent ( getApplicationContext(), opciones.class );

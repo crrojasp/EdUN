@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.agatone.edun.Clases.Usuario;
 import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Clases.fillArray;
 import com.agatone.edun.Ftp_up_down.Coneccion;
+import com.agatone.edun.Ftp_up_down.Subida;
 import com.agatone.edun.R;
 import com.agatone.edun.adapters.algo;
 import com.agatone.edun.adapters.archivosAdapter;
@@ -35,6 +37,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Hashtable;
 
 public class documentos extends AppCompatActivity  {
@@ -280,14 +284,14 @@ public class documentos extends AppCompatActivity  {
     }
 
     private void subirArchivo(){
-        mostrarOpciones();
+            mostrarOpciones();
     }
 
     private void mostrarOpciones(){
         final CharSequence[] opciones={"Subir Archivo","Cancelar"};
         final AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("Escoge una");
-        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+        builder.setItems(opciones, new DialogInterface.OnClickListener()  {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(opciones[which].equals("Cancelar")){
@@ -298,10 +302,26 @@ public class documentos extends AppCompatActivity  {
                     //Intent intent=new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("*/*");
                     startActivityForResult(intent.createChooser(intent,"Seleccione"),10);
+
                 }
             }
+
         });
         builder.show();
+
+
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==10){
+            Toast.makeText(getApplicationContext(),data.getData().getQuery(),Toast.LENGTH_SHORT).show();
+            archivo archivo[]=new archivo[1];
+            archivo[0]=new archivo(20,"federico","cvarlos","federiciano","pdf");
+            archivo[0].setUri(data.getData());
+            Subida subida=new Subida(getApplicationContext());
+            subida.execute(archivo);
+        }
+    }
 }
