@@ -6,90 +6,101 @@
     android:layout_height="match_parent"
     tools:context=".activitys.documentos">
 
-    <ImageButton
-        android:id="@+id/regresar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:background="@null"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="375dp"
-        android:layout_height="445dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="245dp"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/listaDocumentos"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="15dp"
-        android:background="@null"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler"
-        app:srcCompat="@drawable/boton_listadocumentos" />
+            <ImageButton
+                android:id="@+id/regresar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="?attr/actionModeCloseDrawable" />
 
-    <ImageButton
-        android:id="@+id/misDocumentos"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        android:background="@null"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler"
-        app:srcCompat="@drawable/boton_misdocumentos" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="375dp"
+                android:layout_height="445dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="245dp"
+                android:background="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/permisoDocumentos"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="35dp"
-        android:background="@null"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/misDocumentos"
-        app:srcCompat="@drawable/boton_permisodocumentos" />
+            <ImageButton
+                android:id="@+id/listaDocumentos"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="15dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycler"
+                app:srcCompat="@drawable/boton_listadocumentos" />
 
-    <ImageButton
-        android:id="@+id/Tengoquemodificareste"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="35dp"
-        android:background="@null"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/permisoDocumentos"
-        app:srcCompat="@drawable/boton_permisodocumentos" />
+            <ImageButton
+                android:id="@+id/misDocumentos"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycler"
+                app:srcCompat="@drawable/boton_misdocumentos" />
 
-    <ImageButton
-        android:id="@+id/upload"
-        android:layout_width="150dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="15dp"
-        android:background="@null"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listaDocumentos"
-        app:srcCompat="@drawable/boton_subir" />
+            <ImageButton
+                android:id="@+id/permisoDocumentos"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="35dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/misDocumentos"
+                app:srcCompat="@drawable/boton_permisodocumentos" />
+
+            <ImageButton
+                android:id="@+id/Tengoquemodificareste"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="35dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/permisoDocumentos"
+                app:srcCompat="@drawable/boton_permisodocumentos" />
+
+            <ImageButton
+                android:id="@+id/upload"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="15dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/listaDocumentos"
+                app:srcCompat="@drawable/boton_subir" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
