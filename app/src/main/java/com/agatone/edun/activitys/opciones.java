@@ -20,7 +20,7 @@ import com.agatone.edun.activitys.documentos;
 public class opciones extends AppCompatActivity {
 
     //zona de inicizlizacion
-    private ImageButton returnBt,documentoBt;
+    private ImageButton returnBt,documentoBt,Eventos;
 
     //Constantes para revisison de permisos del sistema
     private final int REQUEST_WRITE_EXTERNAL=0;
@@ -35,10 +35,19 @@ public class opciones extends AppCompatActivity {
 
         final Intent cambio = new Intent ( this, login.class );
         final Intent documentos = new Intent ( this, documentos.class );
+        final Intent Event = new Intent ( this, Principal.class );
 
         //seccion de retorno a la pagina anterior
         returnBt=findViewById(R.id.regresar);
         documentoBt=(ImageButton) findViewById(R.id.documentos);
+        Eventos = (ImageButton) findViewById ( R.id.eventos);
+        Eventos.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick ( View v ) {
+                opciones.this.startActivity ( Event );
+                opciones.this.finish ();
+            }
+        } );
 
         returnBt.setOnClickListener(new View.OnClickListener() {
             @Override

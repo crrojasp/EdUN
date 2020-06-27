@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -41,13 +42,14 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
     RequestQueue rq;
     JsonRequest jrq;
     EditText et_fecha, et_hora;
+    TextView guardado_fecha;
     int ano, mes, dia, hora, minutos;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_principal );
-
+        guardado_fecha = findViewById ( R.id.fecha_txt_guardado );
         ftp = findViewById ( R.id.ftp );
         subir = findViewById ( R.id.subir );
         final Intent cambio5 = new Intent ( this, Archivos_de_apoyo.class );
@@ -64,28 +66,19 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 //hora    =  ( );
             }
         } );
-        bt_Crear_Evento.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick ( View v ) {
 
-            }
-        } );
         ftp.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-
                 Principal.this.startActivity ( cambio5 );
                 Principal.this.finish ();
-
             }
         } );
         subir.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-
                 Principal.this.startActivity ( cambio6 );
                 Principal.this.finish ();
-
             }
         } );
         bt_Fecha.setOnClickListener ( new View.OnClickListener () {
@@ -95,7 +88,6 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 dia = calendario.get ( Calendar.DAY_OF_WEEK_IN_MONTH );
                 mes = calendario.get ( Calendar.MONTH );
                 ano = calendario.get ( Calendar.YEAR );
-
                 DatePickerDialog datePickerDialog = new DatePickerDialog ( Principal.this, new DatePickerDialog.OnDateSetListener () {
                     @Override
                     public void onDateSet ( DatePicker view, int year, int month, int dayOfMonth ) {
@@ -108,11 +100,9 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         bt_Hora.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-
                 final Calendar calendario = Calendar.getInstance ();
                 hora = calendario.get ( Calendar.HOUR_OF_DAY );
                 minutos = calendario.get ( Calendar.MINUTE );
-
                 TimePickerDialog timePickerDialog = new TimePickerDialog ( Principal.this, new TimePickerDialog.OnTimeSetListener () {
                     @Override
                     public void onTimeSet ( TimePicker view, int hourOfDay, int minute ) {
@@ -122,25 +112,21 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 timePickerDialog.show ();
             }
         } );
-
+        final String anno=ano+"";
         bt_Crear_Evento.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-
+                guardado_fecha.setText ( anno );
+                guardar_evento ( "" );
             }
         } );
-
         ftp = findViewById ( R.id.ftp );
         subir = findViewById ( R.id.subir );
-
-
         ftp.setOnClickListener ( new View.OnClickListener () {
-
             @Override
             public void onClick ( View view ) {
             }
         } );
-
         subir.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
@@ -176,37 +162,27 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         archivo arc[] = new archivo[1];
         switch (requestCode) {
             case 10:
-
-
                 RequestQueue request;
                 JsonObjectRequest jeison;
                 int id;
                 request = Volley.newRequestQueue ( getApplicationContext () );
-
                 boolean insert = false;
                 String url = null;
                 FileOutputStream stream = null;
-
                 url = Coneccion.host + "/bajarNombreArchivoDeBase.php?id=" + 0;
                 jeison = new JsonObjectRequest ( Request.Method.GET, url, null, this, this );
                 request.add ( jeison );
-
-
                 //subida.execute(arc);
                 //Toast.makeText ( getApplicationContext (),path.toString(), Toast.LENGTH_SHORT ).show ();
                 break;
         }
 
     }
-
     @Override
     public void onErrorResponse ( VolleyError error ) {
-
     }
-
     @Override
     public void onResponse ( JSONObject response ) {
-
     }
     public void guardar_evento(String url ){
         StringRequest st = new StringRequest ( Request.Method.GET, url, new Response.Listener<String> () {
@@ -223,7 +199,6 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
             @Override
             protected Map<String, String> getParams () throws AuthFailureError {
                 HashMap<String, String> parametros = new HashMap<> ();
-
                 parametros.put  ( "ano" , ano+"" );
                 parametros.put  ( "mes" , mes+"" );
                 parametros.put  ( "dia" , dia+"" );

@@ -91,12 +91,7 @@ public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
                 return insert;
             }
 
-
-
         }
-
-
-
         return insert;
     }
     @Override
