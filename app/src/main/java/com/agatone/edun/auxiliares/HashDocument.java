@@ -10,9 +10,9 @@ public class HashDocument {
     //v se usa para saber si ya hay algun dato en la tabla hash
     public static boolean v=false;
     public static HashTable names;
-    public static archivosAdapter archivosAdapter;
-    public static RecyclerView recyclerView;
+
     public static DinamicArray dinamico;
+    public  static DinamicArray de_usuario_actual=new DinamicArray();
     public HashDocument(){
 
     }

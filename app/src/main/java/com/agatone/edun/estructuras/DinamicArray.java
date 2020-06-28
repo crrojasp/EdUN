@@ -45,7 +45,8 @@ public class DinamicArray {
     public void setInt(int i, archivo value){
         if(i>=size||i<0)
             throw new IndexOutOfBoundsException();
-        if(i==size){//se evalua si la variable se quiere insertar al final del arreglo para ppoder hacer el respectivo aumento del contador "size"
+        //se evalua si la variable se quiere insertar al final del arreglo para ppoder hacer el respectivo aumento del contador "size"
+        if(i==size){
             if(size>=capacity)//al igual que en la funcion "insert", se evalua si nos encontramos apuntando al final del arreglo, si es asi, debemos incrementar el tamano del arreglo
                 aumentarArreglo();
             size++;
@@ -80,6 +81,28 @@ public class DinamicArray {
         return r;
     }
 
+    public void Delete(int id){
+        boolean v=true;
+        int i;
+        for(i=0;i<size&&v;){
+            if(arreglo[i].getId()==id){
+                v=false;
+            }else{
+                i++;
+            }
+        }
+
+        if(i<size){
+            borrar(i);
+        }
+
+    }
+
+    public void borrar(int pos){
+        for(int i=pos;i<size-1;i++){
+            arreglo[i]=arreglo[i+1];
+        }
+    }
 
 
     public int getSize(){

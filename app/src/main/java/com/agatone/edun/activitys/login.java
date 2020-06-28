@@ -1,6 +1,8 @@
 package com.agatone.edun.activitys;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -73,8 +75,24 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
 
 
 
+        //confiirma acceso a internet
+
+
+
 
     }
+
+    public boolean Connected(){
+        ConnectivityManager conectividad=(ConnectivityManager)getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+
+        NetworkInfo network=conectividad.getActiveNetworkInfo();
+
+        if(network!=null&network.isConnected()){
+            return true;
+        }
+        return false;
+    }
+
 
     private void IniciarSesión(){
 

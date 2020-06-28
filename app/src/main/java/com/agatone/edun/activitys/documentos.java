@@ -98,46 +98,43 @@ public class documentos extends AppCompatActivity implements BuscarDialog.Buscar
 
 
         //llenado de recycler view
-        archivosAdapter archivosAdapter=new archivosAdapter(HashDocument.dinamico,getApplicationContext());
+        archivosAdapter archivosAdapter=new archivosAdapter(HashDocument.dinamico,getApplicationContext(),this);
         recycler.setAdapter(archivosAdapter);
 
     }
 
 
-
-
-
-
-
+    /**
+     * VARIAS FUNCIONES DE LISTADO
+     *
+     * ListarM funciona para listar todos los archivos a nombre del usuario actual
+     * ListarD sirve para listar todos los documentos disponibles
+     */
 
     private void listarM(){
-        DinamicArray dinamic=new DinamicArray();
-        archivo arc;
 
-        for(int i=0;i<HashDocument.dinamico.getSize();i++){
-            arc=HashDocument.dinamico.getArchivo(i);
-            if(arc.getDueno()==UsuarioActual.usuario.getId()){
-                dinamic.insertarArchivo(arc);
-            }
-        }
-        archivosAdapter archivosAdapter=new archivosAdapter(dinamic,getApplicationContext());
+        archivosAdapter archivosAdapter=new archivosAdapter(HashDocument.de_usuario_actual,getApplicationContext(),this);
         recycler.setAdapter(archivosAdapter);
     };
 
 
 
     private void listarD(){
-            archivosAdapter archivosAdapter=new archivosAdapter(HashDocument.dinamico,getApplicationContext());
-            recycler.setAdapter(archivosAdapter);
+
+        //solo es necesario cargar el arreglo que ya se ha consultado con anterioridad
+
+        archivosAdapter archivosAdapter=new archivosAdapter(HashDocument.dinamico,getApplicationContext(),this);
+        recycler.setAdapter(archivosAdapter);
     }
 
     private void subirArchivo(){
-            mostrarOpciones();
+        mostrarOpciones();
     }
 
     private void mostrarOpciones(){
         final CharSequence[] opciones={"Subir Archivo","Cancelar"};
         final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+
         builder.setTitle("Escoge una");
         builder.setItems(opciones, new DialogInterface.OnClickListener()  {
             @Override
@@ -147,16 +144,13 @@ public class documentos extends AppCompatActivity implements BuscarDialog.Buscar
                 }else{
                     Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
                     intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    //Intent intent=new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType("*/*");
                     startActivityForResult(intent.createChooser(intent,"Seleccione"),10);
-
                 }
             }
 
         });
         builder.show();
-
 
     }
 
@@ -203,12 +197,11 @@ public class documentos extends AppCompatActivity implements BuscarDialog.Buscar
         return url.substring(url.lastIndexOf("/")).replace("/","");
     }
 
-
-
-    private void posProbemos(Uri uri,String r){
-
-    }
-
+    /**
+     * EJECUCION DEL BOTON DE BUSQUEDA
+     *
+     *
+     */
     public void search(View view) {
         BuscarDialog buscar=new BuscarDialog();
         buscar.show(getSupportFragmentManager(),"Dialog");
@@ -218,9 +211,10 @@ public class documentos extends AppCompatActivity implements BuscarDialog.Buscar
     @Override
     public void applyText(String a) {
         Toast.makeText(getApplicationContext(),a,Toast.LENGTH_SHORT).show();
-        DinamicArray busqueda=HashDocument.dinamico.findByName(a);
+        DinamicArray busqueda=HashDocument.names.find_name(a);
 
-        archivosAdapter adapter=new archivosAdapter(busqueda,getApplicationContext());
+
+        archivosAdapter adapter=new archivosAdapter(busqueda,getApplicationContext(),this);
         recycler.setAdapter(adapter);
     }
 }

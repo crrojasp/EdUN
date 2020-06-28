@@ -43,6 +43,12 @@ public class HashTable {
         return r;
     };
 
+    public void Delete(String name,int id){
+        DinamicArray r=tablaHash[Key(name)];
+        r.Delete(id);
+    }
+
+
     public int getCountItem() {
         return countItem;
     }

@@ -1,6 +1,10 @@
 package com.agatone.edun.adapters;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +21,16 @@ import com.agatone.edun.estructuras.DinamicArray;
 public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archivosHolder> implements View.OnClickListener {
     DinamicArray listArchivos;
     Context context;
-
+    Activity activity;
 
     //TextView
     TextView id;
 
 
-    public archivosAdapter (DinamicArray archivos, Context context){
+    public archivosAdapter (DinamicArray archivos, Context context, Activity activity){
         listArchivos=archivos;
         this.context=context;
+        this.activity=activity;
     }
 
     @Override
@@ -65,13 +70,37 @@ public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archiv
             image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context,"siiiii"+nombre.getText().toString(),Toast.LENGTH_SHORT).show();
+
+                    mostrarOpciones(nombre.getText().toString());
+                    final CharSequence[] opciones={"Subir Archivo","Cancelar"};
+
                 }
             });
         }
 
     }
 
+    private void mostrarOpciones(String nombre){
+        final CharSequence[] opciones={"Eliminar","Descargar","Cancelar"};
+        final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+
+        builder.setTitle("Escoge una accion para el archivo '"+nombre+"'");
+        builder.setItems(opciones, new DialogInterface.OnClickListener()  {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(opciones[which].equals("Cancelar")){
+                    dialog.dismiss();
+                }else if(opciones[which].equals("Descargar")){
+                    Toast.makeText(context,"Descargar",Toast.LENGTH_SHORT).show();
+                }else if(opciones[which].equals("Eliminar")){
+                    Toast.makeText(context,"Eliminar",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+
+        builder.show();
+    }
 
     @NonNull
     @Override

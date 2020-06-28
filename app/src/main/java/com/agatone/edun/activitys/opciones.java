@@ -18,6 +18,7 @@ import com.agatone.edun.Clases.fillArray;
 import com.agatone.edun.Ftp_up_down.Bajada;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
+import com.agatone.edun.activitys.Dialogs.LoginDialog;
 import com.agatone.edun.activitys.documentos;
 import com.agatone.edun.adapters.archivosAdapter;
 import com.agatone.edun.auxiliares.HashDocument;
@@ -35,7 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class opciones extends AppCompatActivity {
+public class opciones extends AppCompatActivity implements LoginDialog.LoginDialogListener {
 
     //zona de inicizlizacion
     private ImageButton returnBt,documentoBt;
@@ -56,28 +57,25 @@ public class opciones extends AppCompatActivity {
 
         //seccion de retorno a la pagina anterior
         returnBt=findViewById(R.id.regresar);
-        documentoBt=(ImageButton) findViewById(R.id.documentos);
+        documentoBt=findViewById(R.id.documentos);
 
         returnBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                HashDocument.v=false;
                 startActivity(cambio);
             }
         });
-
 
         documentoBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LlenarHashTable();
-
-
             }
         });
 
 
-
+        login();
         //comprobar si se tienen los permisos de carga y descarga de documentos
         Permisos();
 
@@ -110,6 +108,8 @@ public class opciones extends AppCompatActivity {
                     JSONArray json;
                     DinamicArray filling;
 
+                    int id_act=UsuarioActual.usuario.getId();
+
                     json=response.optJSONArray("documento");
                     filling=new DinamicArray();
                     hash=new HashTable(100);
@@ -130,6 +130,9 @@ public class opciones extends AppCompatActivity {
                             arc=new archivo(id,nombre,autor,dueno,tipo);
                             filling.insertarArchivo(arc);
                             hash.insert(arc);
+                            if(dueno==id_act){
+                                HashDocument.de_usuario_actual.insertarArchivo(arc);
+                            }
                         }
 
                         HashDocument.dinamico=filling;
@@ -191,5 +194,21 @@ public class opciones extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Permiso Denegado",Toast.LENGTH_SHORT).show();
 
         }
+    }
+
+
+    /**
+     * ZONA DE CONTROL DE INICIO DE SESION
+     * aun no implementado
+     */
+    private void login(){
+        LoginDialog login=new LoginDialog();
+
+        login.show(getSupportFragmentManager(),"Dialog");
+    }
+
+    @Override
+    public void confirmUser(String user, String password) {
+        Toast.makeText(getApplicationContext(),"el usuario es:, y la contrasena es: ",Toast.LENGTH_SHORT).show();
     }
 }
