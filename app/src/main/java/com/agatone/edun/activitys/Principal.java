@@ -38,10 +38,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Principal extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener{
-    Button Archivos_de_apoyo_Button, Estado_Trabajo_Button, bt_Crear_Evento, bt_Fecha, bt_Hora, ftp, subir;
-    RequestQueue rq;
-    JsonRequest jrq;
-    EditText et_fecha, et_hora;
+    Button bt_Crear_Evento, bt_Fecha, bt_Hora, ftp, subir;
+    EditText et_fecha, et_hora, Event;
     TextView guardado_fecha;
     int ano, mes, dia, hora, minutos;
 
@@ -50,8 +48,6 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_principal );
         guardado_fecha = findViewById ( R.id.fecha_txt_guardado );
-        ftp = findViewById ( R.id.ftp );
-        subir = findViewById ( R.id.subir );
         final Intent cambio5 = new Intent ( this, Archivos_de_apoyo.class );
         final Intent cambio6 = new Intent ( this, Subir_Archivo_De_Apoyo.class );
         bt_Crear_Evento = findViewById ( R.id.bt_crear_evento );
@@ -59,6 +55,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         bt_Hora = findViewById ( R.id.bot_hora );
         et_fecha = findViewById ( R.id.Caja_fecha );
         et_hora = findViewById ( R.id.Caja_hora );
+        Event = findViewById ( R.id.Event_EditText );
 
         bt_Hora.setOnClickListener ( new View.OnClickListener () {
             @Override
@@ -116,15 +113,8 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         bt_Crear_Evento.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-                guardado_fecha.setText ( anno );
+                guardado_fecha.setText ( Event+" "+minutos +" " + hora + " " + dia + " "+ mes + " "+ ano  );
                 guardar_evento ( "" );
-            }
-        } );
-        ftp = findViewById ( R.id.ftp );
-        subir = findViewById ( R.id.subir );
-        ftp.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick ( View view ) {
             }
         } );
         subir.setOnClickListener ( new View.OnClickListener () {
@@ -159,22 +149,22 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
 
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data ) {
         super.onActivityResult ( requestCode, resultCode, data );
-        archivo arc[] = new archivo[1];
+        //archivo arc[] = new archivo[1];
         switch (requestCode) {
             case 10:
                 RequestQueue request;
                 JsonObjectRequest jeison;
-                int id;
                 request = Volley.newRequestQueue ( getApplicationContext () );
-                boolean insert = false;
-                String url = null;
-                FileOutputStream stream = null;
+                //boolean insert = false;
+                String url;
                 url = Coneccion.host + "/bajarNombreArchivoDeBase.php?id=" + 0;
                 jeison = new JsonObjectRequest ( Request.Method.GET, url, null, this, this );
                 request.add ( jeison );
                 //subida.execute(arc);
                 //Toast.makeText ( getApplicationContext (),path.toString(), Toast.LENGTH_SHORT ).show ();
                 break;
+            default:
+                throw new IllegalStateException ( "Unexpected value: " + requestCode );
         }
 
     }
@@ -197,14 +187,13 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
             }
         }){
             @Override
-            protected Map<String, String> getParams () throws AuthFailureError {
+            protected Map<String, String> getParams () {
                 HashMap<String, String> parametros = new HashMap<> ();
                 parametros.put  ( "ano" , ano+"" );
                 parametros.put  ( "mes" , mes+"" );
                 parametros.put  ( "dia" , dia+"" );
                 parametros.put  ( "hora", hora+"");
                 parametros.put  ( "minutos", minutos+"" );
-                //parametros.put  ( "id", id+"" );
                 return parametros;
             }
         };

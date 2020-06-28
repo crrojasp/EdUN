@@ -16,10 +16,9 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/editText"
-                android:layout_width="315dp"
+                android:id="@+id/Event_EditText"
+                android:layout_width="415dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="40dp"
                 android:layout_marginTop="40dp"
                 android:ems="10"
                 android:hint="@string/a0005"
@@ -69,7 +68,7 @@
                 android:text="@string/a0002"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                app:layout_constraintTop_toBottomOf="@+id/Event_EditText" />
 
             <EditText
                 android:id="@+id/Caja_hora"
@@ -81,26 +80,6 @@
                 android:inputType="textPersonName"
                 app:layout_constraintStart_toEndOf="@+id/bot_hora"
                 app:layout_constraintTop_toBottomOf="@+id/Caja_fecha" />
-
-            <Button
-                android:id="@+id/ftp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="ftp test"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/subir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginBottom="10dp"
-                android:text="subir"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ftp" />
 
             <ImageView
                 android:id="@+id/Escudo3"
@@ -116,10 +95,9 @@
 
             <TextView
                 android:id="@+id/fecha_txt_guardado"
-                android:layout_width="125dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="135dp"
-                android:layout_marginTop="70dp"
+                android:layout_width="415dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="20dp"
                 android:text=""
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
