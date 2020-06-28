@@ -88,7 +88,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 DatePickerDialog datePickerDialog = new DatePickerDialog ( Principal.this, new DatePickerDialog.OnDateSetListener () {
                     @Override
                     public void onDateSet ( DatePicker view, int year, int month, int dayOfMonth ) {
-                        et_fecha.setText ( dayOfMonth + "/" + (month + 1) + "/" + year );
+                        et_fecha.setText ( String.format ( "%d/%d/%d", dayOfMonth, month + 1, year ) );
                     }
                 }, ano, mes, dia );
                 datePickerDialog.show ();
@@ -103,7 +103,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 TimePickerDialog timePickerDialog = new TimePickerDialog ( Principal.this, new TimePickerDialog.OnTimeSetListener () {
                     @Override
                     public void onTimeSet ( TimePicker view, int hourOfDay, int minute ) {
-                        et_hora.setText ( hourOfDay + ":" + minute );
+                        et_hora.setText ( String.format ( "%d : %d", hourOfDay, minute ) );
                     }
                 }, hora, minutos, false );
                 timePickerDialog.show ();
@@ -113,7 +113,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         bt_Crear_Evento.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-                guardado_fecha.setText ( Event+" "+minutos +" " + hora + " " + dia + " "+ mes + " "+ ano  );
+                guardado_fecha.setText ( String.format ( "%s %d %d %d %d %d", Event, minutos, hora, dia, mes, ano ) );
                 guardar_evento ( "" );
             }
         } );
