@@ -3,6 +3,7 @@ package com.agatone.edun.activitys;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,17 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.agatone.edun.Clases.Usuario;
 import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Clases.fillArray;
 import com.agatone.edun.Ftp_up_down.Coneccion;
-import com.agatone.edun.Ftp_up_down.Subida;
 import com.agatone.edun.R;
-import com.agatone.edun.adapters.algo;
+import com.agatone.edun.activitys.Dialogs.BuscarDialog;
 import com.agatone.edun.adapters.archivosAdapter;
+import com.agatone.edun.auxiliares.ArchivoSubirBajar;
 import com.agatone.edun.auxiliares.HashDocument;
 import com.agatone.edun.auxiliares.UsuarioActual;
-import com.agatone.edun.auxiliares.prueba;
 import com.agatone.edun.estructuras.DinamicArray;
 import com.agatone.edun.estructuras.Hash.HashTable;
 import com.android.volley.Request;
@@ -37,11 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.Hashtable;
-
-public class documentos extends AppCompatActivity  {
+public class documentos extends AppCompatActivity implements BuscarDialog.BuscarDialogListener {
 
     private ImageButton listaDocumentos,misDocumentos,permisoDocumentos,regresar,subir;
     private RecyclerView recycler;
@@ -102,18 +97,10 @@ public class documentos extends AppCompatActivity  {
         });
 
 
+        //llenado de recycler view
+        archivosAdapter archivosAdapter=new archivosAdapter(HashDocument.dinamico,getApplicationContext());
+        recycler.setAdapter(archivosAdapter);
 
-        Toast.makeText(getApplicationContext(),HashDocument.v+"",Toast.LENGTH_SHORT).show();
-        if(HashDocument.v){
-
-            Toast.makeText(getApplicationContext(),"hola mundo",Toast.LENGTH_SHORT).show();
-            archivosAdapter archivos=new archivosAdapter(HashDocument.dinamico,getApplicationContext());
-            recycler.setAdapter(archivos);
-
-        }else{
-            listarD();
-
-        }
     }
 
 
@@ -124,163 +111,24 @@ public class documentos extends AppCompatActivity  {
 
 
     private void listarM(){
-        DinamicArray  array=new DinamicArray();
-        RequestQueue request;
-        JsonObjectRequest jeison;
-        final HashTable[] val=new HashTable[1];
-        //final boolean complete[]=new boolean[2];
-        complete[0]=false;
-        complete[1]=false;
+        DinamicArray dinamic=new DinamicArray();
+        archivo arc;
 
-
-
-        request= Volley.newRequestQueue(getApplicationContext());
-        String url=null;
-
-        
-        url="http://"+ Coneccion.host+"/Documentos/ListarMisArchivos.php?id="+UsuarioActual.usuario.getId();
-        Toast.makeText(getApplicationContext(), url,Toast.LENGTH_SHORT).show();
-        jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                archivo arc=null;
-
-
-
-
-                JSONArray json=response.optJSONArray("documento");
-                DinamicArray filling=new DinamicArray();
-
-                /**
-                 * Implementacion con tabla hash
-                 * *aun es una implementacion temprana y por el momento es imposible acceder a los datos desde fuera del Response
-                 */
-                HashTable hash=new HashTable(100);
-
-
-                try {
-                    for(int i=0;i<json.length();i++){
-
-                        int id;
-                        String nombre,autor,dueno,tipo;
-                        JSONObject jsonObject=json.getJSONObject(i);
-
-
-                        id=jsonObject.optInt("id");
-                        nombre=jsonObject.optString("nombre");
-                        autor=jsonObject.optString("autor");
-                        dueno=jsonObject.optString("dueno");
-                        tipo=jsonObject.optString("tipo");
-
-                        arc=new archivo(id,nombre,autor,dueno,tipo);
-                        filling.insertarArchivo(arc);
-                        hash.insert(arc);
-
-                    }
-
-
-                    Intent intent=new Intent(documentos.this,documentos.class);
-
-
-
-                    HashDocument.v=true;
-                    HashDocument.dinamico=filling;
-                    documentos.this.startActivity(intent);
-                    documentos.this.finish();
-
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
-
-                }
+        for(int i=0;i<HashDocument.dinamico.getSize();i++){
+            arc=HashDocument.dinamico.getArchivo(i);
+            if(arc.getDueno()==UsuarioActual.usuario.getId()){
+                dinamic.insertarArchivo(arc);
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),/*"error al hacer la busqueda en la base de datos  "+*/ error.toString(),Toast.LENGTH_SHORT).show();
-            }
-        });
-        request.add(jeison);
-
+        }
+        archivosAdapter archivosAdapter=new archivosAdapter(dinamic,getApplicationContext());
+        recycler.setAdapter(archivosAdapter);
     };
 
 
 
     private void listarD(){
-        DinamicArray  array=new DinamicArray();
-        RequestQueue request;
-        JsonObjectRequest jeison;
-        final HashTable[] val=new HashTable[1];
-        //final boolean complete[]=new boolean[2];
-        complete[0]=false;
-        complete[1]=false;
-
-
-
-        request= Volley.newRequestQueue(getApplicationContext());
-        String url=null;
-        url="http://"+ Coneccion.host+"/Documentos/listarArchivos.php";
-        jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                archivo arc=null;
-                JSONArray json=response.optJSONArray("documento");
-                DinamicArray filling=new DinamicArray();
-
-                /**
-                 * Implementacion con tabla hash
-                 * *aun es una implementacion temprana y por el momento es imposible acceder a los datos desde fuera del Response
-                 */
-                HashTable hash=new HashTable(100);
-
-
-                try {
-                    for(int i=0;i<json.length();i++){
-
-                        int id;
-                        String nombre,autor,dueno,tipo;
-                        JSONObject jsonObject=json.getJSONObject(i);
-                        id=jsonObject.optInt("id");
-                        nombre=jsonObject.optString("nombre");
-                        autor=jsonObject.optString("autor");
-                        dueno=jsonObject.optString("dueno");
-                        tipo=jsonObject.optString("tipo");
-
-                        arc=new archivo(id,nombre,autor,dueno,tipo);
-                        filling.insertarArchivo(arc);
-                        hash.insert(arc);
-                    }
-                    archivosAdapter archivosAdapter=new archivosAdapter(filling,getApplicationContext());
-                    recycler.setAdapter(archivosAdapter);
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
-                    complete[0]=true;
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"error al hacer la busqueda en la base de datos",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
-
-
-
-        request.add(jeison);
-        fillArray fill=new fillArray(getApplicationContext(),array);
-        fill.fill();
-        array=fill.getArreglo();
-
-
-        String s=String.valueOf(array.getSize());
-        //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
-
-
-
-
-
+            archivosAdapter archivosAdapter=new archivosAdapter(HashDocument.dinamico,getApplicationContext());
+            recycler.setAdapter(archivosAdapter);
     }
 
     private void subirArchivo(){
@@ -316,12 +164,63 @@ public class documentos extends AppCompatActivity  {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==10){
-            Toast.makeText(getApplicationContext(),data.getData().getQuery(),Toast.LENGTH_SHORT).show();
-            archivo archivo[]=new archivo[1];
-            archivo[0]=new archivo(20,"federico","cvarlos","federiciano","pdf");
-            archivo[0].setUri(data.getData());
-            Subida subida=new Subida(getApplicationContext());
-            subida.execute(archivo);
+
+
+
+            //consulta de extension del archivo en cuestion
+            String r= getContentResolver().getType(data.getData());
+            r=getExtension(r);
+
+
+            //cargar los datos a valores estaticos para luego poder ser manipulados en posteriores activitys
+            ArchivoSubirBajar.type=r;
+            ArchivoSubirBajar.uri=data.getData();
+
+
+            //prueba, eliminar
+
+            archivo archio[] =new archivo[1];
+            archio[0]=new archivo("holasa",r,data.getData());
+
+
+
+
+
+            //iniciar la nueva actividad
+            /**
+             *Intent intent=new Intent(documentos.this,NuevoDocumento.class);
+             *documentos.this.startActivity(intent);
+             */
+
+            //documentos.this.finish();
+
+
         }
+    }
+
+    //la funcion "getExtension" nos da la extension del uri que se nos da al seleccionar un archivo
+    private String getExtension(String url) {
+        return url.substring(url.lastIndexOf("/")).replace("/","");
+    }
+
+
+
+    private void posProbemos(Uri uri,String r){
+
+    }
+
+    public void search(View view) {
+        BuscarDialog buscar=new BuscarDialog();
+        buscar.show(getSupportFragmentManager(),"Dialog");
+
+    }
+
+    @Override
+    public void applyText(String a) {
+        Toast.makeText(getApplicationContext(),a,Toast.LENGTH_SHORT).show();
+        DinamicArray busqueda=HashDocument.dinamico.findByName(a);
+
+        archivosAdapter adapter=new archivosAdapter(busqueda,getApplicationContext());
+        recycler.setAdapter(adapter);
     }
 }

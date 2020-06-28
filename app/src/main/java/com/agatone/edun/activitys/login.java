@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.agatone.edun.Clases.Usuario;
+import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.agatone.edun.activitys.registro.registro1;
@@ -69,6 +70,9 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
 
             }
         } );
+
+
+
 
     }
 
@@ -138,4 +142,7 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
 
 
     }
+
+
+
 }

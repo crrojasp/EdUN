@@ -39,11 +39,7 @@ public class HashTable {
 
     public DinamicArray find_name(String name){
         DinamicArray r=tablaHash[Key(name)];
-        try{
-            r=r.findByName(name);
-        }catch(Exception e){
-            //no necesito validar ningun error aqui, solo devolver el arreglo vacio
-        }
+        r=r.findByName(name);
         return r;
     };
 

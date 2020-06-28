@@ -2,26 +2,44 @@ package com.agatone.edun.Clases;
 
 import android.net.Uri;
 
+import com.agatone.edun.auxiliares.UsuarioActual;
+
 public class archivo {
     protected static int idOp=0;
 
     protected int id;
+    protected int dueno;
+
     protected String nombre;
     protected String autor;
-    protected String dueno;
+
+
     protected String tipo;
     protected String filepath;
     protected static String remotePath= "";
     protected static Uri uri;
 
     public archivo (String nombre, String autor, String tipo){
-        this(nombre,autor,"unknown",tipo);
+        this(nombre,autor, UsuarioActual.usuario.getId(),tipo);
     }
-    public archivo (String nombre,  String dueno){
-        this(nombre,"autor desconocido",dueno,"pdf");
+
+    public archivo(String nombre,String autor,String tipo, Uri uri){
+        this.nombre=nombre;
+        this.autor=autor;
+        this.tipo=tipo;
+        this.uri=uri;
+        this.id=UsuarioActual.usuario.getId();
+    }
+
+    public archivo(String nombre,String tipo, Uri uri){
+        this(nombre,"Unknown",tipo,uri);
+    }
+
+    public archivo (String nombre,  int dueno){
+        this(nombre,"autorDesconocido",dueno,"pdf");
 
     }
-    public archivo(int id, String nombre, String autor, String dueno, String tipo) {
+    public archivo(int id, String nombre, String autor, int dueno, String tipo) {
         this.id=id;
         this.nombre = nombre;
         this.autor = autor;
@@ -35,7 +53,7 @@ public class archivo {
         }
 
     }
-    public archivo(String nombre, String autor, String dueno, String tipo) {
+    public archivo(String nombre, String autor, int dueno, String tipo) {
         id=idOp;
         idOp++;
         this.nombre = nombre;
@@ -68,11 +86,11 @@ public class archivo {
         this.autor = autor;
     }
 
-    public String getDueno() {
-        return dueno;
+    public int getDueno() {
+        return this.dueno;
     }
 
-    public void setDueno(String dueno) {
+    public void setDueno(int dueno) {
         this.dueno = dueno;
     }
 

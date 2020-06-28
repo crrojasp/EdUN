@@ -7,6 +7,7 @@ import com.agatone.edun.estructuras.Hash.HashTable;
 import com.agatone.edun.adapters.*;
 
 public class HashDocument {
+    //v se usa para saber si ya hay algun dato en la tabla hash
     public static boolean v=false;
     public static HashTable names;
     public static archivosAdapter archivosAdapter;
@@ -16,8 +17,5 @@ public class HashDocument {
 
     }
 
-    public HashTable llenarHash(){
-        return null;
 
-    }
 }

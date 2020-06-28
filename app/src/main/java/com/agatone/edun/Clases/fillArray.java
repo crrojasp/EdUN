@@ -38,13 +38,13 @@ public class fillArray implements Response.Listener<JSONObject>, Response.ErrorL
         try {
             for(int i=0;i<json.length();i++){
 
-                int id;
-                String nombre,autor,dueno,tipo;
+                int id,dueno;
+                String nombre,autor,tipo;
                 JSONObject jsonObject=json.getJSONObject(i);
                 id=jsonObject.optInt("id");
                 nombre=jsonObject.optString("nombre");
                 autor=jsonObject.optString("autor");
-                dueno=jsonObject.optString("dueno");
+                dueno=Integer.parseInt(jsonObject.optString("dueno"));
                 tipo=jsonObject.optString("tipo");
 
                 arc=new archivo(id,nombre,autor,dueno,tipo);

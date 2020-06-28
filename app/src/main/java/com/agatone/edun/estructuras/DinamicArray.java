@@ -66,10 +66,14 @@ public class DinamicArray {
         size--;
     }
 
-    public DinamicArray findByName(String name)throws Exception{
+    public DinamicArray findByName(String name){
         DinamicArray r=new DinamicArray();
+        String val;
+        String name_2=name.toLowerCase();
+        name=name.toLowerCase();
         for(int i=0;i<size;i++){
-            if (arreglo[i].getNombre().equals(name)) {
+            val=arreglo[i].getNombre().toLowerCase();
+            if (val.equals(name_2)) {
                 r.insertarArchivo(arreglo[i]);
             }
         }

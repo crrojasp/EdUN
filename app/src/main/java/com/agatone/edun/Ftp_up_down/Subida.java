@@ -31,7 +31,7 @@ import java.io.IOException;
  *
 
  */
-public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccion, Response.Listener<JSONArray>,Response.ErrorListener {
+public class Subida  extends AsyncTask<archivo, Void, Boolean> implements Coneccion, Response.Listener<JSONArray>,Response.ErrorListener {
 
     private Context context;
 
@@ -40,10 +40,13 @@ public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
         this.context=cont;
     }
 
-    // el String o los Strings que recibira el hilo sera la direccion local del archivo que se quiere subir al host
+
     @Override
     protected Boolean doInBackground(archivo... archivos) {
 
+        Looper.prepare();
+        Toast.makeText ( context,"Aqui como que si",Toast.LENGTH_LONG).show ();
+        Looper.loop();
 
 
         RequestQueue request;
@@ -56,7 +59,7 @@ public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
 
 
             request=Volley.newRequestQueue(context);
-            Uri file=arc.getUri();//el hilo recibira los datos para la subida de archivos
+            Uri file=arc.getUri();
             String id=String.valueOf(arc.getId());
 
 
@@ -75,20 +78,23 @@ public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
                 cliente.setFileType(FTP.BINARY_FILE_TYPE, FTP.BINARY_FILE_TYPE);
                 cliente.setFileTransferMode(FTP.BINARY_FILE_TYPE);
                 cliente.changeWorkingDirectory("estructuras.atwebpages.com/archivo/");
+
                 insert = cliente.storeFile(name+"."+arc.getTipo(),fis);
                 cliente.logout();
                 cliente.disconnect();
-                url="http://"+Coneccion.host+"/subirArchivoABase.php?id="+id+"&nombre="+name+"&autor="+
-                        arc.getAutor()+"&dueno="+arc.getDueno()+"&tipo="+arc.getTipo();
-                url=url.replace( " ","%20");
-                jeison=new JsonArrayRequest(Request.Method.GET,url,null,this,this);
-                request.add(jeison);
+
+                    url="http://"+Coneccion.host+"/subirArchivoABase.php?id="+id+"&nombre="+name+"&autor="+
+                            arc.getAutor()+"&dueno="+arc.getDueno()+"&tipo="+arc.getTipo();
+                    url=url.replace( " ","%20");
+                    jeison=new JsonArrayRequest(Request.Method.GET,url,null,this,this);
+                    request.add(jeison);
+
 
             }catch(IOException e){
                 Looper.prepare();
                 Toast.makeText ( context,e.toString()+'\n'+"El programa a sufrido un error",Toast.LENGTH_LONG).show ();
                 Looper.loop();
-                return insert;
+                //return insert;
             }
 
 
@@ -97,7 +103,7 @@ public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
 
 
 
-        return insert;
+        return true;
     }
     @Override
     public void onErrorResponse(VolleyError error) {
@@ -107,6 +113,6 @@ public class Subida  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
 
     @Override
     public void onResponse(JSONArray response) {
-        Toast.makeText ( context,"hola mundo", Toast.LENGTH_SHORT ).show ();
+
     }
 }
