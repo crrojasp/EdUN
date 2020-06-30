@@ -45,6 +45,7 @@ public class NuevoDocumento extends AppCompatActivity {
         private RadioButton no;
 
     private Button comprobar;
+    private Button subir;
 
     private TextView nombreTxt;
     private TextView autorTxt;
@@ -73,11 +74,16 @@ public class NuevoDocumento extends AppCompatActivity {
             no=findViewById(R.id.no);
 
         comprobar=findViewById(R.id.button);
+        subir=findViewById(R.id.subir);
 
         nombreTxt=findViewById(R.id.nombreTxt);
         autorTxt=findViewById(R.id.autorTxt);
 
         si.setChecked(true);
+        if(!ArchivoSubirBajar.esSubible){
+            subir.setVisibility(View.INVISIBLE);
+        }
+
     }
 
 
@@ -176,12 +182,11 @@ public class NuevoDocumento extends AppCompatActivity {
                         else
                             arc[0]=new archivo(nombre,autor,tipo,ArchivoSubirBajar.uri);
 
-                        ArchivoSubirBajar.isEjecutable=true;
-                        ArchivoSubirBajar.archivo=arc;
-                        Intent intent=new Intent(NuevoDocumento.this,NuevoDocumento.class);
-                        NuevoDocumento.this.startActivity(intent);
-                        NuevoDocumento.this.finish();
 
+                        ArchivoSubirBajar.archivo=arc;
+
+                        subir.setVisibility(View.VISIBLE);
+                        ArchivoSubirBajar.esSubible=false;
                     }
 
 
@@ -205,7 +210,7 @@ public class NuevoDocumento extends AppCompatActivity {
     }
 
     private void ejecutese(archivo [] arc){
-        Subida subir=new Subida(getApplicationContext());
+        Subida subir=new Subida(getApplicationContext(),arc[0]);
         Toast.makeText(getApplicationContext(),"holaaaaa",Toast.LENGTH_LONG).show();
         subir.execute(arc);
         ArchivoSubirBajar.isEjecutable=false;
@@ -214,8 +219,14 @@ public class NuevoDocumento extends AppCompatActivity {
     }
 
 
+    public void subir(View view) {
+        Subida subir=new Subida(getApplicationContext(),ArchivoSubirBajar.archivo[0]);
+        subir.execute(ArchivoSubirBajar.archivo);
+    }
 
 
-
-
+    //cualquier cambio dentro del campo nombre obliga a recomprobar si el nombre es posible
+    public void cambiosNombre(View view) {
+        subir.setVisibility(View.INVISIBLE);
+    }
 }

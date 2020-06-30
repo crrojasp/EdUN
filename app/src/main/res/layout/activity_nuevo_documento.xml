@@ -40,6 +40,7 @@
                 android:ems="10"
                 android:hint="Nombre del documento*"
                 android:inputType="textPersonName"
+                android:onClick="cambiosNombre"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -66,10 +67,22 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="104dp"
                 android:onClick="comprobar_abrir"
-                android:text="Subir/Comprobar Datos"
+                android:text="Comprobar Datos"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+            <Button
+                android:id="@+id/subir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="104dp"
+                android:layout_marginEnd="104dp"
+                android:onClick="subir"
+                android:text="Subir"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"

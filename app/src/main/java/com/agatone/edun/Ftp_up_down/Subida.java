@@ -7,15 +7,18 @@ import android.os.Looper;
 import android.widget.Toast;
 
 import com.agatone.edun.Clases.archivo;
+import com.agatone.edun.auxiliares.UsuarioActual;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.apache.commons.net.ftp.FTP;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,31 +37,30 @@ import java.io.IOException;
 public class Subida  extends AsyncTask<archivo, Void, Boolean> implements Coneccion, Response.Listener<JSONArray>,Response.ErrorListener {
 
     private Context context;
+    private archivo arc;
 
-
-    public Subida(Context cont){
+    public Subida(Context cont,archivo arc){
         this.context=cont;
+        this.arc=arc;
     }
 
+   public void setContext(Context context){
+        this.context=context;
+   }
 
     @Override
     protected Boolean doInBackground(archivo... archivos) {
 
-        Looper.prepare();
-        Toast.makeText ( context,"Aqui como que si",Toast.LENGTH_LONG).show ();
-        Looper.loop();
 
 
-        RequestQueue request;
-        JsonArrayRequest jeison;
+
+
         boolean insert=false;
         String url;
 
         //con el booleano insert se pretende definir si si se subio el archivo al host remoto
         for (archivo arc:archivos) {
 
-
-            request=Volley.newRequestQueue(context);
             Uri file=arc.getUri();
             String id=String.valueOf(arc.getId());
 
@@ -80,14 +82,15 @@ public class Subida  extends AsyncTask<archivo, Void, Boolean> implements Conecc
                 cliente.changeWorkingDirectory("estructuras.atwebpages.com/archivo/");
 
                 insert = cliente.storeFile(name+"."+arc.getTipo(),fis);
+
+
+
+
                 cliente.logout();
                 cliente.disconnect();
 
-                    url="http://"+Coneccion.host+"/subirArchivoABase.php?id="+id+"&nombre="+name+"&autor="+
-                            arc.getAutor()+"&dueno="+arc.getDueno()+"&tipo="+arc.getTipo();
-                    url=url.replace( " ","%20");
-                    jeison=new JsonArrayRequest(Request.Method.GET,url,null,this,this);
-                    request.add(jeison);
+                return insert;
+
 
 
             }catch(IOException e){
@@ -103,16 +106,41 @@ public class Subida  extends AsyncTask<archivo, Void, Boolean> implements Conecc
 
 
 
-        return true;
+        return insert;
     }
+
+
+    @Override
+    protected void onPostExecute(Boolean aBoolean) {
+        if(aBoolean){
+            String url;
+            RequestQueue request;
+            JsonArrayRequest jeison;
+            request=Volley.newRequestQueue(context);
+
+            url="http://"+Coneccion.host+"/Documentos/subirArchivoABase.php?nombre="+arc.getNombre()+"&autor="+
+                    arc.getAutor()+"&dueno="+ UsuarioActual.usuario.getId() +"&tipo="+arc.getTipo();
+            Toast.makeText(context,url,Toast.LENGTH_SHORT).show();
+            url=url.replace( " ","%20");
+            jeison=new JsonArrayRequest(Request.Method.GET,url,null,this,this);
+            request.add(jeison);
+
+        }else{
+            Toast.makeText(context,"No se subio el archivo",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     @Override
     public void onErrorResponse(VolleyError error) {
 
-        Toast.makeText ( context,error.toString(), Toast.LENGTH_SHORT ).show ();
+
+        Toast.makeText ( context,"El programa a sufrido un error"+error.toString(),Toast.LENGTH_LONG).show ();
+
     }
 
     @Override
     public void onResponse(JSONArray response) {
-
+        Toast.makeText ( context,"Se ha cargado el nuevo registro correctamente",Toast.LENGTH_LONG).show ();
     }
 }

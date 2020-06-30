@@ -11,7 +11,7 @@ public class archivo {
     protected int dueno;
 
     protected String nombre;
-    protected String autor;
+    protected String autor="";
 
 
     protected String tipo;

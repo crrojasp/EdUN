@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Clases.fillArray;
 import com.agatone.edun.Ftp_up_down.Coneccion;
+import com.agatone.edun.Ftp_up_down.Subida;
 import com.agatone.edun.R;
 import com.agatone.edun.activitys.Dialogs.BuscarDialog;
 import com.agatone.edun.adapters.archivosAdapter;
@@ -171,20 +172,20 @@ public class documentos extends AppCompatActivity implements BuscarDialog.Buscar
             ArchivoSubirBajar.uri=data.getData();
 
 
-            //prueba, eliminar
 
-            archivo archio[] =new archivo[1];
-            archio[0]=new archivo("holasa",r,data.getData());
+            ArchivoSubirBajar.archivo[0]=new archivo("holasa",r,data.getData());
+
+
 
 
 
 
 
             //iniciar la nueva actividad
-            /**
-             *Intent intent=new Intent(documentos.this,NuevoDocumento.class);
-             *documentos.this.startActivity(intent);
-             */
+
+             Intent intent=new Intent(documentos.this,NuevoDocumento.class);
+             documentos.this.startActivity(intent);
+
 
             //documentos.this.finish();
 
