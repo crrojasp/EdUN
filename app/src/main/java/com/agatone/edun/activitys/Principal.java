@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.R;
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -56,7 +55,6 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         et_fecha = findViewById ( R.id.Caja_fecha );
         et_hora = findViewById ( R.id.Caja_hora );
         Event = findViewById ( R.id.Event_EditText );
-
         bt_Hora.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
@@ -88,7 +86,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 DatePickerDialog datePickerDialog = new DatePickerDialog ( Principal.this, new DatePickerDialog.OnDateSetListener () {
                     @Override
                     public void onDateSet ( DatePicker view, int year, int month, int dayOfMonth ) {
-                        et_fecha.setText ( String.format ( "%d/%d/%d", dayOfMonth, month + 1, year ) );
+                        et_fecha.setText (  dayOfMonth+"/"+ (month + 1)+"/"+ year  );
                     }
                 }, ano, mes, dia );
                 datePickerDialog.show ();
@@ -103,7 +101,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 TimePickerDialog timePickerDialog = new TimePickerDialog ( Principal.this, new TimePickerDialog.OnTimeSetListener () {
                     @Override
                     public void onTimeSet ( TimePicker view, int hourOfDay, int minute ) {
-                        et_hora.setText ( String.format ( "%d : %d", hourOfDay, minute ) );
+                        et_hora.setText (  hourOfDay+":"+ minute  );
                     }
                 }, hora, minutos, false );
                 timePickerDialog.show ();
@@ -113,8 +111,8 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         bt_Crear_Evento.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-                guardado_fecha.setText ( String.format ( "%s %d %d %d %d %d", Event, minutos, hora, dia, mes, ano ) );
-                guardar_evento ( "" );
+                guardado_fecha.setText ( Event+" "+minutos+" "+ hora+" "+ dia+" "+ mes+" "+anno );
+
             }
         } );
         subir.setOnClickListener ( new View.OnClickListener () {
