@@ -41,6 +41,7 @@ public class opciones extends AppCompatActivity {
         returnBt=findViewById(R.id.regresar);
         documentoBt=(ImageButton) findViewById(R.id.documentos);
         Eventos = (ImageButton) findViewById ( R.id.eventos);
+
         Eventos.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {

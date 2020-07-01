@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.R;
+import com.agatone.edun.auxiliares.UsuarioActual;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -37,24 +38,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Principal extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener{
-    Button bt_Crear_Evento, bt_Fecha, bt_Hora, ftp, subir;
+    Button bt_Crear_Evento;
+    Button bt_Fecha;
+    Button bt_Hora;
+    Button ftp;
+    Button subir;
+
     EditText et_fecha, et_hora, Event;
+
     TextView guardado_fecha;
+
     int ano, mes, dia, hora, minutos;
 
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_principal );
-        guardado_fecha = findViewById ( R.id.fecha_txt_guardado );
+
         final Intent cambio5 = new Intent ( this, Archivos_de_apoyo.class );
         final Intent cambio6 = new Intent ( this, Subir_Archivo_De_Apoyo.class );
-        bt_Crear_Evento = findViewById ( R.id.bt_crear_evento );
-        bt_Fecha = findViewById ( R.id.bt_fecha );
-        bt_Hora = findViewById ( R.id.bot_hora );
-        et_fecha = findViewById ( R.id.Caja_fecha );
-        et_hora = findViewById ( R.id.Caja_hora );
-        Event = findViewById ( R.id.Event_EditText );
+
+        inicializar();
+
+
+        /**
+         * CONTROLADORES PARA LOS BOTONES
+         */
+
+
         bt_Hora.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
@@ -62,20 +73,11 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
             }
         } );
 
-        ftp.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick ( View v ) {
-                Principal.this.startActivity ( cambio5 );
-                Principal.this.finish ();
-            }
-        } );
-        subir.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick ( View v ) {
-                Principal.this.startActivity ( cambio6 );
-                Principal.this.finish ();
-            }
-        } );
+        Toast.makeText(getApplicationContext(), UsuarioActual.usuario.getTipo()+"",Toast.LENGTH_SHORT).show();
+
+
+
+
         bt_Fecha.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
@@ -115,35 +117,30 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
 
             }
         } );
-        subir.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick ( View v ) {
-                mostrarOpciones ();
-            }
-        } );
-    }
-
-    private void mostrarOpciones () {
-        final CharSequence[] opciones = {"Subir Archivo", "Cancelar"};
-        final AlertDialog.Builder builder = new AlertDialog.Builder ( this );
-        builder.setTitle ( "Escoge una" );
-        builder.setItems ( opciones, new DialogInterface.OnClickListener () {
-            @Override
-            public void onClick ( DialogInterface dialog, int which ) {
-                if (opciones[which].equals ( "Cancelar" )) {
-                    dialog.dismiss ();
-                } else {
-                    Intent intent = new Intent ( Intent.ACTION_GET_CONTENT );
-                    intent.addCategory ( Intent.CATEGORY_OPENABLE );
-                    //Intent intent=new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType ( "*/*" );
-                    startActivityForResult ( intent.createChooser ( intent, "Seleccione" ), 10 );
-                }
-            }
-        } );
-        builder.show ();
 
     }
+
+
+    //aqui se inician los componentes graficos
+    public void inicializar(){
+        //botones
+        bt_Crear_Evento = findViewById ( R.id.bt_crear_evento );
+        bt_Fecha = findViewById ( R.id.bt_fecha );
+        bt_Hora = findViewById ( R.id.bot_hora );
+
+        //editText
+        et_fecha = findViewById ( R.id.Caja_fecha );
+        et_hora = findViewById ( R.id.Caja_hora );
+
+
+        //otros
+        Event = findViewById ( R.id.Event_EditText );
+        guardado_fecha = findViewById ( R.id.fecha_txt_guardado );
+
+    }
+
+
+
 
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data ) {
         super.onActivityResult ( requestCode, resultCode, data );
