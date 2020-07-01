@@ -1,9 +1,7 @@
-package com.agatone.edun.activitys;
+package com.agatone.edun.activitys.eventos;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,21 +16,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.agatone.edun.Ftp_up_down.Coneccion;
-import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.R;
+import com.agatone.edun.activitys.Archivos_de_apoyo;
+import com.agatone.edun.activitys.Subir_Archivo_De_Apoyo;
 import com.agatone.edun.auxiliares.UsuarioActual;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;

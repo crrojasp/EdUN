@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -16,7 +15,8 @@ import androidx.core.app.ActivityCompat;
 import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Ftp_up_down.Bajada;
 import com.agatone.edun.R;
-import com.agatone.edun.activitys.documentos;
+import com.agatone.edun.activitys.eventos.Principal;
+
 public class opciones extends AppCompatActivity {
 
     //zona de inicizlizacion
