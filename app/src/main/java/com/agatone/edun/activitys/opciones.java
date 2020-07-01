@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat;
 import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Ftp_up_down.Bajada;
 import com.agatone.edun.R;
+import com.agatone.edun.activitys.eventos.OpcionesEventos;
 import com.agatone.edun.activitys.eventos.Principal;
 
 public class opciones extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class opciones extends AppCompatActivity {
 
         final Intent cambio = new Intent ( this, login.class );
         final Intent documentos = new Intent ( this, documentos.class );
-        final Intent Event = new Intent ( this, Principal.class );
+        final Intent Event = new Intent ( this, OpcionesEventos.class );
 
         //seccion de retorno a la pagina anterior
         returnBt=findViewById(R.id.regresar);
@@ -69,9 +70,7 @@ public class opciones extends AppCompatActivity {
 
 
         //Toast.makeText(getApplicationContext(), Environment.DIRECTORY_DOWNLOADS.toString(),Toast.LENGTH_SHORT).show();
-        Bajada bajada=new Bajada(getApplicationContext());
-        archivo arc[]=new archivo[1];
-        bajada.execute(arc);
+
         //comprobar si se tienen los permisos de carga y descarga de documentos
         Permisos();
 

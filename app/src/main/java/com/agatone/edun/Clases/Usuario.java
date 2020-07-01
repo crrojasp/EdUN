@@ -4,7 +4,9 @@ public class Usuario {
     private int id;
     private String nombres;
     private String apellidos;
-    private char tipo;//los tipos pueden ser: '1'(estudiante), '2'(profesor), '3' ambas
+
+    //los tipos pueden ser: '1'(estudiante), '2'(profesor), '3' ambas
+    private char tipo;
     private String Usuario;
     private String Contraseña;
 

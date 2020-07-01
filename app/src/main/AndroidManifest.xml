@@ -16,12 +16,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activitys.documentos"></activity>
+        <activity android:name=".activitys.eventos.OpcionesEventos"></activity>
+        <activity android:name=".activitys.documentos" />
         <activity android:name=".activitys.eventos.Principal" />
         <activity android:name=".activitys.opciones" />
         <activity android:name=".activitys.registro.registro1" />
-        <activity android:name=".activitys.registro.registro2"/>
-        <activity android:name=".activitys.registro.registro3"/>
+        <activity android:name=".activitys.registro.registro2" />
+        <activity android:name=".activitys.registro.registro3" />
         <activity android:name=".activitys.login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
