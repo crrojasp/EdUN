@@ -120,7 +120,7 @@ public class OpcionesEventos extends AppCompatActivity {
 
                 //definir cual activity debe abrirse
                 if(r==0){
-                    intent=new Intent(OpcionesEventos.this,Principal.class)
+                    intent=new Intent(OpcionesEventos.this,Principal.class);
                 }else if(r==1){
                     // el otro intent
                     // intent=new Intent(OpcionesEventos.this,Principal.class)
