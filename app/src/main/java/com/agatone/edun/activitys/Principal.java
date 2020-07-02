@@ -163,7 +163,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                     intent.addCategory ( Intent.CATEGORY_OPENABLE );
                     //Intent intent=new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     intent.setType ( "*/*" );
-                    startActivityForResult ( intent.createChooser ( intent, "Seleccione" ), 10 );
+                    startActivityForResult ( Intent.createChooser ( intent, "Seleccione" ), 10 );
                 }
             }
         } );
