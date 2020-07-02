@@ -13,17 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.agatone.edun.Clases.Usuario;
 import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Clases.fillArray;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.Ftp_up_down.Subida;
 import com.agatone.edun.R;
-import com.agatone.edun.adapters.algo;
 import com.agatone.edun.adapters.archivosAdapter;
 import com.agatone.edun.auxiliares.HashDocument;
 import com.agatone.edun.auxiliares.UsuarioActual;
-import com.agatone.edun.auxiliares.prueba;
 import com.agatone.edun.estructuras.DinamicArray;
 import com.agatone.edun.estructuras.Hash.HashTable;
 import com.android.volley.Request;
@@ -36,10 +33,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.Hashtable;
 
 public class documentos extends AppCompatActivity  {
 
@@ -103,8 +96,8 @@ public class documentos extends AppCompatActivity  {
 
 
 
-        Toast.makeText(getApplicationContext(),HashDocument.v+"",Toast.LENGTH_SHORT).show();
-        if(HashDocument.v){
+        Toast.makeText(getApplicationContext(),HashDocument.fullDocumentos +"",Toast.LENGTH_SHORT).show();
+        if(HashDocument.fullDocumentos){
 
             Toast.makeText(getApplicationContext(),"hola mundo",Toast.LENGTH_SHORT).show();
             archivosAdapter archivos=new archivosAdapter(HashDocument.dinamico,getApplicationContext());
@@ -183,7 +176,7 @@ public class documentos extends AppCompatActivity  {
 
 
 
-                    HashDocument.v=true;
+                    HashDocument.fullDocumentos =true;
                     HashDocument.dinamico=filling;
                     documentos.this.startActivity(intent);
                     documentos.this.finish();

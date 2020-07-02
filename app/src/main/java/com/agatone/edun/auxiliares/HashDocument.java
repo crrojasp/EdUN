@@ -9,14 +9,21 @@ import com.agatone.edun.estructuras.Hash.HashTable;
 import com.agatone.edun.adapters.*;
 
 public class HashDocument {
-    public static boolean v=false;
-    public static HashTable names;
+
     public static archivosAdapter archivosAdapter;
     public static RecyclerView recyclerView;
+
+    //documentos
+    public static boolean fullDocumentos =false;
+    public static HashTable names;
     public static DinamicArray dinamico;
 
+
+
+    //eventos
     public static DinamicArrayEvents user;
     public static HashTableEst users;
+    public static boolean fullEventos=false;
 
 
     public HashDocument(){

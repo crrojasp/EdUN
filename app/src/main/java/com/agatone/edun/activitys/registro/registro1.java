@@ -96,7 +96,7 @@ public class registro1 extends AppCompatActivity {
 
 
     private boolean validate(String nom, String user, String ape){
-        //el booleano v servira para calcular si faltan espacios por llenar, ya que si llega a faltar uno, automaticamente se volvera falso por lo que no entrara al resto de la funcion
+        //el booleano fullDocumentos servira para calcular si faltan espacios por llenar, ya que si llega a faltar uno, automaticamente se volvera falso por lo que no entrara al resto de la funcion
         boolean v=true;
 
         usuarioText.setText("");
