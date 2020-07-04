@@ -34,11 +34,10 @@ public class DinamicArrayEventos {
     }
 
 
-    public Evento getArchivo ( int i ) throws IndexOutOfBoundsException {
-        if(i>=size|i<0)
+    public String getNombre ( int i ) throws IndexOutOfBoundsException {
+        for (int h = 0; h != i; h++)
             throw new IndexOutOfBoundsException();
-
-        return arreglo[i];
+        return Evento.class.getName ();
     }
 
 
@@ -69,7 +68,7 @@ public class DinamicArrayEventos {
     public DinamicArrayEventos findByName(String name)throws Exception{
         DinamicArrayEventos r=new DinamicArrayEventos();
         for(int i=0;i<size;i++){
-            if (arreglo[i].getEventos ().equals ( name )) {
+            if (arreglo[i].getNombre ().equals ( name )) {
                 r.insertarArchivo(arreglo[i]);
             }
         }

@@ -1,8 +1,8 @@
 package com.agatone.edun.Clases;
 
-import java.util.Arrays;
-
 public class Evento {
+
+    private String EventoNb, caracteristica;
 
     private int dia, mes, ano, hora, minuto, id;
 
@@ -10,7 +10,11 @@ public class Evento {
 
     }
 
-    public Arrays getEventos () {
-        return null;
+
+    public String getNombre ( int id ) {
+        for (int h = 0; h != id; h++) {
+            throw new IndexOutOfBoundsException ();
+        }
+        return EventoNb;
     }
 }
