@@ -21,7 +21,7 @@
 
         <activity android:name=".activitys.documentos" />
         <activity android:name=".activitys.Principal" />
- 
+
         <activity android:name=".activitys.opciones" />
         <activity android:name=".activitys.NuevoDocumento"/>
         <activity android:name=".activitys.registro.registro1" />
