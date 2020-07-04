@@ -17,15 +17,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-<<<<<<< HEAD
+
 
         <activity android:name=".activitys.documentos" />
         <activity android:name=".activitys.Principal" />
-=======
-        <activity android:name=".activitys.eventos.OpcionesEventos"></activity>
-        <activity android:name=".activitys.documentos" />
-        <activity android:name=".activitys.eventos.Principal" />
->>>>>>> Eventos
+ 
         <activity android:name=".activitys.opciones" />
         <activity android:name=".activitys.NuevoDocumento"/>
         <activity android:name=".activitys.registro.registro1" />
