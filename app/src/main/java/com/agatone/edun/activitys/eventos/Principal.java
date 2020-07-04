@@ -48,6 +48,9 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
     
     int ano, mes, dia, hora, minutos;
 
+
+
+    
     @Override
     protected void onCreate ( Bundle savedInstanceState ) {
         super.onCreate ( savedInstanceState );
