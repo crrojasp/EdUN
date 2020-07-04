@@ -1,22 +1,21 @@
 package com.agatone.edun.activitys.eventos.HashTableEst;
 
-import com.agatone.edun.Clases.Usuario;
+import com.agatone.edun.Clases.Evento;
 
 public class DinamicArrayEventos {
-    private Usuario[] arreglo;
+    private Evento[] arreglo;
     private int size;
     private int capacity;
 
     public DinamicArrayEventos(){
-        arreglo=new Usuario[2];
+        arreglo = new Evento[2];
         size=0;
         capacity=2;
 
     }
 
 
-
-    public void insertarArchivo(Usuario arc){
+    public void insertarArchivo ( Evento arc ) {
         if(size>=capacity)
             aumentarArreglo();
         arreglo[size]=arc;
@@ -26,16 +25,16 @@ public class DinamicArrayEventos {
 
 
     public void aumentarArreglo(){
-        Usuario[] recurso=new Usuario [capacity*2];
+        Evento[] recurso = new Evento[capacity * 2];
         for(int j=0;j<capacity;j++){
             recurso[j]=arreglo[j];
         }
         arreglo=recurso;
         capacity*=2;
-    };
+    }
 
 
-    public Usuario getArchivo(int i) throws IndexOutOfBoundsException{
+    public Evento getArchivo ( int i ) throws IndexOutOfBoundsException {
         if(i>=size|i<0)
             throw new IndexOutOfBoundsException();
 
@@ -43,7 +42,7 @@ public class DinamicArrayEventos {
     }
 
 
-    public void setInt(int i, Usuario value){
+    public void setInt ( int i, Evento value ) {
         if(i>=size||i<0)
             throw new IndexOutOfBoundsException();
         if(i==size){//se evalua si la variable se quiere insertar al final del arreglo para ppoder hacer el respectivo aumento del contador "size"
@@ -70,7 +69,7 @@ public class DinamicArrayEventos {
     public DinamicArrayEventos findByName(String name)throws Exception{
         DinamicArrayEventos r=new DinamicArrayEventos();
         for(int i=0;i<size;i++){
-            if (arreglo[i].getNombres().equals(name)) {
+            if (arreglo[i].getEventos ().equals ( name )) {
                 r.insertarArchivo(arreglo[i]);
             }
         }

@@ -1,13 +1,16 @@
 package com.agatone.edun.Clases;
 
-import java.util.Date;
+import java.util.Arrays;
 
 public class Evento {
-    private Date Año;
-    private Date Mes;
-    private Date Dia;
+
+    private int dia, mes, ano, hora, minuto, id;
 
     public Evento(){
 
+    }
+
+    public Arrays getEventos () {
+        return null;
     }
 }

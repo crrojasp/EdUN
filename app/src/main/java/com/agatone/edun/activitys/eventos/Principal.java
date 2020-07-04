@@ -19,7 +19,6 @@ import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.agatone.edun.activitys.Archivos_de_apoyo;
 import com.agatone.edun.activitys.Subir_Archivo_De_Apoyo;
-import com.agatone.edun.auxiliares.UsuarioActual;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -66,133 +65,17 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
 
         inicializar();
 
-
         /**
          * CONTROLADORES PARA LOS BOTONES
          */
 
-        /*
-        bt_Hora.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick ( View v ) {
-                //hora    =  ( );
-            }
-        } );
-
-        Toast.makeText(getApplicationContext(), UsuarioActual.usuario.getTipo()+"",Toast.LENGTH_SHORT).show();
-
-        inicializar();
-
-
-        bt_Fecha.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick ( View v ) {
-                final Calendar calendario = Calendar.getInstance ();
-                dia = calendario.get ( Calendar.DAY_OF_WEEK_IN_MONTH );
-                mes = calendario.get ( Calendar.MONTH );
-                ano = calendario.get ( Calendar.YEAR );
-                DatePickerDialog datePickerDialog = new DatePickerDialog ( Principal.this, new DatePickerDialog.OnDateSetListener () {
-                    @Override
-                    public void onDateSet ( DatePicker view, int year, int month, int dayOfMonth ) {
-                        et_fecha.setText (  dayOfMonth+"/"+ (month + 1)+"/"+ year  );
-                    }
-                }, ano, mes, dia );
-                datePickerDialog.show ();
-            }
-        } );
-
-        bt_Hora.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick ( View v ) {
-                final Calendar calendario = Calendar.getInstance ();
-                hora = calendario.get ( Calendar.HOUR_OF_DAY );
-                minutos = calendario.get ( Calendar.MINUTE );
-                TimePickerDialog timePickerDialog = new TimePickerDialog ( Principal.this, new TimePickerDialog.OnTimeSetListener () {
-                    @Override
-                    public void onTimeSet ( TimePicker view, int hourOfDay, int minute ) {
-                        et_hora.setText (  hourOfDay+":"+ minute  );
-                    }
-                }, hora, minutos, false );
-                timePickerDialog.show ();
-            }
-        } );
-        bt_Crear_Evento.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick ( View v ) {
-                event = String.valueOf ( Event.getText () );
-                guardado_fecha.setText ( event+" "+minutos+" "+ hora+" "+ dia+" "+ mes+" "+ano+"" );
-
-            }
-        } );
-        bt_ver_eventos.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick ( View v ) {
-                final Calendar cld = new Calendar () {
-                    @Override
-                    protected void computeTime () {
-
-                    }
-
-                    @Override
-                    protected void computeFields () {
-
-                    }
-
-                    @Override
-                    public void add ( int field, int amount ) {
-
-                    }
-
-                    @Override
-                    public void roll ( int field, boolean up ) {
-
-                    }
-
-                    @Override
-                    public int getMinimum ( int field ) {
-                        return 0;
-                    }
-
-                    @Override
-                    public int getMaximum ( int field ) {
-                        return 0;
-                    }
-
-                    @Override
-                    public int getGreatestMinimum ( int field ) {
-                        return 0;
-                    }
-
-                    @Override
-                    public int getLeastMaximum ( int field ) {
-                        return 0;
-                    }
-                };
-
-            }
-        } );*/
-
     }
 
 
-    //aqui se inician los componentes graficos
     public void inicializar(){
-        //botones
-        /*
-        bt_Crear_Evento = findViewById ( R.id.bt_crear_evento );
-        bt_Fecha = findViewById ( R.id.bt_fecha );
-        bt_Hora = findViewById ( R.id.bot_hora );
-        bt_ver_eventos = findViewById ( R.id.Ver_Eventos_btn );*/
 
-        //editText
         fechaTx =findViewById(R.id.     Fecha);
         horaTx=findViewById(R.id.hora);
-
-        //Event = findViewById ( R.id.Event_EditText );
-
-        //TextView
-        //guardado_fecha = findViewById ( R.id.fecha_txt_guardado );
-
 
     }
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data ) {
