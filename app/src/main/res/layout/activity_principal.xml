@@ -15,14 +15,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/Event_EditText"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="55dp"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="55dp"
                 android:ems="10"
                 android:hint="@string/a0005"
@@ -37,14 +37,14 @@
                 android:id="@+id/Fecha"
                 android:layout_width="175dp"
                 android:layout_height="41dp"
-                android:layout_marginStart="87dp"
-                android:layout_marginTop="52dp"
-                android:layout_marginEnd="111dp"
+                android:layout_marginTop="40dp"
                 android:ems="10"
-                android:hint="fecha"
 
+                android:hint="fecha"
                 android:onClick="fechaClick"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Ver_Eventos_btn" />
 
@@ -52,11 +52,12 @@
                 android:id="@+id/bt_crear_evento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="140dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="320dp"
+                android:layout_marginBottom="270dp"
                 android:text="@string/a0002"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Event_EditText" />
 
@@ -76,6 +77,7 @@
                 android:id="@+id/Ver_Eventos_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:text="@string/Ver_Evento_Str"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -84,16 +86,16 @@
 
             <TextView
                 android:id="@+id/hora"
-                android:layout_width="171dp"
+                android:layout_width="175dp"
                 android:layout_height="46dp"
-                android:layout_marginStart="87dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="111dp"
+                android:layout_marginTop="45dp"
                 android:ems="10"
-                android:hint="hora"
 
+                android:hint="hora"
                 android:onClick="horaClick"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Fecha" />
         </androidx.constraintlayout.widget.ConstraintLayout>
