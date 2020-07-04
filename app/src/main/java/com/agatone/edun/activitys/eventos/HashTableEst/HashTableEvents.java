@@ -3,12 +3,12 @@ package com.agatone.edun.activitys.eventos.HashTableEst;
 import com.agatone.edun.Clases.Usuario;
 
 
-public class HashTableEst {
+public class HashTableEvents {
     private int tamHash;
     private DinamicArrayUsers[] tablaHash;
     private int countItem=0;
 
-    public HashTableEst(int tamHash) {
+    public HashTableEvents(int tamHash) {
         this.tamHash = tamHash;
         tablaHash = new DinamicArrayUsers[tamHash];
         for(int i=0;i<tamHash;i++){

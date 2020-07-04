@@ -14,14 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.agatone.edun.Clases.archivo;
-import com.agatone.edun.Clases.fillArray;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.Ftp_up_down.Subida;
 import com.agatone.edun.R;
-import com.agatone.edun.adapters.archivosAdapter;
 import com.agatone.edun.auxiliares.ArchivoSubirBajar;
-import com.agatone.edun.estructuras.DinamicArray;
-import com.agatone.edun.estructuras.Hash.HashTable;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,7 +26,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class NuevoDocumento extends AppCompatActivity {
@@ -76,7 +71,7 @@ public class NuevoDocumento extends AppCompatActivity {
         comprobar=findViewById(R.id.button);
         subir=findViewById(R.id.subir);
 
-        nombreTxt=findViewById(R.id.nombreTxt);
+        nombreTxt=findViewById(R.id.creadorTxt);
         autorTxt=findViewById(R.id.autorTxt);
 
         si.setChecked(true);
