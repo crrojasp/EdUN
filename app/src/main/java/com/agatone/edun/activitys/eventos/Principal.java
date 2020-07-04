@@ -35,15 +35,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Principal extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener{
-    Button bt_Crear_Evento;
-    Button bt_Fecha;
-    Button bt_Hora;
-    Button ftp;
-    Button subir;
+
+    Button bt_Crear_Evento, bt_Fecha, bt_Hora, bt_ver_eventos;
 
     EditText et_fecha, et_hora, Event;
 
     TextView guardado_fecha;
+
+    String event;
 
     int ano, mes, dia, hora, minutos;
 
@@ -106,11 +105,58 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 timePickerDialog.show ();
             }
         } );
-        final String anno=ano+"";
         bt_Crear_Evento.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
-                guardado_fecha.setText ( Event+" "+minutos+" "+ hora+" "+ dia+" "+ mes+" "+anno );
+                event = String.valueOf ( Event.getText () );
+                guardado_fecha.setText ( event+" "+minutos+" "+ hora+" "+ dia+" "+ mes+" "+ano+"" );
+
+            }
+        } );
+        bt_ver_eventos.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick ( View v ) {
+                final Calendar cld = new Calendar () {
+                    @Override
+                    protected void computeTime () {
+
+                    }
+
+                    @Override
+                    protected void computeFields () {
+
+                    }
+
+                    @Override
+                    public void add ( int field, int amount ) {
+
+                    }
+
+                    @Override
+                    public void roll ( int field, boolean up ) {
+
+                    }
+
+                    @Override
+                    public int getMinimum ( int field ) {
+                        return 0;
+                    }
+
+                    @Override
+                    public int getMaximum ( int field ) {
+                        return 0;
+                    }
+
+                    @Override
+                    public int getGreatestMinimum ( int field ) {
+                        return 0;
+                    }
+
+                    @Override
+                    public int getLeastMaximum ( int field ) {
+                        return 0;
+                    }
+                };
 
             }
         } );
@@ -124,21 +170,18 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         bt_Crear_Evento = findViewById ( R.id.bt_crear_evento );
         bt_Fecha = findViewById ( R.id.bt_fecha );
         bt_Hora = findViewById ( R.id.bot_hora );
+        bt_ver_eventos = findViewById ( R.id.Ver_Eventos_btn );
 
         //editText
         et_fecha = findViewById ( R.id.Caja_fecha );
         et_hora = findViewById ( R.id.Caja_hora );
-
-
-        //otros
         Event = findViewById ( R.id.Event_EditText );
+
+        //TextView
         guardado_fecha = findViewById ( R.id.fecha_txt_guardado );
 
+
     }
-
-
-
-
     protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data ) {
         super.onActivityResult ( requestCode, resultCode, data );
         //archivo arc[] = new archivo[1];
@@ -158,7 +201,6 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
             default:
                 throw new IllegalStateException ( "Unexpected value: " + requestCode );
         }
-
     }
     @Override
     public void onErrorResponse ( VolleyError error ) {
