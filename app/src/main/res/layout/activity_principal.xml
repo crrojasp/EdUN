@@ -86,7 +86,7 @@
                 android:layout_width="97dp"
                 android:layout_height="96dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="110dp"
+                android:layout_marginBottom="60dp"
                 android:focusable="auto"
                 android:hapticFeedbackEnabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -95,13 +95,23 @@
 
             <TextView
                 android:id="@+id/fecha_txt_guardado"
-                android:layout_width="415dp"
+                android:layout_width="300dp"
                 android:layout_height="42dp"
                 android:layout_marginTop="20dp"
                 android:text=""
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bt_crear_evento" />
+
+            <Button
+                android:id="@+id/Ver_Eventos_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ver_Evento_Str"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
