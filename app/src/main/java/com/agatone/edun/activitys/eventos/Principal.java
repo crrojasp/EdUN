@@ -45,6 +45,11 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
     String event;
 
 
+    TextView fechaTx;
+    TextView horaTx;
+
+    Calendar fecha;
+    DatePicker datePicker;
     
     int ano, mes, dia, hora, minutos;
 
@@ -66,7 +71,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
          * CONTROLADORES PARA LOS BOTONES
          */
 
-
+        /*
         bt_Hora.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
@@ -76,7 +81,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
 
         Toast.makeText(getApplicationContext(), UsuarioActual.usuario.getTipo()+"",Toast.LENGTH_SHORT).show();
 
-
+        inicializar();
 
 
         bt_Fecha.setOnClickListener ( new View.OnClickListener () {
@@ -95,6 +100,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 datePickerDialog.show ();
             }
         } );
+
         bt_Hora.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick ( View v ) {
@@ -164,7 +170,7 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                 };
 
             }
-        } );
+        } );*/
 
     }
 
@@ -172,18 +178,20 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
     //aqui se inician los componentes graficos
     public void inicializar(){
         //botones
+        /*
         bt_Crear_Evento = findViewById ( R.id.bt_crear_evento );
         bt_Fecha = findViewById ( R.id.bt_fecha );
         bt_Hora = findViewById ( R.id.bot_hora );
-        bt_ver_eventos = findViewById ( R.id.Ver_Eventos_btn );
+        bt_ver_eventos = findViewById ( R.id.Ver_Eventos_btn );*/
 
         //editText
-        et_fecha = findViewById ( R.id.Caja_fecha );
-        et_hora = findViewById ( R.id.Caja_hora );
-        Event = findViewById ( R.id.Event_EditText );
+        fechaTx =findViewById(R.id.     Fecha);
+        horaTx=findViewById(R.id.hora);
+
+        //Event = findViewById ( R.id.Event_EditText );
 
         //TextView
-        guardado_fecha = findViewById ( R.id.fecha_txt_guardado );
+        //guardado_fecha = findViewById ( R.id.fecha_txt_guardado );
 
 
     }
@@ -238,5 +246,41 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         };
         RequestQueue requestQueue = Volley.newRequestQueue ( this );
         requestQueue.add ( st );
+    }
+
+    public void fechaClick(View view) {
+        Calendar calendario=Calendar.getInstance();
+
+        int dia = calendario.get ( Calendar.DAY_OF_WEEK_IN_MONTH );
+        int mes = calendario.get ( Calendar.MONTH );
+        int ano = calendario.get ( Calendar.YEAR );
+        DatePickerDialog datePickerDialog = new DatePickerDialog ( Principal.this, new DatePickerDialog.OnDateSetListener () {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                fechaTx.setText(year+"/"+month+"/"+dayOfMonth);
+            }
+        }, ano, mes, dia );
+        datePickerDialog.show ();
+
+
+    }
+
+    public void horaClick(View view) {
+
+        TimePickerDialog timePickerDialog=new TimePickerDialog(
+                Principal.this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        horaTx.setText(hourOfDay+":"+minute);
+                    }
+                },
+                hora,
+                minutos,
+                true
+        );
+        timePickerDialog.show();
     }
 }

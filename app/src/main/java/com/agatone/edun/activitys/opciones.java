@@ -4,8 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -14,13 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.agatone.edun.Clases.archivo;
-import com.agatone.edun.Clases.fillArray;
-import com.agatone.edun.Ftp_up_down.Bajada;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.agatone.edun.activitys.Dialogs.LoginDialog;
-import com.agatone.edun.activitys.documentos;
-import com.agatone.edun.adapters.archivosAdapter;
+import com.agatone.edun.activitys.eventos.OpcionesEventos;
 import com.agatone.edun.auxiliares.HashDocument;
 import com.agatone.edun.auxiliares.UsuarioActual;
 import com.agatone.edun.estructuras.DinamicArray;
@@ -39,7 +36,9 @@ import org.json.JSONObject;
 public class opciones extends AppCompatActivity implements LoginDialog.LoginDialogListener {
 
     //zona de inicizlizacion
-    private ImageButton returnBt,documentoBt;
+    private ImageButton returnBt;
+    private ImageButton documentoBt;
+    private ImageButton eventsBt;
 
     //Constantes para revisison de permisos del sistema
     private final int REQUEST_WRITE_EXTERNAL=0;
@@ -59,11 +58,12 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
         //seccion de retorno a la pagina anterior
         returnBt=findViewById(R.id.regresar);
         documentoBt=findViewById(R.id.documentos);
+        eventsBt=findViewById(R.id.eventos);
 
         returnBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashDocument.v=false;
+                HashDocument.fillDocument =false;
                 startActivity(cambio);
             }
         });
@@ -72,6 +72,15 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
             @Override
             public void onClick(View v) {
                 LlenarHashTable();
+            }
+        });
+
+        eventsBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(opciones.this,OpcionesEventos.class);
+                opciones.this.startActivity(intent);
+
             }
         });
 
@@ -90,7 +99,7 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
      * primero se hace la consulta de todos los archivos dentro de la base de datos, se llena el recycler view y se carga la tabla hash
      */
     private void LlenarHashTable(){
-        if(!HashDocument.v){
+        if(!HashDocument.fillDocument){
             DinamicArray array=new DinamicArray();
             RequestQueue request;
             JsonObjectRequest jeison;
@@ -138,7 +147,7 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
 
                         HashDocument.dinamico=filling;
                         HashDocument.names=hash;
-                        HashDocument.v=true;
+                        HashDocument.fillDocument =true;
 
                         Intent documentos = new Intent ( opciones.this, documentos.class );
 

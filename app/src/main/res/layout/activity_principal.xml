@@ -9,54 +9,44 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="-25dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <TextView
                 android:id="@+id/Event_EditText"
-                android:layout_width="415dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="55dp"
                 android:ems="10"
                 android:hint="@string/a0005"
                 android:inputType="textPersonName"
                 android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bot_hora" />
+                app:layout_constraintTop_toBottomOf="@+id/hora" />
 
-            <Button
-                android:id="@+id/bt_fecha"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="100dp"
-                android:text="@string/a0003"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/Caja_fecha"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="100dp"
+            <TextView
+                android:id="@+id/Fecha"
+                android:layout_width="175dp"
+                android:layout_height="41dp"
+                android:layout_marginStart="87dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="111dp"
                 android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintStart_toEndOf="@+id/bt_fecha"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:hint="fecha"
 
-            <Button
-                android:id="@+id/bot_hora"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="50dp"
-                android:text="@string/a0004"
+                android:onClick="fechaClick"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bt_fecha" />
+                app:layout_constraintTop_toBottomOf="@+id/Ver_Eventos_btn" />
 
             <Button
                 android:id="@+id/bt_crear_evento"
@@ -70,17 +60,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Event_EditText" />
 
-            <EditText
-                android:id="@+id/Caja_hora"
-                android:layout_width="wrap_content"
-                android:layout_height="42dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="50dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                app:layout_constraintStart_toEndOf="@+id/bot_hora"
-                app:layout_constraintTop_toBottomOf="@+id/Caja_fecha" />
-
             <ImageView
                 android:id="@+id/Escudo3"
                 android:layout_width="97dp"
@@ -93,16 +72,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/universidad_escudo" />
 
-            <TextView
-                android:id="@+id/fecha_txt_guardado"
-                android:layout_width="300dp"
-                android:layout_height="42dp"
-                android:layout_marginTop="20dp"
-                android:text=""
-                android:textSize="22sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bt_crear_evento" />
-
             <Button
                 android:id="@+id/Ver_Eventos_btn"
                 android:layout_width="wrap_content"
@@ -112,6 +81,21 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/hora"
+                android:layout_width="171dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="87dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="111dp"
+                android:ems="10"
+                android:hint="hora"
+
+                android:onClick="horaClick"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Fecha" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
