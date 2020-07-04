@@ -44,6 +44,8 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
 
     String event;
 
+
+    
     int ano, mes, dia, hora, minutos;
 
     @Override
