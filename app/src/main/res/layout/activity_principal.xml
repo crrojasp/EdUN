@@ -10,8 +10,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="-25dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteX="-51dp"
+        tools:layout_editor_absoluteY="-327dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -52,25 +52,23 @@
                 android:id="@+id/bt_crear_evento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="270dp"
+                android:layout_marginBottom="100dp"
                 android:text="@string/a0002"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/Escudo3"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Event_EditText" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/Escudo3"
                 android:layout_width="97dp"
                 android:layout_height="96dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="60dp"
                 android:focusable="auto"
                 android:hapticFeedbackEnabled="false"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ed_link"
                 app:srcCompat="@drawable/universidad_escudo" />
 
             <Button
@@ -98,6 +96,20 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Fecha" />
+
+            <EditText
+                android:id="@+id/ed_link"
+                android:layout_width="275dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:layout_marginBottom="50dp"
+                android:hint="@string/info_evento"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/bt_crear_evento"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Event_EditText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

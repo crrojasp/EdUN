@@ -25,4 +25,5 @@
     <string name="confirmar_Contrasena">Confirmar contrasena</string>
     <string name="finish">Terminar</string>
     <string name="Ver_Evento_Str">Ver Eventos</string>
+    <string name="info_evento">Dato de la reunión</string>
 </resources>
