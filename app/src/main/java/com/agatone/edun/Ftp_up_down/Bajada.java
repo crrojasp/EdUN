@@ -3,6 +3,7 @@ package com.agatone.edun.Ftp_up_down;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import com.agatone.edun.Clases.archivo;
 
 import org.apache.commons.net.ftp.FTP;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -61,7 +64,7 @@ import java.io.OutputStream;
     *
     *
 */
-public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements Coneccion {
+public class Bajada  extends AsyncTask<String,Void,Boolean> implements Coneccion {
     private String path;
     public Context context;//solo por una prueba, despues eliminar
 
@@ -80,78 +83,70 @@ public class Bajada  extends AsyncTask<archivo,Void,Boolean> implements Coneccio
     }
 
     public Bajada(Context context){
-
-        this(MediaStore.Downloads.RELATIVE_PATH,context);//<<<<<<<<<<<<<<<<<<<<<<<<<<<< CAMBIAR
+        //por defecto se tiene que la carpeta para guardar los archivos, sera la carpeta de descargas
+        this(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString(),context);
     }
 
 
     //
     @Override
-    protected Boolean doInBackground(archivo... archivos) {
+    protected Boolean doInBackground(String... strings) {
         //se carga el nombre del archivo
-
+        String name=strings[0];
 
 
 
         boolean down=false;
-        String url=null;
-        FileOutputStream stream=null;
+        final File file=new File(this.path,name);
+
 
         try {
+                FileOutputStream fil=new FileOutputStream(file);
+                OutputStream out=new BufferedOutputStream(fil);
 
 
+                Handler handler;
+                handler=  new Handler(context.getMainLooper());
+                handler.post( new Runnable(){
+                    public void run(){
 
+                        Toast.makeText(context, file.getPath(),Toast.LENGTH_LONG).show();
+                    }
+                });
 
                 cliente.connect(host,port); //estos valores se encuentran en la interfaz Coneccion
                 cliente.login( username,pass);
 
                 cliente.enterLocalPassiveMode(); // IMPORTANTE!!!!
 
-                cliente.setFileType(FTP.BINARY_FILE_TYPE, FTP.BINARY_FILE_TYPE);
+                cliente.setFileType(FTP.BINARY_FILE_TYPE);
 
-                cliente.setFileTransferMode(FTP.BINARY_FILE_TYPE);
+                //cliente.setFileTransferMode(FTP.BINARY_FILE_TYPE);
 
-                cliente.changeWorkingDirectory("estructuras.atwebpages.com/archivo/");
-
-                //BufferedOutputStream buffOut = new BufferedOutputStream(new FileOutputStream(this.path+arc.getNombre()+"."+arc.getTipo()));
-                //Toast.makeText ( context,"como que si llego",Toast.LENGTH_LONG).show ();
+                //cliente.changeWorkingDirectory("estructuras.atwebpages.com/archivo/");
 
 
-
-                stream = new FileOutputStream(getPath());
-                //stream=new FileOutputStream(this.path+arc.getNombre()+"."+arc.getTipo());
-
-
-                //cliente.retrieveFile(arc.getNombre()+"."+arc.getTipo(),out);
-                cliente.retrieveFile(Coneccion.host+"/archivos/hola.pdf",stream);
-                stream.close();
+                down=cliente.retrieveFile(Coneccion.host+"/archivo/"+name,out);
+                out.close();
                 cliente.disconnect();
 
 
 
         } catch (IOException e) {
-            Looper.prepare();
-            Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
-            Looper.loop();
+            down= false;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //insert es para verificar que se halla bajado el archivo
         return down;
+        //insert es para verificar que se halla bajado el archivo
+
     }
 
+    @Override
+    protected void onPostExecute(Boolean aBoolean) {
+        if(aBoolean)
+            Toast.makeText(context,"Se descargo el archivo",Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(context,"no se descargo el archivo",Toast.LENGTH_SHORT).show();
+    }
 }
+

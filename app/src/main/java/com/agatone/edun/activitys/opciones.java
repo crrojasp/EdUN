@@ -43,13 +43,14 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
 
     //Constantes para revisison de permisos del sistema
     private final int REQUEST_WRITE_EXTERNAL=0;
-
+    private final int REQUEST_READ_EXTERNAL=1;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView ( R.layout.activity_opciones);
+
 
 
         final Intent cambio = new Intent ( this, login.class );
@@ -75,10 +76,10 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
         });
 
 
-        login();
         //comprobar si se tienen los permisos de carga y descarga de documentos
         Permisos();
 
+        login();
 
 
     }
@@ -180,6 +181,9 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,
                     new String []{Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_WRITE_EXTERNAL);
+        }else if(ActivityCompat.checkSelfPermission(this,Manifest.permission.READ_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_READ_EXTERNAL);
         }
     }
     @Override
@@ -192,6 +196,14 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
             }
             else
                 Toast.makeText(getApplicationContext(),"Permiso Denegado",Toast.LENGTH_SHORT).show();
+
+        }else if(requestCode==REQUEST_READ_EXTERNAL){
+            if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(getApplicationContext(),"Permiso de READ_external Concedido",Toast.LENGTH_SHORT).show();
+
+            }
+            else
+                Toast.makeText(getApplicationContext(),"Permiso de READ_external Denegado",Toast.LENGTH_SHORT).show();
 
         }
     }

@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.agatone.edun.Ftp_up_down.Bajada;
 import com.agatone.edun.R;
+import com.agatone.edun.auxiliares.HashDocument;
 import com.agatone.edun.estructuras.DinamicArray;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archivosHolder> implements View.OnClickListener {
     DinamicArray listArchivos;
@@ -70,8 +77,19 @@ public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archiv
             image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String nom=nombre.getText().toString();
+                    String tipo=null;
+                    int idd=Integer.parseInt(id.getText().toString());
+                    DinamicArray dinamic=HashDocument.names.find_name(nom);
 
-                    mostrarOpciones(nombre.getText().toString());
+                    for(int i=0;i<dinamic.getSize();i++){
+                        if(idd==dinamic.getArchivo(i).getId())
+                            tipo=dinamic.getArchivo(i).getTipo();
+                    }
+
+
+
+                    mostrarOpciones(nom,tipo);
                     final CharSequence[] opciones={"Subir Archivo","Cancelar"};
 
                 }
@@ -80,9 +98,11 @@ public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archiv
 
     }
 
-    private void mostrarOpciones(String nombre){
+    private void mostrarOpciones(String nombre,String tipo){
         final CharSequence[] opciones={"Eliminar","Descargar","Cancelar"};
         final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
+        final String nom=nombre+"."+tipo;
+
 
         builder.setTitle("Escoge una accion para el archivo '"+nombre+"'");
         builder.setItems(opciones, new DialogInterface.OnClickListener()  {
@@ -91,7 +111,16 @@ public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archiv
                 if(opciones[which].equals("Cancelar")){
                     dialog.dismiss();
                 }else if(opciones[which].equals("Descargar")){
-                    Toast.makeText(context,"Descargar",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Descargarndo... espere un momento",Toast.LENGTH_SHORT).show();
+
+                    String nuevo[]=new String[1];
+                    nuevo[0]=nom;
+
+                    Bajada bajada =new Bajada(context);
+                    bajada.execute(nuevo);
+
+
+
                 }else if(opciones[which].equals("Eliminar")){
                     Toast.makeText(context,"Eliminar",Toast.LENGTH_SHORT).show();
                 }
