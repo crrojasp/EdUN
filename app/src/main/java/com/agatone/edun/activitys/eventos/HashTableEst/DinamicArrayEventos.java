@@ -1,17 +1,17 @@
 package com.agatone.edun.activitys.eventos.HashTableEst;
 
 import com.agatone.edun.Clases.Usuario;
-import com.agatone.edun.Clases.archivo;
 
-public class DinamicArrayEvents {
+public class DinamicArrayEventos {
     private Usuario[] arreglo;
     private int size;
     private int capacity;
 
-    public DinamicArrayEvents(){
+    public DinamicArrayEventos(){
         arreglo=new Usuario[2];
         size=0;
         capacity=2;
+
     }
 
 
@@ -67,8 +67,8 @@ public class DinamicArrayEvents {
         size--;
     }
 
-    public DinamicArrayEvents findByName(String name)throws Exception{
-        DinamicArrayEvents r=new DinamicArrayEvents();
+    public DinamicArrayEventos findByName(String name)throws Exception{
+        DinamicArrayEventos r=new DinamicArrayEventos();
         for(int i=0;i<size;i++){
             if (arreglo[i].getNombres().equals(name)) {
                 r.insertarArchivo(arreglo[i]);
