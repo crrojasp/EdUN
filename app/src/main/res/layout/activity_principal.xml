@@ -5,104 +5,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF"
-    tools:context=".activitys.Principal">
+    tools:context=".activitys.eventos.Principal">
 
-    <ImageView
-        android:id="@+id/Escudo3"
-        android:layout_width="97dp"
-        android:layout_height="96dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:focusable="auto"
-        android:hapticFeedbackEnabled="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/universidad_escudo" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="315dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:hint="@string/a0005"
-        android:inputType="textPersonName"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bot_hora" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/bt_fecha"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/a0003"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <EditText
+                android:id="@+id/Event_EditText"
+                android:layout_width="415dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="40dp"
+                android:ems="10"
+                android:hint="@string/a0005"
+                android:inputType="textPersonName"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bot_hora" />
 
-    <EditText
-        android:id="@+id/Caja_fecha"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toEndOf="@+id/bt_fecha"
-        app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/bt_fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="100dp"
+                android:text="@string/a0003"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bot_hora"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/a0004"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_fecha" />
+            <EditText
+                android:id="@+id/Caja_fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="100dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toEndOf="@+id/bt_fecha"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/bt_crear_evento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/a0002"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+            <Button
+                android:id="@+id/bot_hora"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/a0004"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_fecha" />
 
-    <EditText
-        android:id="@+id/Caja_hora"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toEndOf="@+id/bot_hora"
-        app:layout_constraintTop_toBottomOf="@+id/Caja_fecha" />
+            <Button
+                android:id="@+id/bt_crear_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="320dp"
+                android:text="@string/a0002"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Event_EditText" />
 
-    <Button
-        android:id="@+id/ftp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="40dp"
-        android:text="ftp test"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/subir" />
+            <EditText
+                android:id="@+id/Caja_hora"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintStart_toEndOf="@+id/bot_hora"
+                app:layout_constraintTop_toBottomOf="@+id/Caja_fecha" />
 
-    <Button
-        android:id="@+id/subir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="40dp"
-        android:text="subir"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Escudo3" />
+            <ImageView
+                android:id="@+id/Escudo3"
+                android:layout_width="97dp"
+                android:layout_height="96dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="60dp"
+                android:focusable="auto"
+                android:hapticFeedbackEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/universidad_escudo" />
+
+            <TextView
+                android:id="@+id/fecha_txt_guardado"
+                android:layout_width="300dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="20dp"
+                android:text=""
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_crear_evento" />
+
+            <Button
+                android:id="@+id/Ver_Eventos_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ver_Evento_Str"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
