@@ -61,8 +61,8 @@ public class OpcionesEventos extends AppCompatActivity {
         }else{
             //final Calendar calendar =Calendar.getInstance ();
 
-            //Intent intent =new Intent(OpcionesEventos.this,Principal.class);
-            //OpcionesEventos.this.startActivity(intent);
+            Intent intent =new Intent(OpcionesEventos.this,Principal.class);
+            OpcionesEventos.this.startActivity(intent);
         }
     }
 }
