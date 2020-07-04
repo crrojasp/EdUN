@@ -36,7 +36,7 @@ public class opciones extends AppCompatActivity {
 
         final Intent cambio = new Intent ( this, login.class );
         final Intent documentos = new Intent ( this, documentos.class );
-        final Intent Event = new Intent ( this, OpcionesEventos.class );
+        final Intent Event = new Intent ( this, Principal.class );
 
         //seccion de retorno a la pagina anterior
         returnBt=findViewById(R.id.regresar);
