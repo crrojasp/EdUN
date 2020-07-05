@@ -2,23 +2,44 @@ package com.agatone.edun.Clases;
 
 public class Evento {
 
-    private String EventoNb, caracteristica;
+    private String EventoNb;
+    private String caracteristica;
+    private String Creador;
 
-    private int dia, mes, ano, hora, minuto, id;
+    private int dia, mes, ano, hora, minuto, id, id_creador;
 
-    public Evento(String eventoNb, String caracteristica, int dia, int mes, int ano, int hora, int minuto, int id) {
-        this.EventoNb = eventoNb;
+
+    public Evento(String eventoNb, String caracteristica, String creador, int dia, int mes, int ano, int hora, int minuto, int id, int id_creador) {
+        EventoNb = eventoNb;
         this.caracteristica = caracteristica;
+        Creador = creador;
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
         this.hora = hora;
         this.minuto = minuto;
         this.id = id;
+        this.id_creador = id_creador;
     }
 
     public String getEventoNb() {
         return EventoNb;
+    }
+
+    public String getCreador() {
+        return Creador;
+    }
+
+    public void setCreador(String creador) {
+        Creador = creador;
+    }
+
+    public int getId_creador() {
+        return id_creador;
+    }
+
+    public void setId_creador(int id_creador) {
+        this.id_creador = id_creador;
     }
 
     public void setEventoNb(String eventoNb) {

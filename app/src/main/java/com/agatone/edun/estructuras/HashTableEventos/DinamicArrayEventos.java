@@ -1,4 +1,4 @@
-package com.agatone.edun.activitys.eventos.HashTableEst;
+package com.agatone.edun.estructuras.HashTableEventos;
 
 import com.agatone.edun.Clases.Evento;
 
@@ -15,7 +15,7 @@ public class DinamicArrayEventos {
     }
 
 
-    public void insertarArchivo ( Evento arc ) {
+    public void insertarEvento ( Evento arc ) {
         if(size>=capacity)
             aumentarArreglo();
         arreglo[size]=arc;
@@ -34,10 +34,10 @@ public class DinamicArrayEventos {
     }
 
 
-    public String getNombre ( int i ) throws IndexOutOfBoundsException {
+    public Evento getEvento ( int i ) throws IndexOutOfBoundsException {
         for (int h = 0; h != i; h++)
             throw new IndexOutOfBoundsException();
-        return Evento.class.getName ();
+        return arreglo[i];
     }
 
 
@@ -68,8 +68,8 @@ public class DinamicArrayEventos {
     public DinamicArrayEventos findByName(String name)throws Exception{
         DinamicArrayEventos r=new DinamicArrayEventos();
         for(int i=0;i<size;i++){
-            if (arreglo[i].getNombre ().equals ( name )) {
-                r.insertarArchivo(arreglo[i]);
+            if (arreglo[i].getEventoNb ().equals ( name )) {
+                r.insertarEvento(arreglo[i]);
             }
         }
         return r;

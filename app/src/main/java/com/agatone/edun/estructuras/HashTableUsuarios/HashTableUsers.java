@@ -1,14 +1,14 @@
-package com.agatone.edun.activitys.eventos.HashTableEst;
+package com.agatone.edun.estructuras.HashTableUsuarios;
 
-import com.agatone.edun.Clases.Evento;
+import com.agatone.edun.Clases.Usuario;
 
 
-public class HashTableEvents {
+public class HashTableUsers {
     private int tamHash;
     private DinamicArrayUsers[] tablaHash;
     private int countItem=0;
 
-    public HashTableEvents ( int tamHash ) {
+    public HashTableUsers(int tamHash) {
         this.tamHash = tamHash;
         tablaHash = new DinamicArrayUsers[tamHash];
         for(int i=0;i<tamHash;i++){
@@ -26,9 +26,9 @@ public class HashTableEvents {
         return value % tamHash;
     }
 
-    public void insert ( Evento arc ) {
-        String key = Key ( arc.getNombre () );
-        tablaHash[id].insertarArchivo ( arc );
+    public void insert(Usuario arc){
+        int key=Key(arc.getNombres());
+        tablaHash[key].insertarArchivo(arc);
         countItem++;
     }
 
@@ -40,7 +40,7 @@ public class HashTableEvents {
             //no necesito validar ningun error aqui, solo devolver el arreglo vacio
         }
         return r;
-    }
+    };
 
     public int getCountItem() {
         return countItem;

@@ -46,6 +46,7 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
 
         btContinuar     = findViewById ( R.id.btcontinuar);
         btCambioRegistro = findViewById ( R.id.btregistro);
+
         user=(EditText)findViewById ( R.id.CajaUsuario );
         password=(EditText)findViewById ( R.id.CajaContraseña );
 
@@ -131,10 +132,15 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
             id=jsonObject.optInt("id");
             nombre=jsonObject.optString("nombre");
             apellido=jsonObject.optString("apellido");
-            tipo=jsonObject.optString("tipo").charAt(0);
+            String tipor=jsonObject.optString("tipo");
+            tipo=tipor.charAt(0);
             usuario=user.getText().toString();
 
+
             Usuario User = new Usuario (nombre, apellido, tipo, usuario);
+
+
+
             User.setId(id);
 
             if(User.getId()==-1){

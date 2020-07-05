@@ -52,6 +52,7 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
 
 
 
+
         final Intent cambio = new Intent ( this, login.class );
 
 

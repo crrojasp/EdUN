@@ -1,4 +1,4 @@
-package com.agatone.edun.activitys.eventos.HashTableEst;
+package com.agatone.edun.estructuras.HashTableUsuarios;
 
 import com.agatone.edun.Clases.Usuario;
 

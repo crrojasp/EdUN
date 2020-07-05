@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,41 +15,34 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.agatone.edun.R;
 
-public class BuscarDialog extends AppCompatDialogFragment {
+public class mensajeEventoDialog extends AppCompatDialogFragment {
 
-    private EditText nombre_archivo;
-    private BuscarDialogListener listener;
+    private TextView mensaje;
+
+
+    private LoginDialog.LoginDialogListener listener;
+
 
     @Override
     public android.app.Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater=getActivity().getLayoutInflater();
-        View view=inflater.inflate(R.layout.layout_search,null);
+        View view=inflater.inflate(R.layout.layout_mensaje_evento,null);
 
         builder.setView(view)
-                .setTitle("Busqueda de archivo")
-                .setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
+                .setTitle("mensaje")
+                .setNegativeButton("Salir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 })
-                .setPositiveButton("Buscar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String nombreArchivo=nombre_archivo.getText().toString();
-                        listener.applyText(nombreArchivo);
-                    }
-                });
+                .setPositiveButton(null,null);
 
-        nombre_archivo=view.findViewById(R.id.Mensaje);
-
-
-
+        mensaje=view.findViewById(R.id.Mensaje);
 
         return builder.create();
-
     }
 
     @Override
@@ -56,13 +50,13 @@ public class BuscarDialog extends AppCompatDialogFragment {
         super.onAttach(context);
 
         try {
-            listener=(BuscarDialogListener) context;
+            listener=(LoginDialog.LoginDialogListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()+" must implement ExampleDialogListener");
         }
     }
 
-    public interface BuscarDialogListener{
-        void applyText(String a);
+    public interface LoginDialogListener{
+        void confirmUser(String user, String password);
     }
 }
