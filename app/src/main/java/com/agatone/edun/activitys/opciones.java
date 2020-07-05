@@ -89,7 +89,7 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
         //comprobar si se tienen los permisos de carga y descarga de documentos
         Permisos();
 
-        login();
+        //login();
 
 
     }

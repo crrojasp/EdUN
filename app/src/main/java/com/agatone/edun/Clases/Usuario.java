@@ -9,10 +9,7 @@ public class Usuario {
     private String Contraseña;
 
 
-    public Usuario (){
-        this.Usuario=getUsuario ();
-        this.Contraseña=getContraseña ();
-    }
+
 
     public Usuario(String Nombres, String Apellidos, char tipo, String Usuario){
 
@@ -70,7 +67,7 @@ public class Usuario {
     }
 
     public char getTipo() {
-        return tipo;
+        return this.tipo;
     }
 
     public void setTipo(char tipo) {

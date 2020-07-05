@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.agatone.edun.Clases.Usuario;
-import com.agatone.edun.Clases.archivo;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.agatone.edun.activitys.registro.registro1;
@@ -109,6 +108,7 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
             Toast.makeText(getApplicationContext(),"Falta la contrasena",Toast.LENGTH_SHORT).show();
         }else {
             String url = "http://"+ Coneccion.host +"/inicioSesion.php?Usuario=" + Usuario1 + "&Contraseña=" + Contraseña1;
+
             jrq = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
             rq.add(jrq);
         }
@@ -124,6 +124,8 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
         String apellido;
         char tipo;
         String usuario;
+        String r;
+
         try {
             JSONArray json=response.optJSONArray("usuario");
 
@@ -131,11 +133,18 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
             id=jsonObject.optInt("id");
             nombre=jsonObject.optString("nombre");
             apellido=jsonObject.optString("apellido");
-            tipo=jsonObject.optString("tipo").charAt(0);
+
+            r=jsonObject.optString("tipo");
+            tipo=r.charAt(0);
             usuario=user.getText().toString();
+            Character tip=tipo;
+
 
             Usuario User = new Usuario (nombre, apellido, tipo, usuario);
             User.setId(id);
+
+
+
 
             if(User.getId()==-1){
                 Toast.makeText ( getApplicationContext (),"No se encontro el usuario", Toast.LENGTH_SHORT ).show ();

@@ -63,7 +63,7 @@ public class OpcionesEventos extends AppCompatActivity {
      */
     public void crearListener(View view) {
 
-        if(UsuarioActual.usuario.getTipo()=='1'){
+        if(UsuarioActual.usuario.getTipo()==1){
 
             Toast.makeText(getApplicationContext(),"No tiene los permisos para crear eventos nuevos",Toast.LENGTH_LONG).show();
         }else{
@@ -76,7 +76,7 @@ public class OpcionesEventos extends AppCompatActivity {
     }
 
     public void misEventosListener(View view) {
-        if(UsuarioActual.usuario.getTipo()=='2'){
+        if(UsuarioActual.usuario.getTipo()==2){
 
             Toast.makeText(getApplicationContext(),"No tiene los permisos para observar eventos",Toast.LENGTH_LONG).show();
         }else{
