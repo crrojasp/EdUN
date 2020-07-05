@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agatone.edun.Clases.Evento;
-import com.agatone.edun.Clases.archivo;
-import com.agatone.edun.Ftp_up_down.Bajada;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
-import com.agatone.edun.activitys.documentos;
-import com.agatone.edun.activitys.opciones;
-import com.agatone.edun.auxiliares.HashDocument;
 import com.agatone.edun.auxiliares.UsuarioActual;
 import com.agatone.edun.estructuras.DinamicArray;
-import com.agatone.edun.estructuras.Hash.HashTable;
 import com.agatone.edun.estructuras.HashTableEventos.DinamicArrayEventos;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,7 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosHolder>  {
+public class eventosMiosAdapter extends RecyclerView.Adapter<eventosMiosAdapter.eventosHolder>  {
     DinamicArrayEventos listEventos;
     Context context;
     Activity activity;
@@ -47,7 +40,7 @@ public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosH
 
 
 
-    public eventosAdapter(DinamicArrayEventos eventos, Context context, Activity activity){
+    public eventosMiosAdapter(DinamicArrayEventos eventos, Context context, Activity activity){
         listEventos =eventos;
         this.context=context;
         this.activity=activity;
@@ -91,9 +84,8 @@ public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosH
                 @Override
                 public void onClick(View v) {
                     String id=(id_e.getText().toString());
-                    //Toast.makeText(context,id,Toast.LENGTH_SHORT).show();
-                    int val=Integer.parseInt(id);
-                    mostrarOpciones(val);
+                    Toast.makeText(context,id,Toast.LENGTH_SHORT).show();
+                    mostrarOpciones(1);
                 }
             });
 
@@ -102,7 +94,7 @@ public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosH
     }
 
     private void mostrarOpciones(int id_e){
-        final CharSequence[] opciones={"Informacion extra","apuntarse","Cancelar"};
+        final CharSequence[] opciones={"Informacion extra","Eliminar","Cancelar"};
         final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
 
 
@@ -115,12 +107,15 @@ public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosH
                 if(opciones[which].equals("Cancelar")){
                     dialog.dismiss();
                 }else if(opciones[which].equals("Informacion extra")){
-                    //terminar esta zona
+
+
+                }else if(opciones[which].equals("Eliminar")){
+
 
 
                 }else if(opciones[which].equals("apuntarse")){
                     Inscribirse(ide);
-                    dialog.dismiss();
+
                 }
             }
 
@@ -193,11 +188,11 @@ public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosH
                 try {
                     int val;
 
-                    String valu=json.getString(0);
+                    JSONObject jsonObject;
 
-                    val=Integer.parseInt(valu);
+                    jsonObject=json.getJSONObject(0);
+                    val=jsonObject.optInt("id");
 
-                    Toast.makeText(context,val+"",Toast.LENGTH_SHORT).show();
                     if(val==0)
                         Toast.makeText(context,"no se pudo enlistar en el evento",Toast.LENGTH_SHORT).show();
                     else if(val==1)

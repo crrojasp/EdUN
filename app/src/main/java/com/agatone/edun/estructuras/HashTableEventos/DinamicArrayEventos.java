@@ -15,10 +15,10 @@ public class DinamicArrayEventos {
     }
 
 
-    public void insertarEvento ( Evento arc ) {
+    public void insertarEvento ( Evento event ) {
         if(size>=capacity)
             aumentarArreglo();
-        arreglo[size]=arc;
+        arreglo[size]=event;
         size++;
     }
 
@@ -35,7 +35,7 @@ public class DinamicArrayEventos {
 
 
     public Evento getEvento ( int i ) throws IndexOutOfBoundsException {
-        for (int h = 0; h != i; h++)
+        if(i>=size|i<0)
             throw new IndexOutOfBoundsException();
         return arreglo[i];
     }

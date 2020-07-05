@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activitys.eventos.MisEventos"
+    tools:context=".activitys.eventos.ListaEventos"
     android:padding="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

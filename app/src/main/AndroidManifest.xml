@@ -18,6 +18,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".activitys.eventos.MisEventos"></activity>
+        <activity android:name=".activitys.eventos.ListaEventos" />
         <activity android:name=".activitys.documentos" />
         <activity android:name=".activitys.eventos.Principal" />
         <activity android:name=".activitys.eventos.OpcionesEventos" />

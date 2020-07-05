@@ -24,6 +24,11 @@ public class HashDocument {
     public static HashTableEvents tablaEventos;
     public static DinamicArrayEventos dinamicEventos;
 
+    public static boolean fillMEvents=false;
+    public static HashTableEvents tablaMisEventos;
+    public static DinamicArrayEventos dinamicMio;
+
+
     public HashDocument(){
 
     }
