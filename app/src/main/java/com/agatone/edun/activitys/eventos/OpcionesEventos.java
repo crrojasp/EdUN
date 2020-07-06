@@ -83,136 +83,144 @@ public class OpcionesEventos extends AppCompatActivity {
     }
 
     public void MisEventosListener(View view) {
-        DinamicArrayEventos array=new DinamicArrayEventos();
-        RequestQueue request;
-        JsonObjectRequest jeison;
-        HashTableEvents hash;
-        request= Volley.newRequestQueue(getApplicationContext());
+        if(UsuarioActual.usuario.getTipo()=='2'){
 
-        //final int pos=po;
+            Toast.makeText(getApplicationContext(),"No tiene los permisos para observar estos",Toast.LENGTH_LONG).show();
+        }else{
 
-        String url=null;
-        url="http://"+ Coneccion.host+"/eventos/ListarEventosEnlazados.php?id="+UsuarioActual.usuario.getId();
-        url=url.replace(" ","%20");
+            RequestQueue request;
+            JsonObjectRequest jeison;
 
-        Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
+            request= Volley.newRequestQueue(getApplicationContext());
 
-        jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Evento event;
-                HashTableEvents hash;
-                JSONArray json;
-                DinamicArrayEventos filling;
+            //final int pos=po;
 
+            String url=null;
+            url="http://"+ Coneccion.host+"/eventos/eventosCreados.php?id_c="+UsuarioActual.usuario.getId();
+            url=url.replace(" ","%20");
 
+            //Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
 
-                json=response.optJSONArray("eventos");
-                filling=new DinamicArrayEventos();
-                hash=new HashTableEvents(50);
-                try {
-                    for(int i=0;i<json.length();i++){
-
-                        int ano;
-                        int mes;
-                        int dia;
-                        String fecha;
-
-                        int hora;
-                        int minuto;
-                        String time;
-
-                        String nombreEvento;
-                        String mensaje;
-                        int idEvento;
-
-                        String nombreCreador;
-                        int idCreador;
+            jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Evento event;
+                    HashTableEvents hash;
+                    JSONArray json;
+                    DinamicArrayEventos filling;
 
 
-                        JSONObject jsonObject;
 
-                        jsonObject=json.getJSONObject(i);
+                    json=response.optJSONArray("eventos");
+                    filling=new DinamicArrayEventos();
+                    hash=new HashTableEvents(50);
+                    try {
+                        for(int i=0;i<json.length();i++){
+
+                            int ano;
+                            int mes;
+                            int dia;
+                            String fecha;
+
+                            int hora;
+                            int minuto;
+                            String time;
+
+                            String nombreEvento;
+                            String mensaje;
+                            int idEvento;
+
+                            String nombreCreador;
+                            int idCreador;
 
 
-                        nombreCreador=jsonObject.optString("creador");
-                        idCreador=jsonObject.optInt("id_creador");
+                            JSONObject jsonObject;
 
-                        fecha=jsonObject.optString("fecha");
-                        time=jsonObject.optString("hora");
+                            jsonObject=json.getJSONObject(i);
 
-                        nombreEvento=jsonObject.optString("evento");
-                        idEvento=jsonObject.optInt("id_evento");
-                        mensaje=jsonObject.optString("mensaje");
 
-                        boolean v=true;
+                            nombreCreador=jsonObject.optString("creador");
+                            idCreador=jsonObject.optInt("id_creador");
 
-                        int begin=0;
-                        int end=0;
+                            fecha=jsonObject.optString("fecha");
+                            time=jsonObject.optString("hora");
 
-                        String values[]=new String[3];
-                        int r=0;
+                            nombreEvento=jsonObject.optString("evento");
+                            idEvento=jsonObject.optInt("id_evento");
+                            mensaje=jsonObject.optString("mensaje");
 
-                        for(int j=0;j<=fecha.length();j++){
-                            if(j==(fecha.length())||fecha.charAt(j)=='-'){
-                                values[r]=fecha.substring(begin,j);
-                                r++;
-                                begin=j+1;
+                            boolean v=true;
+
+                            int begin=0;
+                            int end=0;
+
+                            String values[]=new String[3];
+                            int r=0;
+
+                            for(int j=0;j<=fecha.length();j++){
+                                if(j==(fecha.length())||fecha.charAt(j)=='-'){
+                                    values[r]=fecha.substring(begin,j);
+                                    r++;
+                                    begin=j+1;
+                                }
+
                             }
+
+                            ano=Integer.parseInt(values[0]);
+                            mes=Integer.parseInt(values[1]);
+                            dia=Integer.parseInt(values[2]);
+
+
+                            values=new String[2];
+                            r=0;
+                            begin=0;
+                            for(int j=0;j<=time.length()&&r<2;j++){
+                                if(time.charAt(j)==':'){
+                                    values[r]=time.substring(begin,j);
+                                    r++;
+                                    begin=j+1;
+
+                                }
+                                //ystem.out.println(time.charAt(j));
+                            }
+
+                            hora=Integer.parseInt(values[0]);
+                            minuto=Integer.parseInt(values[1]);
+
+                            event=new Evento(nombreEvento,mensaje,nombreCreador,dia,mes,ano,hora,minuto,idEvento,idCreador);
+
+                            Toast.makeText(getApplicationContext(),(event==null)+"",Toast.LENGTH_SHORT).show();
+                            filling.insertarEvento(event);
+                            hash.insert(event);
 
                         }
 
-                        ano=Integer.parseInt(values[0]);
-                        mes=Integer.parseInt(values[1]);
-                        dia=Integer.parseInt(values[2]);
+                        Toast.makeText(getApplicationContext(),filling.getSize()+"",Toast.LENGTH_SHORT).show();
 
+                        HashDocument.dinamicMio=filling;
+                        HashDocument.tablaMisEventos=hash;
+                        HashDocument.fillMEvents =true;
 
-                        values=new String[2];
-                        r=0;
-                        begin=0;
-                        for(int j=0;j<=time.length()&&r<2;j++){
-                            if(time.charAt(j)==':'){
-                                values[r]=time.substring(begin,j);
-                                r++;
-                                begin=j+1;
+                        Intent intent =new Intent(OpcionesEventos.this, MisEventos.class);
+                        OpcionesEventos.this.startActivity(intent);
+                        OpcionesEventos.this.finish();
 
-                            }
-                            //ystem.out.println(time.charAt(j));
-                        }
-
-                        hora=Integer.parseInt(values[0]);
-                        minuto=Integer.parseInt(values[1]);
-
-                        event=new Evento(nombreEvento,mensaje,nombreCreador,dia,mes,ano,hora,minuto,idEvento,idCreador);
-
-                        Toast.makeText(getApplicationContext(),(event==null)+"",Toast.LENGTH_SHORT).show();
-                        filling.insertarEvento(event);
-                        hash.insert(event);
+                    } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
 
                     }
-
-                    Toast.makeText(getApplicationContext(),filling.getSize()+"",Toast.LENGTH_SHORT).show();
-
-                    HashDocument.dinamicMio=filling;
-                    HashDocument.tablaMisEventos=hash;
-                    HashDocument.fillMEvents =true;
-
-                    Intent intent =new Intent(OpcionesEventos.this, MisEventos.class);
-                    OpcionesEventos.this.startActivity(intent);
-                    OpcionesEventos.this.finish();
-
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
-
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"no hay eventos enlazados",Toast.LENGTH_SHORT).show();
-            }
-        });
-        request.add(jeison);
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(),"no hay eventos enlazados",Toast.LENGTH_SHORT).show();
+                }
+            });
+            request.add(jeison);
+
+        }
+
+
 
     }
 
@@ -353,4 +361,143 @@ public class OpcionesEventos extends AppCompatActivity {
     }
 
 
+    public void enlazadosEventosListener(View view) {
+        if(UsuarioActual.usuario.getTipo()=='1'){
+
+            Toast.makeText(getApplicationContext(),"No tiene los permisos para observar estos",Toast.LENGTH_LONG).show();
+        }else{
+
+            RequestQueue request;
+            JsonObjectRequest jeison;
+
+            request= Volley.newRequestQueue(getApplicationContext());
+
+            //final int pos=po;
+
+            String url=null;
+            url="http://"+ Coneccion.host+"/eventos/ListarEventosEnlazados.php?id="+UsuarioActual.usuario.getId();
+            url=url.replace(" ","%20");
+
+            //Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
+
+            jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Evento event;
+                    HashTableEvents hash;
+                    JSONArray json;
+                    DinamicArrayEventos filling;
+
+
+
+                    json=response.optJSONArray("eventos");
+                    filling=new DinamicArrayEventos();
+                    hash=new HashTableEvents(50);
+                    try {
+                        for(int i=0;i<json.length();i++){
+
+                            int ano;
+                            int mes;
+                            int dia;
+                            String fecha;
+
+                            int hora;
+                            int minuto;
+                            String time;
+
+                            String nombreEvento;
+                            String mensaje;
+                            int idEvento;
+
+                            String nombreCreador;
+                            int idCreador;
+
+
+                            JSONObject jsonObject;
+
+                            jsonObject=json.getJSONObject(i);
+
+
+                            nombreCreador=jsonObject.optString("creador");
+                            idCreador=jsonObject.optInt("id_creador");
+
+                            fecha=jsonObject.optString("fecha");
+                            time=jsonObject.optString("hora");
+
+                            nombreEvento=jsonObject.optString("evento");
+                            idEvento=jsonObject.optInt("id_evento");
+                            mensaje=jsonObject.optString("mensaje");
+
+                            boolean v=true;
+
+                            int begin=0;
+                            int end=0;
+
+                            String values[]=new String[3];
+                            int r=0;
+
+                            for(int j=0;j<=fecha.length();j++){
+                                if(j==(fecha.length())||fecha.charAt(j)=='-'){
+                                    values[r]=fecha.substring(begin,j);
+                                    r++;
+                                    begin=j+1;
+                                }
+
+                            }
+
+                            ano=Integer.parseInt(values[0]);
+                            mes=Integer.parseInt(values[1]);
+                            dia=Integer.parseInt(values[2]);
+
+
+                            values=new String[2];
+                            r=0;
+                            begin=0;
+                            for(int j=0;j<=time.length()&&r<2;j++){
+                                if(time.charAt(j)==':'){
+                                    values[r]=time.substring(begin,j);
+                                    r++;
+                                    begin=j+1;
+
+                                }
+                                //ystem.out.println(time.charAt(j));
+                            }
+
+                            hora=Integer.parseInt(values[0]);
+                            minuto=Integer.parseInt(values[1]);
+
+                            event=new Evento(nombreEvento,mensaje,nombreCreador,dia,mes,ano,hora,minuto,idEvento,idCreador);
+
+                            Toast.makeText(getApplicationContext(),(event==null)+"",Toast.LENGTH_SHORT).show();
+                            filling.insertarEvento(event);
+                            hash.insert(event);
+
+                        }
+
+                        Toast.makeText(getApplicationContext(),filling.getSize()+"",Toast.LENGTH_SHORT).show();
+
+                        HashDocument.dinamicMio=filling;
+                        HashDocument.tablaMisEventos=hash;
+                        HashDocument.fillMEvents =true;
+
+                        Intent intent =new Intent(OpcionesEventos.this, eventosEnlazados.class);
+                        OpcionesEventos.this.startActivity(intent);
+                        OpcionesEventos.this.finish();
+
+                    } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(),"no hay eventos enlazados",Toast.LENGTH_SHORT).show();
+                }
+            });
+            request.add(jeison);
+
+        }
+
+    }
 }

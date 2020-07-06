@@ -17,7 +17,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activitys.eventos.MisEventos"></activity>
+        <activity android:name=".activitys.eventos.eventosEnlazados"></activity>
+        <activity android:name=".activitys.eventos.MisEventos" />
         <activity android:name=".activitys.eventos.ListaEventos" />
         <activity android:name=".activitys.documentos" />
         <activity android:name=".activitys.eventos.Principal" />

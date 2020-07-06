@@ -14,12 +14,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agatone.edun.Clases.archivo;
+import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.agatone.edun.activitys.Dialogs.BuscarDialog;
+import com.agatone.edun.activitys.eventos.OpcionesEventos;
 import com.agatone.edun.adapters.archivosAdapter;
 import com.agatone.edun.auxiliares.ArchivoSubirBajar;
 import com.agatone.edun.auxiliares.HashDocument;
+import com.agatone.edun.auxiliares.UsuarioActual;
 import com.agatone.edun.estructuras.Hash.DinamicArray;
+import com.agatone.edun.estructuras.Hash.HashTable;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class documentos extends AppCompatActivity implements BuscarDialog.BuscarDialogListener {
 
@@ -202,5 +216,79 @@ public class documentos extends AppCompatActivity implements BuscarDialog.Buscar
 
         archivosAdapter adapter=new archivosAdapter(busqueda,getApplicationContext(),this);
         recycler.setAdapter(adapter);
+    }
+
+    public void recargar(View view) {
+
+            DinamicArray array=new DinamicArray();
+            RequestQueue request;
+            JsonObjectRequest jeison;
+            HashTable hash;
+            request= Volley.newRequestQueue(getApplicationContext());
+            String url=null;
+            url="http://"+ Coneccion.host+"/Documentos/listarArchivos.php?id="+ UsuarioActual.usuario.getId();
+            url=url.replace(" ","%20");
+            Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
+
+            jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    archivo arc;
+                    HashTable hash;
+                    JSONArray json;
+                    DinamicArray filling;
+
+                    int id_act=UsuarioActual.usuario.getId();
+
+                    json=response.optJSONArray("documento");
+                    filling=new DinamicArray();
+                    hash=new HashTable(100);
+                    try {
+                        for(int i=0;i<json.length();i++){
+
+                            int id,dueno;
+                            String nombre,autor,tipo;
+                            JSONObject jsonObject;
+
+                            jsonObject=json.getJSONObject(i);
+                            id=jsonObject.optInt("id");
+                            nombre=jsonObject.optString("nombre");
+                            autor=jsonObject.optString("autor");
+                            dueno=jsonObject.optInt("dueno");
+                            tipo=jsonObject.optString("tipo");
+
+                            arc=new archivo(id,nombre,autor,dueno,tipo);
+                            filling.insertarArchivo(arc);
+                            hash.insert(arc);
+                            if(dueno==id_act){
+                                HashDocument.de_usuario_actual.insertarArchivo(arc);
+                            }
+                        }
+
+                        HashDocument.dinamico=filling;
+                        HashDocument.names=hash;
+                        HashDocument.fillDocument =true;
+
+                        Intent documentos = new Intent ( documentos.this, documentos.class );
+
+                        documentos.this.startActivity(documentos);
+                        documentos.this.finish();
+
+
+
+                    } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(),"error al hacer la busqueda en la base de datos",Toast.LENGTH_SHORT).show();
+                }
+            });
+            request.add(jeison);
+
+
     }
 }

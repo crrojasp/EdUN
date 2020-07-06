@@ -165,9 +165,9 @@ public class NuevoDocumento extends AppCompatActivity {
                     if(value==0){
                         nombreTxt.setText("Nombre repetido, porfavor dar otra opcion");
                     }else{
-                        subir.setClickable(false);
+
                         archivo arc[]=new archivo[1];
-                        Toast.makeText(getApplicationContext(),"Subiendo archivo, espere",Toast.LENGTH_LONG).show();
+
 
                         String nombre=nombre_documento.getText().toString();
                         String tipo=ArchivoSubirBajar.type;
@@ -216,6 +216,8 @@ public class NuevoDocumento extends AppCompatActivity {
 
 
     public void subir(View view) {
+        Toast.makeText(getApplicationContext(),"Subiendo archivo, espere",Toast.LENGTH_LONG).show();
+        subir.setClickable(false);
         Subida subir=new Subida(getApplicationContext(),ArchivoSubirBajar.archivo[0]);
         subir.execute(ArchivoSubirBajar.archivo);
     }

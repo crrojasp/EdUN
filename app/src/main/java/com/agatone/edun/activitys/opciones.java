@@ -98,7 +98,7 @@ public class opciones extends AppCompatActivity implements LoginDialog.LoginDial
      * ZONA DE LLENADO DE LA TABLA HASH
      * primero se hace la consulta de todos los archivos dentro de la base de datos, se llena el recycler view y se carga la tabla hash
      */
-    private void LlenarHashTable(){
+    public void LlenarHashTable(){
         if(!HashDocument.fillDocument){
             DinamicArray array=new DinamicArray();
             RequestQueue request;

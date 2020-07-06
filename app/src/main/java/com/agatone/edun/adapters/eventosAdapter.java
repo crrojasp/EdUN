@@ -181,7 +181,7 @@ public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosH
         request= Volley.newRequestQueue(context);
         String url=null;
 
-        url="http://"+ Coneccion.host+"/eventos/alistarEvento.php?id="+UsuarioActual.usuario.getId()+"&id_c="+id_c;
+        url="http://"+ Coneccion.host+"/eventos/alistarEvento.php?id="+id_c+"&id_c="+UsuarioActual.usuario.getId();
         url=url.replace(" ","%20");
 
 

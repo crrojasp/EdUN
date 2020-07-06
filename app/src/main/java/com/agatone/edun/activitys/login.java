@@ -53,7 +53,7 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
         final Intent cambio2 = new Intent ( this, registro1.class );
 
 
-        Toast.makeText(getApplicationContext(),getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString(),Toast.LENGTH_SHORT).show();
 
         btCambioRegistro.setOnClickListener ( new View.OnClickListener () {
             @Override
