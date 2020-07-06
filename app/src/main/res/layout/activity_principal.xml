@@ -37,26 +37,27 @@
                 android:id="@+id/Fecha"
                 android:layout_width="175dp"
                 android:layout_height="41dp"
-                android:layout_marginTop="40dp"
-                android:ems="10"
+                android:layout_marginTop="100dp"
 
+                android:ems="10"
                 android:hint="fecha"
                 android:onClick="fechaClick"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Ver_Eventos_btn" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/bt_crear_evento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="24dp"
+                android:onClick="crearEventoListener"
                 android:text="@string/a0002"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/Escudo3"
-                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_bias="0.781"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
@@ -68,19 +69,8 @@
                 android:focusable="auto"
                 android:hapticFeedbackEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ed_link"
+                app:layout_constraintTop_toBottomOf="@+id/mensajes"
                 app:srcCompat="@drawable/universidad_escudo" />
-
-            <Button
-                android:id="@+id/Ver_Eventos_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@string/Ver_Evento_Str"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/hora"
@@ -98,12 +88,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/Fecha" />
 
             <EditText
-                android:id="@+id/ed_link"
-                android:layout_width="275dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/mensajes"
+                android:layout_width="266dp"
+                android:layout_height="116dp"
                 android:layout_marginTop="100dp"
                 android:layout_marginBottom="50dp"
                 android:hint="@string/info_evento"
+                android:textAlignment="viewStart"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toTopOf="@+id/bt_crear_evento"
                 app:layout_constraintEnd_toEndOf="parent"

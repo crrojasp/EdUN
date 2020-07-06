@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,13 +15,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.agatone.edun.R;
+import com.agatone.edun.auxiliares.UsuarioActual;
 
 public class mensajeEventoDialog extends AppCompatDialogFragment {
 
     private TextView mensaje;
+    String mensajes;
 
-
-    private LoginDialog.LoginDialogListener listener;
+    public mensajeEventoDialog(String mensaje){
+        mensajes=mensaje;
+    }
+    //private LoginDialog.LoginDialogListener listener;
 
 
     @Override
@@ -29,6 +34,10 @@ public class mensajeEventoDialog extends AppCompatDialogFragment {
 
         LayoutInflater inflater=getActivity().getLayoutInflater();
         View view=inflater.inflate(R.layout.layout_mensaje_evento,null);
+
+        mensaje=view.findViewById(R.id.Mensaje);
+        mensaje.setText(mensajes);
+        Toast.makeText(getContext(),mensajes,Toast.LENGTH_SHORT).show();
 
         builder.setView(view)
                 .setTitle("mensaje")
@@ -40,23 +49,11 @@ public class mensajeEventoDialog extends AppCompatDialogFragment {
                 })
                 .setPositiveButton(null,null);
 
-        mensaje=view.findViewById(R.id.Mensaje);
 
         return builder.create();
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
 
-        try {
-            listener=(LoginDialog.LoginDialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()+" must implement ExampleDialogListener");
-        }
-    }
 
-    public interface LoginDialogListener{
-        void confirmUser(String user, String password);
-    }
+
 }

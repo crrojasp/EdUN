@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -20,7 +19,7 @@ import com.agatone.edun.activitys.Dialogs.LoginDialog;
 import com.agatone.edun.activitys.eventos.OpcionesEventos;
 import com.agatone.edun.auxiliares.HashDocument;
 import com.agatone.edun.auxiliares.UsuarioActual;
-import com.agatone.edun.estructuras.DinamicArray;
+import com.agatone.edun.estructuras.Hash.DinamicArray;
 import com.agatone.edun.estructuras.Hash.HashTable;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;

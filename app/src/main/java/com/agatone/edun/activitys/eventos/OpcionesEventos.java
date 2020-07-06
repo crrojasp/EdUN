@@ -54,7 +54,7 @@ public class OpcionesEventos extends AppCompatActivity {
      */
     public void crearListener(View view) {
 
-        if(UsuarioActual.usuario.getTipo()=='\1'){
+        if(UsuarioActual.usuario.getTipo()=='2'){
 
             Toast.makeText(getApplicationContext(),"No tiene los permisos para crear eventos nuevos",Toast.LENGTH_LONG).show();
         }else{
@@ -66,7 +66,7 @@ public class OpcionesEventos extends AppCompatActivity {
     }
 
     public void ListaEventosListener(View view) {
-        if(UsuarioActual.usuario.getTipo()=='\2'){
+        if(UsuarioActual.usuario.getTipo()=='1'){
 
             Toast.makeText(getApplicationContext(),"No tiene los permisos para observar eventos",Toast.LENGTH_LONG).show();
         }else{
@@ -209,7 +209,7 @@ public class OpcionesEventos extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"error al hacer la busqueda en la base de datos",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"no hay eventos enlazados",Toast.LENGTH_SHORT).show();
             }
         });
         request.add(jeison);
@@ -322,13 +322,13 @@ public class OpcionesEventos extends AppCompatActivity {
 
                         event=new Evento(nombreEvento,mensaje,nombreCreador,dia,mes,ano,hora,minuto,idEvento,idCreador);
 
-                        Toast.makeText(getApplicationContext(),(event==null)+"",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),(event==null)+"",Toast.LENGTH_SHORT).show();
                         filling.insertarEvento(event);
                         hash.insert(event);
 
                     }
 
-                    Toast.makeText(getApplicationContext(),filling.getSize()+"",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),filling.getSize()+"",Toast.LENGTH_SHORT).show();
 
                     HashDocument.dinamicEventos=filling;
                     HashDocument.tablaEventos=hash;

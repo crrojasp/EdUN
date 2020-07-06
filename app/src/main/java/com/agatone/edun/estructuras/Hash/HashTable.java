@@ -1,11 +1,6 @@
 package com.agatone.edun.estructuras.Hash;
 
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-
 import com.agatone.edun.Clases.archivo;
-import com.agatone.edun.estructuras.DinamicArray;
 
 
 public class HashTable {

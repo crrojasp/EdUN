@@ -3,7 +3,7 @@ package com.agatone.edun.Clases;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.agatone.edun.estructuras.DinamicArray;
+import com.agatone.edun.estructuras.Hash.DinamicArray;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 

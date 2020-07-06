@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,7 +53,7 @@ public class login extends AppCompatActivity implements Response.Listener<JSONOb
         final Intent cambio2 = new Intent ( this, registro1.class );
 
 
-
+        Toast.makeText(getApplicationContext(),getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString(),Toast.LENGTH_SHORT).show();
 
         btCambioRegistro.setOnClickListener ( new View.OnClickListener () {
             @Override

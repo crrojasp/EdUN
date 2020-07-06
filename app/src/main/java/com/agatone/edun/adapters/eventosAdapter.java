@@ -13,19 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agatone.edun.Clases.Evento;
-import com.agatone.edun.Clases.archivo;
-import com.agatone.edun.Ftp_up_down.Bajada;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
-import com.agatone.edun.activitys.documentos;
-import com.agatone.edun.activitys.opciones;
+import com.agatone.edun.activitys.Dialogs.mensajeEventoDialog;
 import com.agatone.edun.auxiliares.HashDocument;
 import com.agatone.edun.auxiliares.UsuarioActual;
-import com.agatone.edun.estructuras.DinamicArray;
-import com.agatone.edun.estructuras.Hash.HashTable;
+import com.agatone.edun.estructuras.Hash.DinamicArray;
 import com.agatone.edun.estructuras.HashTableEventos.DinamicArrayEventos;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -91,9 +88,9 @@ public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosH
                 @Override
                 public void onClick(View v) {
                     String id=(id_e.getText().toString());
-                    //Toast.makeText(context,id,Toast.LENGTH_SHORT).show();
                     int val=Integer.parseInt(id);
-                    mostrarOpciones(val);
+                    String nombre=nombreTxt.getText().toString();
+                    mostrarOpciones(val,nombre);
                 }
             });
 
@@ -101,13 +98,14 @@ public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosH
 
     }
 
-    private void mostrarOpciones(int id_e){
+    private void mostrarOpciones(int id_e,String nombre){
         final CharSequence[] opciones={"Informacion extra","apuntarse","Cancelar"};
         final AlertDialog.Builder builder=new AlertDialog.Builder(activity);
 
 
         final int ide=id_e;
-
+        final String mensaje= HashDocument.tablaEventos.getEvento(id_e,nombre).getCaracteristica();
+        Toast.makeText(context,mensaje+":"+nombre+":"+id_e,Toast.LENGTH_SHORT).show();
         builder.setTitle("seleccion alguna accion");
         builder.setItems(opciones, new DialogInterface.OnClickListener()  {
             @Override
@@ -115,9 +113,15 @@ public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosH
                 if(opciones[which].equals("Cancelar")){
                     dialog.dismiss();
                 }else if(opciones[which].equals("Informacion extra")){
-                    //terminar esta zona
+                    if(mensaje!=null)
+                        UsuarioActual.mensaje=mensaje;
+                    else
+                        UsuarioActual.mensaje="Nada escrito";
+
+                        mensajeEventoDialog mensajeEventoDialog=new mensajeEventoDialog(UsuarioActual.mensaje);
 
 
+                        mensajeEventoDialog.show(((AppCompatActivity)activity).getSupportFragmentManager(),"Mensaje");
                 }else if(opciones[which].equals("apuntarse")){
                     Inscribirse(ide);
                     dialog.dismiss();
@@ -197,7 +201,7 @@ public class eventosAdapter extends RecyclerView.Adapter<eventosAdapter.eventosH
 
                     val=Integer.parseInt(valu);
 
-                    Toast.makeText(context,val+"",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context,val+"",Toast.LENGTH_SHORT).show();
                     if(val==0)
                         Toast.makeText(context,"no se pudo enlistar en el evento",Toast.LENGTH_SHORT).show();
                     else if(val==1)

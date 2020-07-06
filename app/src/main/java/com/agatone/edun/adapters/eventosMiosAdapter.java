@@ -18,7 +18,7 @@ import com.agatone.edun.Clases.Evento;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.agatone.edun.auxiliares.UsuarioActual;
-import com.agatone.edun.estructuras.DinamicArray;
+import com.agatone.edun.estructuras.Hash.DinamicArray;
 import com.agatone.edun.estructuras.HashTableEventos.DinamicArrayEventos;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -84,8 +84,8 @@ public class eventosMiosAdapter extends RecyclerView.Adapter<eventosMiosAdapter.
                 @Override
                 public void onClick(View v) {
                     String id=(id_e.getText().toString());
-                    Toast.makeText(context,id,Toast.LENGTH_SHORT).show();
-                    mostrarOpciones(1);
+                    int ide=Integer.parseInt(id);
+                    mostrarOpciones(ide);
                 }
             });
 

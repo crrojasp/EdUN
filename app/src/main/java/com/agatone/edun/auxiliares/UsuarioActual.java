@@ -10,4 +10,7 @@ import com.agatone.edun.Clases.Usuario;
 public class UsuarioActual {
     public static Usuario usuario;
 
+    public static int eventid=0;
+    public static String mensaje="";
+
 }

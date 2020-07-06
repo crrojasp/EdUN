@@ -75,6 +75,16 @@ public class DinamicArrayEventos {
         return r;
     }
 
+    public Evento getEventoById(int id){
+
+        for(int i=0;i<size;i++){
+            if(arreglo[i].getId()==id){
+                return arreglo[i];
+            }
+        }
+        return null;
+    }
+
 
 
     public int getSize(){

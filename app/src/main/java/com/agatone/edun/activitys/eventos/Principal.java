@@ -12,36 +12,35 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.agatone.edun.Clases.Usuario;
 import com.agatone.edun.Ftp_up_down.Coneccion;
 import com.agatone.edun.R;
 import com.agatone.edun.activitys.Archivos_de_apoyo;
 import com.agatone.edun.activitys.Subir_Archivo_De_Apoyo;
+import com.agatone.edun.auxiliares.UsuarioActual;
+import com.agatone.edun.estructuras.Hash.DinamicArray;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
-public class Principal extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener{
+public class Principal extends AppCompatActivity{
 
-    Button bt_Crear_Evento, bt_Fecha, bt_Hora, bt_ver_eventos;
+    Button bt_Crear_Evento;
 
-    EditText et_fecha, et_hora, Event;
 
-    TextView guardado_fecha;
-
-    String event;
+    EditText eventEditText;
+    EditText mensaje;
 
 
     TextView fechaTx;
@@ -50,7 +49,11 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
     Calendar fecha;
     DatePicker datePicker;
     
-    int ano, mes, dia, hora, minutos;
+    int ano;
+    int mes;
+    int dia;
+    int hora;
+    int minutos;
 
 
 
@@ -74,69 +77,24 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
 
     public void inicializar(){
 
-        fechaTx =findViewById(R.id.     Fecha);
+        fechaTx =findViewById(R.id.Fecha);
         horaTx=findViewById(R.id.hora);
 
+        mensaje=findViewById(R.id.mensajes);
+        eventEditText=findViewById(R.id.Event_EditText);
+
     }
-    protected void onActivityResult ( int requestCode, int resultCode, @Nullable Intent data ) {
-        super.onActivityResult ( requestCode, resultCode, data );
-        //archivo arc[] = new archivo[1];
-        switch (requestCode) {
-            case 10:
-                RequestQueue request;
-                JsonObjectRequest jeison;
-                request = Volley.newRequestQueue ( getApplicationContext () );
-                //boolean insert = false;
-                String url;
-                url = Coneccion.host + "/bajarNombreArchivoDeBase.php?id=" + 0;
-                jeison = new JsonObjectRequest ( Request.Method.GET, url, null, this, this );
-                request.add ( jeison );
-                //subida.execute(arc);
-                //Toast.makeText ( getApplicationContext (),path.toString(), Toast.LENGTH_SHORT ).show ();
-                break;
-            default:
-                throw new IllegalStateException ( "Unexpected value: " + requestCode );
-        }
-    }
-    @Override
-    public void onErrorResponse ( VolleyError error ) {
-    }
-    @Override
-    public void onResponse ( JSONObject response ) {
-    }
-    public void guardar_evento(String url ){
-        StringRequest st = new StringRequest ( Request.Method.GET, url, new Response.Listener<String> () {
-            @Override
-            public void onResponse ( String response ) {
-                Toast.makeText ( getApplicationContext (),"Operación Exitosa", Toast.LENGTH_SHORT ).show ();
-            }
-        }, new Response.ErrorListener () {
-            @Override
-            public void onErrorResponse ( VolleyError error ) {
-                Toast.makeText ( getApplicationContext (),error.toString (),Toast.LENGTH_LONG).show ();
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams () {
-                HashMap<String, String> parametros = new HashMap<> ();
-                parametros.put  ( "ano" , ano+"" );
-                parametros.put  ( "mes" , mes+"" );
-                parametros.put  ( "dia" , dia+"" );
-                parametros.put  ( "hora", hora+"");
-                parametros.put  ( "minutos", minutos+"" );
-                return parametros;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue ( this );
-        requestQueue.add ( st );
-    }
+
+
+
 
     public void fechaClick(View view) {
         Calendar calendario=Calendar.getInstance();
 
-        int dia = calendario.get ( Calendar.DAY_OF_WEEK_IN_MONTH );
-        int mes = calendario.get ( Calendar.MONTH );
-        int ano = calendario.get ( Calendar.YEAR );
+        dia = calendario.get ( Calendar.DAY_OF_WEEK_IN_MONTH );
+        mes = calendario.get ( Calendar.MONTH );
+        ano = calendario.get ( Calendar.YEAR );
+
         DatePickerDialog datePickerDialog = new DatePickerDialog ( Principal.this, new DatePickerDialog.OnDateSetListener () {
 
             @Override
@@ -158,6 +116,8 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         horaTx.setText(hourOfDay+":"+minute);
+                        hora=hourOfDay;
+                        minutos=minute;
                     }
                 },
                 hora,
@@ -166,4 +126,112 @@ public class Principal extends AppCompatActivity implements Response.Listener<JS
         );
         timePickerDialog.show();
     }
+
+    public void crearEventoListener(View view) {
+        boolean v=verificar();
+        if(v){
+            crearEvento();
+        }
+        //Toast.makeText(getApplicationContext(),v+"",Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean verificar(){
+        boolean v=true;
+        //se revisa que se halla escogido alguna fecha
+        String fecha=fechaTx.getText().toString();
+        if(fecha.length()==0){
+            v=false;
+            Toast.makeText(getApplicationContext(),"Porfavor seleccione una fecha",Toast.LENGTH_SHORT).show();
+        }
+
+        //se revisa que se halla escogido alguna hora
+        String hora=horaTx.getText().toString();
+        if(hora.length()==0){
+            v=false;
+            Toast.makeText(getApplicationContext(),"Porfavor seleccione una hora",Toast.LENGTH_SHORT).show();
+        }
+
+        //se revisa si tiene nombre el evento
+        String nombre=eventEditText.getText().toString();
+        if(nombre.length()==0){
+            v=false;
+            Toast.makeText(getApplicationContext(),"Porfavor dele un nombre al evento",Toast.LENGTH_SHORT).show();
+        }
+
+        String mensajes=mensaje.getText().toString();
+        if(mensajes.length()==0){
+            Toast.makeText(getApplicationContext(),"es preferible proporcionar informacion extra para el evento",Toast.LENGTH_SHORT).show();
+        }else{
+            if(mensaje.length()>240){
+                mensaje.setText("");
+                Toast.makeText(getApplicationContext(),"debe tener una longitud menor a 240 caracteres",Toast.LENGTH_SHORT).show();
+                v=false;
+            }
+        }
+
+        return v;
+    }
+
+
+    public void crearEvento(){
+
+        String nombre=eventEditText.getText().toString();
+        String mensajes=mensaje.getText().toString();
+
+        DinamicArray array=new DinamicArray();
+        RequestQueue request;
+        JsonObjectRequest jeison;
+
+        request= Volley.newRequestQueue(getApplicationContext());
+        String url=null;
+        if(mensaje.length()==0){
+            url="http://"+ Coneccion.host+"/eventos/eventos.php?ano="+ano+"&mes="+mes+"&dia="+dia+"&hora="+hora+"&minuto="+minutos+"&nombre="+nombre+"&id_c="+ UsuarioActual.usuario.getId();
+        }else{
+            url="http://"+ Coneccion.host+"/eventos/eventos.php?ano="+ano+"&mes="+mes+"&dia="+dia+"&hora="+hora+"&minuto="+minutos+"&nombre="+nombre+"&mensaje="+mensajes+"&id_c="+ UsuarioActual.usuario.getId();
+        }
+
+        url=url.replace(" ","%20");
+        //Toast.makeText(getApplicationContext(),url,Toast.LENGTH_SHORT).show();
+
+
+        jeison=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                JSONArray json;
+
+
+                json=response.optJSONArray("val");
+
+                try {
+                    int val;
+
+                    String valu=json.getString(0);
+
+                    val=Integer.parseInt(valu);
+
+                    Toast.makeText(getApplicationContext(),val+"",Toast.LENGTH_SHORT).show();
+                    if(val==0)
+                        Toast.makeText(getApplicationContext(),"No se creo el evento nuevo",Toast.LENGTH_SHORT).show();
+                    else if(val==1)
+                        Toast.makeText(getApplicationContext(),"creado nuevo evento",Toast.LENGTH_SHORT).show();
+
+
+
+
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(),e.toString() ,Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"error al enlistar, intentelo de nuevo mas tarde",Toast.LENGTH_SHORT).show();
+            }
+        });
+        request.add(jeison);
+    };
+
+
 }

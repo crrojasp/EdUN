@@ -1,4 +1,4 @@
-package com.agatone.edun.estructuras;
+package com.agatone.edun.estructuras.Hash;
 
 import com.agatone.edun.Clases.archivo;
 

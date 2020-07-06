@@ -3,7 +3,6 @@ package com.agatone.edun.activitys;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,27 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.agatone.edun.Clases.archivo;
-import com.agatone.edun.Clases.fillArray;
-import com.agatone.edun.Ftp_up_down.Coneccion;
-import com.agatone.edun.Ftp_up_down.Subida;
 import com.agatone.edun.R;
 import com.agatone.edun.activitys.Dialogs.BuscarDialog;
 import com.agatone.edun.adapters.archivosAdapter;
 import com.agatone.edun.auxiliares.ArchivoSubirBajar;
 import com.agatone.edun.auxiliares.HashDocument;
-import com.agatone.edun.auxiliares.UsuarioActual;
-import com.agatone.edun.estructuras.DinamicArray;
-import com.agatone.edun.estructuras.Hash.HashTable;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.agatone.edun.estructuras.Hash.DinamicArray;
 
 public class documentos extends AppCompatActivity implements BuscarDialog.BuscarDialogListener {
 
@@ -43,7 +27,7 @@ public class documentos extends AppCompatActivity implements BuscarDialog.Buscar
     private RecyclerView recycler;
     private DinamicArray archivosArray;
 
-    private static boolean complete[]=new boolean[2];
+    //private static boolean complete[]=new boolean[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +39,7 @@ public class documentos extends AppCompatActivity implements BuscarDialog.Buscar
         listaDocumentos=(ImageButton) findViewById(R.id.listaDocumentos);
         regresar=(ImageButton) findViewById(R.id.regresar);
         misDocumentos=(ImageButton) findViewById(R.id.misDocumentos);
-        permisoDocumentos=(ImageButton) findViewById(R.id.permisoDocumentos);
+        //permisoDocumentos=(ImageButton) findViewById(R.id.permisoDocumentos);
         recycler=(RecyclerView) findViewById(R.id.recycler);
 
         recycler.setLayoutManager(new LinearLayoutManager(this.getApplicationContext()));
@@ -205,6 +189,7 @@ public class documentos extends AppCompatActivity implements BuscarDialog.Buscar
      */
     public void search(View view) {
         BuscarDialog buscar=new BuscarDialog();
+
         buscar.show(getSupportFragmentManager(),"Dialog");
 
     }

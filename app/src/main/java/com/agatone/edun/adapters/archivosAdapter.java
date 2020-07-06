@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.agatone.edun.Ftp_up_down.Bajada;
 import com.agatone.edun.R;
 import com.agatone.edun.auxiliares.HashDocument;
-import com.agatone.edun.estructuras.DinamicArray;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import com.agatone.edun.estructuras.Hash.DinamicArray;
 
 public class archivosAdapter extends RecyclerView.Adapter<archivosAdapter.archivosHolder> implements View.OnClickListener {
     DinamicArray listArchivos;

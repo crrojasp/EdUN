@@ -4,7 +4,7 @@ import com.agatone.edun.estructuras.HashTableEventos.DinamicArrayEventos;
 import com.agatone.edun.estructuras.HashTableEventos.HashTableEvents;
 import com.agatone.edun.estructuras.HashTableUsuarios.DinamicArrayUsers;
 import com.agatone.edun.estructuras.HashTableUsuarios.HashTableUsers;
-import com.agatone.edun.estructuras.DinamicArray;
+import com.agatone.edun.estructuras.Hash.DinamicArray;
 import com.agatone.edun.estructuras.Hash.HashTable;
 
 public class HashDocument {

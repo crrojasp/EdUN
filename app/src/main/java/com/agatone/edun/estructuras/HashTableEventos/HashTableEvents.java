@@ -43,6 +43,10 @@ public class HashTableEvents {
         return r;
     }
 
+    public Evento getEvento(int id, String nombre){
+        return tablaHash[Key(nombre)].getEventoById(id);
+    }
+
     public int getCountItem() {
         return countItem;
     }
